@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>erle – Werkstattplanung</title>
+<style>
+:root{--bg:#fbfbfc;--card:#fff;--line:#dfe4ea;--text:#182033;--muted:#697386;--blue:#2f6fd5;--blueSoft:#eaf2ff;--red:#c23b50;--redSoft:#fff0f2;--yellow:#a98512;--yellowSoft:#fff9df;--green:#20825c;--greenSoft:#edf8f2}
+*{box-sizing:border-box} body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);font-size:15px}
+button,input,select,textarea{font:inherit} button{cursor:pointer} .hidden{display:none!important}
+.btn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:11px 15px;font-weight:700;color:var(--text)}
+.btn.primary{background:var(--blue);border-color:var(--blue);color:#fff} .btn.danger{color:var(--red);border-color:#efc3ca}
+.input,.select,.textarea{width:100%;border:1px solid var(--line);background:#fff;border-radius:10px;padding:12px 13px;outline:none}
+.input:focus,.select:focus,.textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(47,111,213,.10)}
+.field{display:flex;flex-direction:column;gap:7px} .field label{font-size:13px;font-weight:800}
+.muted{color:var(--muted)} .small{font-size:12px} .row{display:flex;gap:10px;align-items:center} .between{display:flex;justify-content:space-between;gap:14px;align-items:center}
+.panel{background:#fff;border:1px solid var(--line);border-radius:15px;padding:17px}
+.badge{display:inline-flex;align-items:center;border-radius:999px;padding:5px 9px;font-size:11px;font-weight:800}
+.badge.red{background:var(--redSoft);color:var(--red)} .badge.yellow{background:var(--yellowSoft);color:#856a0d} .badge.green{background:var(--greenSoft);color:var(--green)} .badge.blue{background:var(--blueSoft);color:var(--blue)}
+
+/* Login */
+#login{min-height:100vh;display:grid;place-items:center;padding:24px}
+.login-card{width:min(430px,100%);background:#fff;border:1px solid var(--line);border-radius:20px;padding:34px;box-shadow:0 20px 55px rgba(20,30,50,.09)}
+.brand{display:flex;gap:11px;align-items:center;margin-bottom:26px} .brandmark{width:40px;height:40px;border-radius:11px;background:var(--blue);color:#fff;display:grid;place-items:center;font-weight:900;font-size:20px}
+.brandtitle{font-size:21px;font-weight:900} .brandsub{font-size:12px;color:var(--muted)}
+.login-card .field{margin-bottom:14px} .login-card .btn{width:100%;min-height:46px}
+.authswitch{text-align:center;margin-top:13px;font-size:13px} .authswitch button{border:0;background:none;color:var(--blue);font-weight:800}
+.notice{border:1px solid #cfe0fb;background:#f7fbff;border-radius:11px;padding:11px 12px;font-size:12px;line-height:1.45}
+.error{border:1px solid #f0c3cb;background:#fff6f7;color:#9f2940;border-radius:11px;padding:11px 12px;font-size:12px;line-height:1.45}
+
+/* App shell */
+#app{display:grid;grid-template-columns:220px minmax(0,1fr);min-height:100vh}
+.sidebar{position:sticky;top:0;height:100vh;background:#fff;border-right:1px solid var(--line);padding:20px 15px;display:flex;flex-direction:column}
+.sidebar .brand{margin-bottom:30px} .sidebar .brandmark{width:38px;height:38px} .sidebar .brandsub{display:none}
+.nav{display:flex;flex-direction:column;gap:4px} .nav button{border:0;background:transparent;text-align:left;border-radius:9px;padding:13px 14px;font-weight:700;color:#536072;font-size:15px}
+.nav button.active{background:var(--blueSoft);color:var(--blue)} .nav button:hover{background:#f2f5f8}
+.sidefoot{margin-top:auto;border-top:1px solid var(--line);padding:14px 8px 0} .sidefoot strong{display:block} .sidefoot button{border:0;background:none;padding:10px 0;color:var(--muted)}
+.main{min-width:0} .top{position:sticky;top:0;z-index:20;background:rgba(245,247,250,.95);backdrop-filter:blur(8px);padding:20px 28px 10px}
+.topinner{display:flex;gap:10px;justify-content:flex-end} .top .input{max-width:360px} .content{padding:10px 28px 44px}
+.pagehead{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin:6px 0 16px} .pagehead h1{margin:0;font-size:29px} .pagehead p{margin:5px 0 0;color:var(--muted);font-size:13px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:12px} .stat{background:#fff;border:1px solid var(--line);border-radius:13px;padding:13px 15px;min-height:70px} .stat strong{font-size:23px;display:block} .stat span{font-size:11px;color:var(--muted)}
+.filters{display:flex;gap:7px;margin-bottom:13px;overflow:auto} .filter{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 11px;font-size:12px} .filter.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+
+/* Board */
+.boardwrap{overflow:auto;padding-bottom:12px} .board{display:grid;grid-template-columns:repeat(4,minmax(280px,1fr));gap:16px;min-width:1160px}
+.col{background:#f4f5f6;border:1px solid #e0e6ec;border-radius:15px;padding:12px;min-height:520px} .col.over{outline:2px solid rgba(47,111,213,.35)}
+.colhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:11px;font-weight:900} .colcount{background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px 8px;font-size:11px;color:var(--muted)}
+.ordercard{background:#fff;border:1px solid var(--line);border-radius:13px;padding:16px;margin-bottom:10px;box-shadow:0 3px 10px rgba(20,30,50,.035);cursor:pointer} .ordercard.dragging{opacity:.5}
+.plate{font-size:22px;font-weight:900;letter-spacing:.2px} .vehicle{font-size:14px;font-weight:700;margin-top:4px} .desc{font-size:14px;line-height:1.45;margin:10px 0}
+.cardmeta{font-size:12px;color:var(--muted);display:flex;flex-direction:column;gap:5px} .statusline{height:4px;border-radius:8px;margin-top:12px} .statusline.planned{background:var(--blue)} .statusline.buy{background:var(--red)} .statusline.working{background:var(--yellow)} .statusline.done{background:var(--green)}
+
+/* tables */
+.tablewrap{overflow:auto} table{width:100%;border-collapse:collapse} th,td{padding:12px 10px;border-bottom:1px solid var(--line);text-align:left;font-size:14px} th{font-size:12px;color:var(--muted)}
+
+/* Modal */
+.backdrop{position:fixed;inset:0;z-index:100;background:rgba(31,41,55,.28);display:flex;align-items:center;justify-content:center;padding:28px;backdrop-filter:blur(1px)}
+.modal{width:min(880px,calc(100vw - 56px));max-height:calc(100vh - 56px);overflow:auto;background:#fbfbfc;border-radius:19px;box-shadow:0 28px 80px rgba(15,23,42,.22)}
+.modalhead{position:sticky;top:0;z-index:3;background:#fbfbfc;border-bottom:1px solid var(--line);padding:19px 22px;display:flex;justify-content:space-between;align-items:center} .modalhead h2{margin:0;font-size:26px}
+.modalbody{padding:18px 22px 24px} .close{width:34px;height:34px;border:0;border-radius:9px;background:#fff}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:15px} .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:15px} .section{background:#fff;border:1px solid var(--line);border-radius:15px;padding:17px;margin-top:13px} .sectiontitle{font-weight:900;font-size:16px;margin-bottom:12px}
+.task{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:10px;align-items:center;padding:12px 2px;border-bottom:1px solid var(--line)} .task input[type=checkbox]{width:19px;height:19px} .task.done .tasktitle{text-decoration:line-through;color:var(--muted)}
+.partstates{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end} .partbtn{border:1px solid var(--line);background:#fff;border-radius:8px;padding:7px 10px;font-size:11px;font-weight:800}
+.partbtn.missing{background:var(--redSoft);color:var(--red);border-color:#efbac4} .partbtn.available{background:var(--greenSoft);color:var(--green);border-color:#bce0ce} .partbtn.installed{background:#e3f3ea;color:#155f42;border-color:#9fd0b6}
+.addrow{display:flex;gap:9px;margin-top:13px} .addrow .input{flex:1} .actions{display:flex;justify-content:flex-end;gap:9px;margin-top:18px}
+.combo{position:relative} .suggestions{position:absolute;z-index:20;left:0;right:0;top:calc(100% + 4px);max-height:250px;overflow:auto;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 14px 34px rgba(20,30,50,.12)} .suggestions button{display:block;width:100%;border:0;background:#fff;text-align:left;padding:10px 12px} .suggestions button:hover,.suggestions button.sel{background:var(--blueSoft);color:var(--blue)}
+.toast{position:fixed;right:22px;bottom:22px;z-index:200;background:#182033;color:#fff;border-radius:10px;padding:11px 14px;font-size:13px;box-shadow:0 10px 30px rgba(0,0,0,.2)}
+
+@media(max-width:900px){#app{grid-template-columns:180px minmax(0,1fr)} .sidebar{padding:16px 10px} .nav button{padding:11px 10px} .grid2,.grid3{grid-template-columns:1fr}}
+@media(max-width:680px){#app{display:block} .sidebar{display:none} .top,.content{padding-left:12px;padding-right:12px} .stats{display:flex;overflow:auto} .stat{min-width:150px} .modal{width:calc(100vw - 20px);max-height:calc(100vh - 20px)} .backdrop{padding:10px} .task{grid-template-columns:28px 1fr} .partstates{grid-column:2;justify-content:flex-start}}
+</style>
+</head>
+<body>
+
+<section id="login">
+  <div class="login-card">
+    <div class="brand"><div class="brandmark">e</div><div><div class="brandtitle">Erle.Werkstatt</div><div class="brandsub">Werkstattplanung</div></div></div>
+    <div class="field"><label>Benutzername</label><input id="loginUser" class="input" autocomplete="username"></div>
+    <div class="field"><label>Passwort</label><input id="loginPass" class="input" type="password" autocomplete="current-password"></div>
+    <div id="confirmWrap" class="field hidden"><label>Passwort wiederholen</label><input id="loginConfirm" class="input" type="password" autocomplete="new-password"></div>
+    <div id="authMessage" class="error hidden" style="margin-bottom:12px"></div>
+    <button id="authMainBtn" class="btn primary">Anmelden</button>
+    <div class="authswitch"><span id="authSwitchText">Noch kein Konto?</span> <button id="authSwitchBtn">Account erstellen</button></div>
+  </div>
+</section>
+
+<section id="app" class="hidden">
+  <aside class="sidebar">
+    <div class="brand"><div class="brandmark">e</div><div><div class="brandtitle">Erle.Werkstatt</div></div></div>
+    <nav class="nav">
+      <button data-page="board" class="active">Übersicht</button>
+      <button data-page="orders">Aufträge</button>
+      <button data-page="purchase">Einkauf</button>
+      <button data-page="appointments">Termine</button>
+      <button data-page="vehicles">Fahrzeuge</button>
+      <button data-page="archive">Archiv</button>
+      <button id="usersNav" data-page="users">Benutzer</button>
+      <button id="settingsNav" data-page="settings">Einstellungen</button>
+    </nav>
+    <div class="sidefoot"><strong id="sideUser"></strong><span id="sideRole" class="small muted"></span><button id="logoutBtn">Abmelden</button></div>
+  </aside>
+  <main class="main">
+    <div class="top"><div class="topinner"><input id="search" class="input" placeholder="Kennzeichen oder Fahrzeug suchen…"><button id="topNew" class="btn primary">+ Neuer Auftrag</button></div></div>
+    <div id="content" class="content"></div>
+  </main>
+</section>
+
+<div id="modalRoot"></div>
+<div id="toast" class="toast hidden"></div>
+
+<script>
+const SUPABASE_URL='https://yntrnwzzsmhzmqtwnyyb.supabase.co';
+const SUPABASE_KEY='sb_publishable_gYvZ4Awk6O_MvFvOIFXIaA_WzAD8Ns3';
+const SESSION_KEY='erle_supabase_session_v1';
+
+const commonModels = [
+  'Alfa Romeo 147',
+  'Alfa Romeo 156',
+  'Alfa Romeo 159',
+  'Alfa Romeo Giulia',
+  'Alfa Romeo Giulietta',
+  'Alfa Romeo MiTo',
+  'Alfa Romeo Stelvio',
+  'Audi 100',
+  'Audi 80',
+  'Audi A1',
+  'Audi A2',
+  'Audi A3',
+  'Audi A4',
+  'Audi A5',
+  'Audi A6',
+  'Audi A7',
+  'Audi A8',
+  'Audi Q2',
+  'Audi Q3',
+  'Audi Q4 e-tron',
+  'Audi Q5',
+  'Audi Q7',
+  'Audi Q8',
+  'Audi TT',
+  'BMW 1er',
+  'BMW 2er',
+  'BMW 3er',
+  'BMW 4er',
+  'BMW 5er',
+  'BMW 6er',
+  'BMW 7er',
+  'BMW 8er',
+  'BMW i3',
+  'BMW i4',
+  'BMW i5',
+  'BMW iX',
+  'BMW X1',
+  'BMW X2',
+  'BMW X3',
+  'BMW X4',
+  'BMW X5',
+  'BMW X6',
+  'BMW X7',
+  'BMW Z3',
+  'BMW Z4',
+  'Citroën Berlingo',
+  'Citroën C1',
+  'Citroën C2',
+  'Citroën C3',
+  'Citroën C3 Aircross',
+  'Citroën C4',
+  'Citroën C4 Cactus',
+  'Citroën C4 Picasso',
+  'Citroën C5',
+  'Citroën C5 Aircross',
+  'Citroën Jumper',
+  'Citroën Jumpy',
+  'Cupra Ateca',
+  'Cupra Born',
+  'Cupra Formentor',
+  'Cupra Leon',
+  'Dacia Dokker',
+  'Dacia Duster',
+  'Dacia Jogger',
+  'Dacia Lodgy',
+  'Dacia Logan',
+  'Dacia Sandero',
+  'Dacia Spring',
+  'Fiat 500',
+  'Fiat 500L',
+  'Fiat 500X',
+  'Fiat Bravo',
+  'Fiat Doblo',
+  'Fiat Ducato',
+  'Fiat Grande Punto',
+  'Fiat Panda',
+  'Fiat Punto',
+  'Fiat Tipo',
+  'Ford B-Max',
+  'Ford C-Max',
+  'Ford Ecosport',
+  'Ford Edge',
+  'Ford Fiesta',
+  'Ford Focus',
+  'Ford Galaxy',
+  'Ford Ka',
+  'Ford Kuga',
+  'Ford Mondeo',
+  'Ford Mustang',
+  'Ford Puma',
+  'Ford Ranger',
+  'Ford S-Max',
+  'Ford Tourneo',
+  'Ford Transit',
+  'Ford Transit Connect',
+  'Ford Transit Custom',
+  'Honda Accord',
+  'Honda Civic',
+  'Honda CR-V',
+  'Honda HR-V',
+  'Honda Jazz',
+  'Hyundai Getz',
+  'Hyundai i10',
+  'Hyundai i20',
+  'Hyundai i30',
+  'Hyundai i40',
+  'Hyundai Ioniq',
+  'Hyundai Ioniq 5',
+  'Hyundai Kona',
+  'Hyundai Santa Fe',
+  'Hyundai Tucson',
+  'Jeep Cherokee',
+  'Jeep Compass',
+  'Jeep Grand Cherokee',
+  'Jeep Renegade',
+  'Jeep Wrangler',
+  'Kia Carens',
+  'Kia Ceed',
+  'Kia EV6',
+  'Kia Niro',
+  'Kia Optima',
+  'Kia Picanto',
+  'Kia ProCeed',
+  'Kia Rio',
+  'Kia Sorento',
+  'Kia Sportage',
+  'Kia Stonic',
+  'Land Rover Defender',
+  'Land Rover Discovery',
+  'Land Rover Discovery Sport',
+  'Land Rover Freelander',
+  'Land Rover Range Rover',
+  'Land Rover Range Rover Evoque',
+  'Land Rover Range Rover Sport',
+  'Mazda 2',
+  'Mazda 3',
+  'Mazda 5',
+  'Mazda 6',
+  'Mazda CX-3',
+  'Mazda CX-30',
+  'Mazda CX-5',
+  'Mazda CX-60',
+  'Mazda MX-5',
+  'Mercedes-Benz A-Klasse',
+  'Mercedes-Benz B-Klasse',
+  'Mercedes-Benz C-Klasse',
+  'Mercedes-Benz Citan',
+  'Mercedes-Benz CLA',
+  'Mercedes-Benz CLK',
+  'Mercedes-Benz CLS',
+  'Mercedes-Benz E-Klasse',
+  'Mercedes-Benz G-Klasse',
+  'Mercedes-Benz GLA',
+  'Mercedes-Benz GLB',
+  'Mercedes-Benz GLC',
+  'Mercedes-Benz GLE',
+  'Mercedes-Benz M-Klasse',
+  'Mercedes-Benz S-Klasse',
+  'Mercedes-Benz SLK',
+  'Mercedes-Benz Sprinter',
+  'Mercedes-Benz V-Klasse',
+  'Mercedes-Benz Vito',
+  'Mini Clubman',
+  'Mini Cooper',
+  'Mini Countryman',
+  'Mini One',
+  'Mitsubishi ASX',
+  'Mitsubishi Colt',
+  'Mitsubishi Lancer',
+  'Mitsubishi Outlander',
+  'Mitsubishi Space Star',
+  'Nissan Almera',
+  'Nissan Juke',
+  'Nissan Leaf',
+  'Nissan Micra',
+  'Nissan Navara',
+  'Nissan Note',
+  'Nissan Qashqai',
+  'Nissan X-Trail',
+  'Opel Adam',
+  'Opel Agila',
+  'Opel Antara',
+  'Opel Astra',
+  'Opel Combo',
+  'Opel Corsa',
+  'Opel Crossland',
+  'Opel Grandland',
+  'Opel Insignia',
+  'Opel Meriva',
+  'Opel Mokka',
+  'Opel Signum',
+  'Opel Vectra',
+  'Opel Vivaro',
+  'Opel Zafira',
+  'Peugeot 106',
+  'Peugeot 107',
+  'Peugeot 108',
+  'Peugeot 2008',
+  'Peugeot 206',
+  'Peugeot 207',
+  'Peugeot 208',
+  'Peugeot 3008',
+  'Peugeot 306',
+  'Peugeot 307',
+  'Peugeot 308',
+  'Peugeot 406',
+  'Peugeot 407',
+  'Peugeot 5008',
+  'Peugeot 508',
+  'Peugeot Boxer',
+  'Peugeot Partner',
+  'Peugeot Rifter',
+  'Porsche 911',
+  'Porsche Boxster',
+  'Porsche Cayenne',
+  'Porsche Cayman',
+  'Porsche Macan',
+  'Porsche Panamera',
+  'Porsche Taycan',
+  'Renault Captur',
+  'Renault Clio',
+  'Renault Espace',
+  'Renault Kadjar',
+  'Renault Kangoo',
+  'Renault Laguna',
+  'Renault Master',
+  'Renault Megane',
+  'Renault Scenic',
+  'Renault Twingo',
+  'Renault Zoe',
+  'Seat Alhambra',
+  'Seat Altea',
+  'Seat Arona',
+  'Seat Ateca',
+  'Seat Ibiza',
+  'Seat Leon',
+  'Seat Mii',
+  'Seat Tarraco',
+  'Seat Toledo',
+  'Smart ForFour',
+  'Smart ForTwo',
+  'Subaru Forester',
+  'Subaru Impreza',
+  'Subaru Legacy',
+  'Subaru Outback',
+  'Subaru XV',
+  'Suzuki Ignis',
+  'Suzuki Jimny',
+  'Suzuki Swift',
+  'Suzuki SX4',
+  'Suzuki Vitara',
+  'Tesla Model 3',
+  'Tesla Model S',
+  'Tesla Model X',
+  'Tesla Model Y',
+  'Toyota Auris',
+  'Toyota Avensis',
+  'Toyota Aygo',
+  'Toyota C-HR',
+  'Toyota Corolla',
+  'Toyota Corolla Cross',
+  'Toyota Land Cruiser',
+  'Toyota Prius',
+  'Toyota Proace',
+  'Toyota RAV4',
+  'Toyota Verso',
+  'Toyota Yaris',
+  'Toyota Yaris Cross',
+  'Volkswagen Amarok',
+  'Volkswagen Arteon',
+  'Volkswagen Bora',
+  'Volkswagen Caddy',
+  'Volkswagen Crafter',
+  'Volkswagen Eos',
+  'Volkswagen Fox',
+  'Volkswagen Golf',
+  'Volkswagen Golf 2',
+  'Volkswagen Golf 3',
+  'Volkswagen Golf 4',
+  'Volkswagen Golf 5',
+  'Volkswagen Golf 6',
+  'Volkswagen Golf 7',
+  'Volkswagen Golf 8',
+  'Volkswagen Golf Plus',
+  'Volkswagen Golf Sportsvan',
+  'Volkswagen ID.3',
+  'Volkswagen ID.4',
+  'Volkswagen ID.5',
+  'Volkswagen Jetta',
+  'Volkswagen Lupo',
+  'Volkswagen New Beetle',
+  'Volkswagen Passat',
+  'Volkswagen Phaeton',
+  'Volkswagen Polo',
+  'Volkswagen Scirocco',
+  'Volkswagen Sharan',
+  'Volkswagen T-Cross',
+  'Volkswagen T-Roc',
+  'Volkswagen Tiguan',
+  'Volkswagen Touareg',
+  'Volkswagen Touran',
+  'Volkswagen Transporter',
+  'Volkswagen Up',
+  'Volvo C30',
+  'Volvo S40',
+  'Volvo S60',
+  'Volvo S80',
+  'Volvo S90',
+  'Volvo V40',
+  'Volvo V50',
+  'Volvo V60',
+  'Volvo V70',
+  'Volvo V90',
+  'Volvo XC40',
+  'Volvo XC60',
+  'Volvo XC70',
+  'Volvo XC90',
+  'Škoda Citigo',
+  'Škoda Fabia',
+  'Škoda Kamiq',
+  'Škoda Karoq',
+  'Škoda Kodiaq',
+  'Škoda Octavia',
+  'Škoda Rapid',
+  'Škoda Roomster',
+  'Škoda Scala',
+  'Škoda Superb',
+  'Škoda Yeti'
+].sort((a,b)=>a.localeCompare(b,'de',{sensitivity:'base'}));
+function normalizePlate(raw){
+  let s=String(raw||'').toUpperCase().trim();
+  if(!s)return '';
+
+  s=s.replace(/[–—]/g,'-').replace(/\s+/g,' ').replace(/[^A-Z0-9 -]/g,'');
+
+  const explicit=s.split(/[\s-]+/).filter(Boolean);
+  if(explicit.length>=3){
+    const district=explicit[0];
+    const letters=explicit[1];
+    const number=explicit.slice(2).join('');
+    return [district,letters,number].filter(Boolean).join('-');
+  }
+
+  const knownDistricts=['BHV','OHZ','HB','HH','H'];
+  const compact=s.replace(/[\s-]/g,'');
+
+  for(const district of knownDistricts){
+    if(compact.startsWith(district)){
+      const rest=compact.slice(district.length);
+      const m=rest.match(/^([A-Z]{1,2})([0-9]{1,4}[A-Z]?)$/);
+      if(m)return `${district}-${m[1]}-${m[2]}`;
+    }
+  }
+
+  const m=compact.match(/^([A-Z]{1,3})([A-Z]{1,2})([0-9]{1,4}[A-Z]?)$/);
+  if(m)return `${m[1]}-${m[2]}-${m[3]}`;
+
+  return s.replace(/\s+/g,'-').replace(/-+/g,'-');
+}
+
+const manufacturers=[...new Set(commonModels.map(x=>{
+  if(x.startsWith('Alfa Romeo '))return 'Alfa Romeo';
+  if(x.startsWith('Land Rover '))return 'Land Rover';
+  if(x.startsWith('Mercedes-Benz '))return 'Mercedes-Benz';
+  return x.split(' ')[0];
+}))].sort((a,b)=>a.localeCompare(b,'de',{sensitivity:'base'}));
+
+let session=JSON.parse(localStorage.getItem(SESSION_KEY)||'null');
+let me=null, profiles=[], orders=[], vehicles=[], customers=[];
+let page='board', filter='all', search='', authMode='login', pollTimer=null;
+
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+const uid=p=>p+'-'+crypto.randomUUID();
+const technicalEmail=username=>{
+  const bytes=new TextEncoder().encode(username.trim().toLowerCase());
+  let bin=''; bytes.forEach(b=>bin+=String.fromCharCode(b));
+  return 'u_'+btoa(bin).replace(/=/g,'').replace(/\+/g,'-').replace(/\//g,'_')+'@erle.local';
+};
+function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.remove('hidden');setTimeout(()=>t.classList.add('hidden'),2600)}
+function headers(extra={}){const h={apikey:SUPABASE_KEY,'Content-Type':'application/json',...extra};if(session?.access_token)h.Authorization='Bearer '+session.access_token;return h}
+async function api(path,opts={}){const r=await fetch(SUPABASE_URL+path,{...opts,headers:headers(opts.headers||{})});let body=null;const txt=await r.text();if(txt){try{body=JSON.parse(txt)}catch{body=txt}}if(!r.ok)throw new Error((body&&body.message)||body?.error_description||body?.hint||('Fehler '+r.status));return body}
+async function rest(table,query='',opts={}){return api('/rest/v1/'+table+query,opts)}
+async function rpc(name,body={}){return api('/rest/v1/rpc/'+name,{method:'POST',body:JSON.stringify(body)})}
+
+async function signIn(username,password){
+  const email=technicalEmail(username);
+  try{
+    const s=await api('/auth/v1/token?grant_type=password',{method:'POST',body:JSON.stringify({email,password})});
+    session=s;localStorage.setItem(SESSION_KEY,JSON.stringify(session));return true;
+  }catch(e){
+    if(username.toLowerCase()==='admin' && password==='12345678'){
+      const s=await signUpRaw('Admin',password);
+      if(s?.access_token){session=s;localStorage.setItem(SESSION_KEY,JSON.stringify(session));return true}
+    }
+    throw e;
+  }
+}
+async function signUpRaw(username,password){
+  return api('/auth/v1/signup',{method:'POST',body:JSON.stringify({email:technicalEmail(username),password,data:{username}})})
+}
+async function register(username,password){
+  if(username.toLowerCase()==='admin')throw new Error('Der Benutzername Admin ist reserviert.');
+  const s=await signUpRaw(username,password);
+  if(!s?.access_token)throw new Error('Registrierung angelegt, aber keine Sitzung erhalten. In Supabase muss „Confirm email“ ausgeschaltet sein.');
+  session=s;localStorage.setItem(SESSION_KEY,JSON.stringify(session));
+}
+async function refreshSession(){
+  if(!session?.refresh_token)return false;
+  try{
+    const s=await api('/auth/v1/token?grant_type=refresh_token',{method:'POST',body:JSON.stringify({refresh_token:session.refresh_token})});
+    session=s;localStorage.setItem(SESSION_KEY,JSON.stringify(session));return true;
+  }catch{return false}
+}
+async function loadMe(){
+  const rows=await rest('erle_profiles','?select=id,username,role,active&id=eq.'+encodeURIComponent(session.user.id));
+  me=rows?.[0]||null;
+  if(me?.username?.toLowerCase()==='admin'){try{await rpc('erle_bootstrap_admin');const r=await rest('erle_profiles','?select=id,username,role,active&id=eq.'+encodeURIComponent(session.user.id));me=r?.[0]||me}catch{}}
+  return me;
+}
+function isAdmin(){return me?.role==='admin'}
+function isArchived(o){return !!o.archived_at}
+function archiveExpired(o){
+  if(!o.archived_at)return false;
+  return (Date.now()-new Date(o.archived_at).getTime()) > 42*24*60*60*1000;
+}
+async function purgeExpiredArchive(){
+  const expired=orders.filter(archiveExpired);
+  for(const o of expired){
+    try{
+      await rest('erle_orders','?id=eq.'+encodeURIComponent(o.id),{method:'DELETE'});
+      orders=orders.filter(x=>x.id!==o.id);
+    }catch(e){}
+  }
+}
+
+async function loadData(silent=false){
+  try{
+    const [o,v,c]=await Promise.all([
+      rest('erle_orders','?select=*&order=created_at.asc'),
+      rest('erle_vehicles','?select=*'),
+      rest('erle_customers','?select=*')
+    ]);
+    orders=o||[];vehicles=v||[];customers=c||[];
+    if(isAdmin()){profiles=await rest('erle_profiles','?select=id,username,role,active,created_at&order=created_at.asc')||[]}
+    await purgeExpiredArchive();
+    if(!silent)render(); else if(page==='board')render();
+  }catch(e){if(!silent)toast(e.message)}
+}
+async function enterApp(){
+  if(!session?.access_token){showLogin();return}
+  try{await loadMe();if(!me||me.active===false)throw new Error('Konto nicht verfügbar.');await loadData();showApp();startPolling()}
+  catch(e){if(await refreshSession())return enterApp();logout()}
+}
+function showLogin(){$('#app').classList.add('hidden');$('#login').classList.remove('hidden')}
+function showApp(){$('#login').classList.add('hidden');$('#app').classList.remove('hidden');$('#sideUser').textContent=me.username;$('#sideRole').textContent=isAdmin()?'Administrator':'Mitarbeiter';$('#usersNav').classList.toggle('hidden',!isAdmin());$('#settingsNav').classList.toggle('hidden',!isAdmin());render()}
+function logout(){session=null;me=null;localStorage.removeItem(SESSION_KEY);clearInterval(pollTimer);showLogin()}
+function startPolling(){clearInterval(pollTimer);pollTimer=setInterval(()=>loadData(true),15000)}
+
+function vehicle(id){return vehicles.find(v=>v.id===id)} function customer(id){return customers.find(c=>c.id===id)}
+function taskState(t){return t.part_status||'none'}
+function statusOf(o){
+  if(o.completed_at)return 'done';
+  const tasks=Array.isArray(o.tasks)?o.tasks:[];
+  if(tasks.some(t=>taskState(t)==='missing'))return 'buy';
+  if(tasks.some(t=>t.completed||['available','installed'].includes(taskState(t))))return 'working';
+  return 'planned';
+}
+const statLabel={planned:'Auftrag',buy:'Einkauf erforderlich',working:'In Arbeit',done:'Fertig'};
+
+function visibleOrders(){
+  let a=orders.filter(o=>!isArchived(o));
+  const q=search.trim().toLowerCase();
+  if(q)a=a.filter(o=>{const v=vehicle(o.vehicle_id);const c=customer(o.customer_id);return [o.description,o.order_number,v?.license_plate,v?.manufacturer,v?.model,c?.name].join(' ').toLowerCase().includes(q)});
+  if(filter!=='all')a=a.filter(o=>statusOf(o)===filter);
+  return a;
+}
+function render(){
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===page));
+  const c=$('#content');
+  if(page==='board')c.innerHTML=renderBoard();
+  if(page==='orders')c.innerHTML=renderOrders();
+  if(page==='purchase')c.innerHTML=renderPurchase();
+  if(page==='appointments')c.innerHTML=renderAppointments();
+  if(page==='vehicles')c.innerHTML=renderVehicles();
+  if(page==='archive')c.innerHTML=renderArchive();
+  if(page==='users')c.innerHTML=renderUsers();
+  if(page==='settings')c.innerHTML=renderSettings();
+  wire();
+}
+function renderBoard(){
+  const a=visibleOrders(), all=orders.filter(o=>!isArchived(o));
+  const counts={planned:0,buy:0,working:0,done:0};all.forEach(o=>counts[statusOf(o)]++);
+  return `<div class="pagehead"><div><h1>Werkstattübersicht</h1><p>Was steht an, was fehlt, was ist fertig?</p></div></div>
+  <div class="stats"><div class="stat"><strong>${all.length}</strong><span>Aktuelle Fahrzeuge</span></div><div class="stat"><strong>${counts.buy}</strong><span>Einkauf nötig</span></div><div class="stat"><strong>${counts.working}</strong><span>In Arbeit</span></div><div class="stat"><strong>${counts.done}</strong><span>Fertig</span></div></div>
+  <div class="filters">${[['all','Alle'],['buy','Einkauf'],['working','In Arbeit'],['done','Fertig']].map(([k,l])=>`<button class="filter ${filter===k?'active':''}" data-filter="${k}">${l}</button>`).join('')}</div>
+  <div class="boardwrap"><div class="board">${['planned','buy','working','done'].map(st=>{const list=a.filter(o=>statusOf(o)===st);return `<section class="col" data-drop="${st}"><div class="colhead"><span>${statLabel[st]}</span><span class="colcount">${list.length}</span></div>${list.map(card).join('')}</section>`}).join('')}</div></div>`;
+}
+function card(o){
+  const v=vehicle(o.vehicle_id),tasks=Array.isArray(o.tasks)?o.tasks:[],done=tasks.filter(t=>t.completed).length,missing=tasks.filter(t=>taskState(t)==='missing').length,st=statusOf(o);
+  return `<article class="ordercard" draggable="true" data-order="${o.id}"><div class="plate">${esc(v?.license_plate)}</div><div class="vehicle">${esc((v?.manufacturer||'')+' '+(v?.model||''))}</div><div class="desc">${esc(o.description)}</div><div class="cardmeta">${o.appointment_date?`<span>${new Date(o.appointment_date).toLocaleString('de-DE',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})}</span>`:''}${missing?`<span style="color:var(--red)">${missing} Arbeit(en) mit fehlenden Teilen</span>`:''}<span>${done}/${tasks.length} erledigt</span><span class="badge ${o.payment_status==='paid'?'green':'red'}">${o.payment_status==='paid'?'Bezahlt':'Offen'}</span></div><div class="statusline ${st}"></div></article>`;
+}
+function renderOrders(){
+  const a=visibleOrders();return `<div class="pagehead"><div><h1>Aufträge</h1><p>Alle sichtbaren Werkstattaufträge.</p></div></div><div class="panel tablewrap"><table><thead><tr><th>Kennzeichen</th><th>Fahrzeug</th><th>Auftrag</th><th>Status</th><th></th></tr></thead><tbody>${a.map(o=>{const v=vehicle(o.vehicle_id),s=statusOf(o);return `<tr><td><strong>${esc(v?.license_plate)}</strong></td><td>${esc((v?.manufacturer||'')+' '+(v?.model||''))}</td><td>${esc(o.description)}</td><td>${statLabel[s]}</td><td><button class="btn" data-open="${o.id}">Öffnen</button></td></tr>`}).join('')}</tbody></table></div>`;
+}
+function renderPurchase(){
+  const a=orders.filter(o=>statusOf(o)==='buy');return `<div class="pagehead"><div><h1>Einkauf</h1><p>Nur Aufträge mit fehlenden Teilen.</p></div></div><div class="row" style="align-items:stretch;flex-wrap:wrap">${a.length?a.map(o=>{const v=vehicle(o.vehicle_id),miss=(o.tasks||[]).filter(t=>taskState(t)==='missing');return `<div class="panel" style="min-width:320px;flex:1"><div class="between"><div><strong>${esc(v?.license_plate)}</strong><div class="small muted">${esc(o.description)}</div></div><button class="btn" data-open="${o.id}">Öffnen</button></div>${miss.map(t=>`<div style="padding:10px 0;border-bottom:1px solid var(--line)">${esc(t.title)} <span class="badge red">Fehlt</span></div>`).join('')}</div>`}).join(''):'<div class="panel">Aktuell fehlt nichts.</div>'}</div>`;
+}
+function renderAppointments(){
+  const a=orders.filter(o=>o.appointment_date).sort((a,b)=>a.appointment_date.localeCompare(b.appointment_date));return `<div class="pagehead"><div><h1>Termine</h1><p>Geplante Werkstatttermine.</p></div></div><div class="panel tablewrap"><table><thead><tr><th>Datum</th><th>Kennzeichen</th><th>Auftrag</th></tr></thead><tbody>${a.map(o=>{const v=vehicle(o.vehicle_id);return `<tr><td>${new Date(o.appointment_date).toLocaleString('de-DE')}</td><td><strong>${esc(v?.license_plate)}</strong></td><td><button class="btn" data-open="${o.id}">${esc(o.description)}</button></td></tr>`}).join('')}</tbody></table></div>`;
+}
+function renderVehicles(){return `<div class="pagehead"><div><h1>Fahrzeuge</h1><p>Alle für dich sichtbaren Fahrzeuge.</p></div></div><div class="panel tablewrap"><table><thead><tr><th>Kennzeichen</th><th>Hersteller</th><th>Modell</th></tr></thead><tbody>${vehicles.map(v=>`<tr><td><strong>${esc(v.license_plate)}</strong></td><td>${esc(v.manufacturer)}</td><td>${esc(v.model)}</td></tr>`).join('')}</tbody></table></div>`}
+function renderArchive(){
+  const a=orders.filter(o=>isArchived(o)&&!archiveExpired(o)).sort((x,y)=>new Date(y.archived_at)-new Date(x.archived_at));
+  return `<div class="pagehead"><div><h1>Archiv</h1><p>Gelöschte fertige Aufträge bleiben 6 Wochen im Archiv.</p></div></div>
+  <div class="panel">${a.length?a.map(o=>{const v=vehicle(o.vehicle_id);const days=Math.max(0,42-Math.floor((Date.now()-new Date(o.archived_at).getTime())/86400000));return `<div class="between" style="padding:11px 0;border-bottom:1px solid var(--line)"><div><strong>${esc(v?.license_plate)}</strong><div class="small muted">${esc(o.description)} · noch ca. ${days} Tage</div></div><div class="row"><span class="badge ${o.payment_status==='paid'?'green':'red'}">${o.payment_status==='paid'?'Bezahlt':'Offen'}</span><button class="btn" data-open="${o.id}">Öffnen</button></div></div>`}).join(''):'Noch nichts archiviert.'}</div>`;
+}
+function renderUsers(){
+  if(!isAdmin())return '<div class="panel">Kein Zugriff.</div>';
+  return `<div class="pagehead"><div><h1>Benutzer</h1><p>Alle zentral in Supabase registrierten Erle.Werkstatt-Benutzer.</p></div><button class="btn" id="reloadUsers">Neu Laden</button></div>
+  <div class="panel tablewrap">
+    <table>
+      <thead><tr><th>Benutzername</th><th>Rolle</th><th>Status</th><th>Erstellt</th><th>Aktion</th></tr></thead>
+      <tbody>
+        ${profiles.length?profiles.map(p=>`<tr>
+          <td><strong>${esc(p.username)}</strong>${p.id===me.id?' <span class="badge blue">Du</span>':''}</td>
+          <td><span class="badge ${p.role==='admin'?'blue':'green'}">${p.role==='admin'?'Administrator':'Mitarbeiter'}</span></td>
+          <td><span class="badge ${p.active?'green':'red'}">${p.active?'Aktiv':'Deaktiviert'}</span></td>
+          <td>${p.created_at?new Date(p.created_at).toLocaleDateString('de-DE'):'–'}</td>
+          <td>${p.id===me.id?'–':`<div class="row"><button class="btn" data-user-role="${p.id}" data-role="${p.role==='admin'?'worker':'admin'}">${p.role==='admin'?'Zu Mitarbeiter':'Zu Admin'}</button><button class="btn ${p.active?'danger':''}" data-user-active="${p.id}" data-active="${p.active?'false':'true'}">${p.active?'Deaktivieren':'Aktivieren'}</button></div>`}</td>
+        </tr>`).join(''):`<tr><td colspan="5" class="muted">Keine Benutzer Geladen.</td></tr>`}
+      </tbody>
+    </table>
+  </div>`;
+}
+function renderSettings(){
+  if(!isAdmin())return '<div class="panel">Kein Zugriff.</div>';
+  return `<div class="pagehead"><div><h1>Einstellungen</h1><p>Nur für Administratoren.</p></div></div><div class="panel"><div class="sectiontitle">Zentrale Supabase-Verbindung</div><div class="notice"><strong>Diese Erle.Werkstatt-Datei ist bereits mit deinem Supabase-Projekt verbunden.</strong><br>Alle Nutzer verwenden dieselbe Datenbank. Andere Nutzer brauchen kein Supabase-Konto und sehen diese Einstellungen nicht.</div><div style="margin-top:14px"><button class="btn" id="testConnection">Verbindung testen</button></div><div id="connResult" style="margin-top:12px"></div><div class="sectiontitle" style="margin-top:22px">Einmalige Voraussetzung</div><div class="notice">In Supabase unter <strong>Authentication → Providers → Email</strong> muss <strong>Confirm email ausgeschaltet</strong> sein, da Erle.Werkstatt intern technische E-Mail-Adressen verwendet und der Nutzer nur Benutzername + Passwort sieht.</div></div>`;
+}
+
+function wire(){
+  document.querySelectorAll('[data-action="new"]').forEach(b=>b.onclick=openNewOrder);
+  document.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>openOrder(b.dataset.open));
+  document.querySelectorAll('[data-filter]').forEach(b=>b.onclick=()=>{filter=b.dataset.filter;render()});
+  document.querySelectorAll('.ordercard').forEach(cardEl=>{cardEl.onclick=()=>openOrder(cardEl.dataset.order);cardEl.ondragstart=()=>cardEl.classList.add('dragging');cardEl.ondragend=()=>cardEl.classList.remove('dragging')});
+  document.querySelectorAll('[data-drop]').forEach(col=>{col.ondragover=e=>{e.preventDefault();col.classList.add('over')};col.ondragleave=()=>col.classList.remove('over');col.ondrop=async e=>{e.preventDefault();col.classList.remove('over');const el=document.querySelector('.ordercard.dragging');if(!el)return;const o=orders.find(x=>x.id===el.dataset.order);if(!o)return;const st=col.dataset.drop;if(st==='done'){await markFinished(o.id,true);return}if(st==='buy'){const t=(o.tasks||[])[0];if(t)t.part_status='missing'}if(st==='working'){(o.tasks||[]).forEach(t=>{if(t.part_status==='missing')t.part_status='available'})}if(st==='planned'){(o.tasks||[]).forEach(t=>{if(!t.completed)t.part_status='none'})}await saveOrder(o);render()}});
+  if($('#testConnection'))$('#testConnection').onclick=async()=>{try{await rest('erle_profiles','?select=id&limit=1');$('#connResult').innerHTML='<span class="badge green">Verbunden</span>'}catch(e){$('#connResult').innerHTML='<div class="error">'+esc(e.message)+'</div>'}};
+  if($('#reloadUsers')) $('#reloadUsers').onclick=loadUsersNow;
+  document.querySelectorAll('[data-user-role]').forEach(b=>b.onclick=()=>updateUserProfile(b.dataset.userRole,{role:b.dataset.role}));
+  document.querySelectorAll('[data-user-active]').forEach(b=>b.onclick=()=>updateUserProfile(b.dataset.userActive,{active:b.dataset.active==='true'}));
+}
+
+async function loadUsersNow(){
+  try{
+    profiles=await rest('erle_profiles','?select=id,username,role,active,created_at&order=created_at.asc')||[];
+    render();
+    toast('Benutzer neu geladen.');
+  }catch(e){toast('Benutzer konnten nicht geladen werden: '+e.message)}
+}
+async function updateUserProfile(id,patch){
+  if(!isAdmin()||id===me.id)return;
+  try{
+    await rest('erle_profiles','?id=eq.'+encodeURIComponent(id),{
+      method:'PATCH',
+      headers:{Prefer:'return=minimal'},
+      body:JSON.stringify(patch)
+    });
+    const p=profiles.find(x=>x.id===id);if(p)Object.assign(p,patch);
+    render();
+  }catch(e){toast('Änderung fehlgeschlagen: '+e.message)}
+}
+function openModal(title,body){$('#modalRoot').innerHTML=`<div class="backdrop"><div class="modal"><div class="modalhead"><h2>${title}</h2><button class="close">×</button></div><div class="modalbody">${body}</div></div></div>`;$('.close').onclick=closeModal;$('.backdrop').onclick=e=>{if(e.target.classList.contains('backdrop'))closeModal()}}
+function closeModal(){$('#modalRoot').innerHTML=''}
+
+function combo(id,list,getLabel,onChoose,nextId){
+  const input=$('#'+id),box=$('#'+id+'Box');if(!input||!box)return;let idx=-1;
+  const values=()=>{const q=input.value.toLowerCase().trim();return list().filter(x=>!q||getLabel(x).toLowerCase().includes(q)).slice(0,80)};
+  const draw=()=>{const a=values();idx=Math.min(idx,a.length-1);box.innerHTML=a.map((x,i)=>`<button type="button" class="${i===idx?'sel':''}" data-i="${i}">${esc(getLabel(x))}</button>`).join('');box.classList.toggle('hidden',!a.length);box.querySelectorAll('button').forEach(b=>b.onclick=()=>{const x=a[+b.dataset.i];input.value=getLabel(x);box.classList.add('hidden');onChoose?.(x);if(nextId)$('#'+nextId)?.focus()})};
+  input.onfocus=draw;input.oninput=()=>{idx=-1;draw()};input.onkeydown=e=>{const a=values();if(e.key==='ArrowDown'){e.preventDefault();idx=Math.min(idx+1,a.length-1);draw()}else if(e.key==='ArrowUp'){e.preventDefault();idx=Math.max(idx-1,0);draw()}else if(e.key==='Enter'){e.preventDefault();const x=a[Math.max(0,idx)];if(x){input.value=getLabel(x);box.classList.add('hidden');onChoose?.(x)}if(nextId)$('#'+nextId)?.focus()}else if(e.key==='Escape')box.classList.add('hidden')};
+  document.addEventListener('pointerdown',function out(e){if(!input.isConnected){document.removeEventListener('pointerdown',out);return}if(!input.closest('.combo').contains(e.target))box.classList.add('hidden')},{capture:true});
+}
+function openNewOrder(){
+  const workerOptions=isAdmin()?profiles.filter(p=>p.active).map(p=>`<option value="${p.id}">${esc(p.username)}</option>`).join(''):`<option value="${me.id}">${esc(me.username)}</option>`;
+  openModal('Neuer Auftrag',`<div class="grid2"><div class="field"><label>Kennzeichen *</label><input id="np" class="input" placeholder="z. B. HB-AB-123"></div><div class="field"><label>Hersteller *</label><div class="combo"><input id="nm" class="input" autocomplete="off" placeholder="Hersteller suchen…"><div id="nmBox" class="suggestions hidden"></div></div></div></div>
+  <div class="grid2" style="margin-top:15px"><div class="field"><label>Modell</label><div class="combo"><input id="nmodel" class="input" autocomplete="off" placeholder="Modell suchen…"><div id="nmodelBox" class="suggestions hidden"></div></div></div><div class="field"><label>Kunde</label><input id="nc" class="input" placeholder="optional"></div></div>
+  <div class="field" style="margin-top:15px"><label>Auftrag *</label><textarea id="nd" class="textarea" rows="3" placeholder="z. B. Ölservice, Bremsen vorne, Reifen wechseln"></textarea><div class="small muted">Mit Komma, Semikolon oder neuer Zeile trennen. Daraus entstehen automatisch die Arbeiten.</div></div>
+  <div class="field" style="margin-top:15px"><label>Zusatzinformation</label><textarea id="ne" class="textarea" rows="2"></textarea></div>
+  <div class="grid3" style="margin-top:15px"><div class="field"><label>Datum</label><input id="ndate" type="date" class="input"></div><div class="field"><label>Uhrzeit</label><input id="ntime" type="time" class="input"></div><div class="field"><label>Zuständig</label><select id="nass" class="select">${workerOptions}</select></div></div>
+  <div class="actions"><button class="btn" id="cancelNew">Abbrechen</button><button class="btn primary" id="saveNew">Auftrag erstellen</button></div>`);
+  $('#cancelNew').onclick=closeModal;
+  $('#np').onblur=()=>$('#np').value=normalizePlate($('#np').value);
+  $('#np').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();$('#np').value=normalizePlate($('#np').value);$('#nm').focus()}};
+  combo('nm',()=>manufacturers,x=>x,()=>{$('#nmodel').value=''},'nmodel');
+  combo('nmodel',()=>{const m=$('#nm').value.trim();return commonModels.filter(x=>x.toLowerCase().startsWith(m.toLowerCase()+' '))},x=>{const m=$('#nm').value.trim();return x.slice(m.length+1)},null,'nc');
+  $('#saveNew').onclick=createOrder;
+}
+async function createOrder(){
+  try{
+    const plate=normalizePlate($('#np').value),maker=$('#nm').value.trim(),model=$('#nmodel').value.trim(),desc=$('#nd').value.trim();
+    if(!plate||!maker||!desc)throw new Error('Kennzeichen, Hersteller und Auftrag sind Pflichtfelder.');
+
+    const assignee=$('#nass').value || me.id;
+    let v=vehicles.find(x=>(x.license_plate||'').replace(/-/g,'')===plate.replace(/-/g,''));
+    const cname=$('#nc').value.trim();
+
+    if(!v){
+      v={id:uid('v'),customer_id:null,license_plate:plate,manufacturer:maker,model};
+      await rest('erle_vehicles','',{
+        method:'POST',
+        headers:{Prefer:'return=minimal'},
+        body:JSON.stringify(v)
+      });
+      vehicles.push(v);
+    }
+
+    const work=desc.split(/\n|;|,/).map(x=>x.trim()).filter(Boolean);
+    const tasks=work.map((title,i)=>({id:uid('t'),title,completed:false,position:i+1,part_status:'none'}));
+    const dt=$('#ndate').value?$('#ndate').value+'T'+($('#ntime').value||'08:00')+':00':null;
+
+    const o={
+      id:uid('o'),
+      vehicle_id:v.id,
+      customer_id:null,
+      order_number:'A-'+Date.now().toString().slice(-6),
+      description:desc,
+      extra_info:$('#ne').value.trim(),
+      priority:'normal',
+      appointment_date:dt,
+      assigned_user_id:assignee,
+      payment_status:'open',
+      archived_at:null,
+      tasks,
+      notes:[]
+    };
+
+    await rest('erle_orders','',{
+      method:'POST',
+      headers:{Prefer:'return=minimal'},
+      body:JSON.stringify(o)
+    });
+    orders.push(o);
+
+    if(cname){
+      const cust={id:uid('c'),name:cname};
+      await rest('erle_customers','',{
+        method:'POST',
+        headers:{Prefer:'return=minimal'},
+        body:JSON.stringify(cust)
+      });
+      customers.push(cust);
+
+      o.customer_id=cust.id;
+      v.customer_id=cust.id;
+
+      await rest('erle_orders','?id=eq.'+encodeURIComponent(o.id),{
+        method:'PATCH',
+        headers:{Prefer:'return=minimal'},
+        body:JSON.stringify({customer_id:cust.id})
+      });
+      await rest('erle_vehicles','?id=eq.'+encodeURIComponent(v.id),{
+        method:'PATCH',
+        headers:{Prefer:'return=minimal'},
+        body:JSON.stringify({customer_id:cust.id})
+      });
+    }
+
+    closeModal();
+    render();
+    openOrder(o.id);
+  }catch(e){
+    toast('Auftrag konnte nicht erstellt werden: '+e.message);
+  }
+}
+async function saveOrder(o){try{const rr=await rest('erle_orders','?id=eq.'+encodeURIComponent(o.id),{method:'PATCH',headers:{Prefer:'return=representation'},body:JSON.stringify({tasks:o.tasks,notes:o.notes,description:o.description,extra_info:o.extra_info,appointment_date:o.appointment_date,completed_at:o.completed_at,assigned_user_id:o.assigned_user_id,payment_status:o.payment_status||'open',archived_at:o.archived_at||null})});if(rr?.[0])Object.assign(o,rr[0])}catch(e){toast('Speichern fehlgeschlagen: '+e.message);await loadData(true)}}
+function openOrder(id){
+  const o=orders.find(x=>x.id===id);if(!o)return;const v=vehicle(o.vehicle_id),tasks=Array.isArray(o.tasks)?o.tasks:[],st=statusOf(o);
+  openModal(esc(v?.license_plate||''),`<div class="muted">${esc((v?.manufacturer||'')+' '+(v?.model||''))}</div>
+  <div class="section"><div class="grid2"><div><div class="small muted">Auftrag</div><strong>${esc(o.description)}</strong></div><div><div class="small muted">Status</div><strong>${statLabel[st]}</strong></div></div></div>
+  <div class="section"><div class="between"><div class="sectiontitle">Arbeiten <span class="small muted">${tasks.filter(t=>t.completed).length}/${tasks.length} erledigt</span></div><span class="small muted">Teilestatus direkt je Arbeit</span></div>
+  <div id="taskList">${tasks.map(t=>taskRow(o,t)).join('')}</div>
+  <div class="addrow"><input id="newTask" class="input" placeholder="Neue Arbeit hinzufügen…"><button id="addTaskBtn" class="btn">Hinzufügen</button></div></div>
+  <div class="section"><div class="sectiontitle">Fahrzeugstatus</div><label class="row"><input id="finishCar" type="checkbox" ${o.completed_at?'checked':''} style="width:19px;height:19px"><strong>Fahrzeug fertig</strong></label></div>
+  <div class="section"><div class="between"><div><div class="sectiontitle" style="margin-bottom:4px">Zahlung</div><div class="small muted">Zahlungsstatus des Auftrags</div></div><div class="row"><button id="payOpen" class="btn ${o.payment_status==='paid'?'':'danger'}">Offen</button><button id="payPaid" class="btn ${o.payment_status==='paid'?'primary':''}" style="${o.payment_status==='paid'?'background:var(--green);border-color:var(--green);':''}">Bezahlt</button></div></div></div>
+  ${o.completed_at?`<div class="section"><div class="between"><div><div class="sectiontitle" style="margin-bottom:4px">${o.archived_at?'Archiv':'Fertiger Auftrag'}</div><div class="small muted">${o.archived_at?'Der Auftrag bleibt insgesamt 6 Wochen im Archiv.':'Löschen entfernt den Auftrag aus der aktiven Übersicht und verschiebt ihn ins Archiv.'}</div></div><button id="archiveBtn" class="btn ${o.archived_at?'':'danger'}">${o.archived_at?'Wiederherstellen':'Löschen'}</button></div></div>`:''}
+  <div class="section"><div class="sectiontitle">Notizen</div><div>${(o.notes||[]).map(n=>`<div style="padding:8px 0;border-bottom:1px solid var(--line)">${esc(n.text)}<div class="small muted">${new Date(n.created_at).toLocaleString('de-DE')}</div></div>`).join('')||'<div class="small muted">Keine Notizen.</div>'}</div><div class="addrow"><input id="noteText" class="input" placeholder="Notiz hinzufügen…"><button id="addNoteBtn" class="btn">Speichern</button></div></div>`);
+  document.querySelectorAll('[data-taskcheck]').forEach(x=>x.onchange=()=>toggleTask(o.id,x.dataset.taskcheck,x.checked));
+  document.querySelectorAll('[data-part]').forEach(x=>x.onclick=()=>setPart(o.id,x.dataset.task,x.dataset.part));
+  $('#addTaskBtn').onclick=()=>addTask(o.id);$('#newTask').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();addTask(o.id)}};
+  $('#finishCar').onchange=()=>markFinished(o.id,$('#finishCar').checked);
+  if($('#payOpen')) $('#payOpen').onclick=()=>setPayment(o.id,'open');
+  if($('#payPaid')) $('#payPaid').onclick=()=>setPayment(o.id,'paid');
+  if($('#archiveBtn')) $('#archiveBtn').onclick=()=>toggleArchive(o.id);
+  $('#addNoteBtn').onclick=()=>addNote(o.id);$('#noteText').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();addNote(o.id)}};
+}
+function taskRow(o,t){
+  const s=taskState(t);return `<div class="task ${t.completed?'done':''}"><input type="checkbox" data-taskcheck="${t.id}" ${t.completed?'checked':''}><div class="tasktitle">${esc(t.title)}</div><div class="partstates"><button class="partbtn ${s==='missing'?'missing':''}" data-part="missing" data-task="${t.id}">${s==='missing'?'✓ ':''}Fehlt</button><button class="partbtn ${s==='available'?'available':''}" data-part="available" data-task="${t.id}">${s==='available'?'✓ ':''}Da</button><button class="partbtn ${s==='installed'?'installed':''}" data-part="installed" data-task="${t.id}">${s==='installed'?'✓ ':''}Verbaut</button></div></div>`;
+}
+async function toggleTask(oid,tid,val){
+  const o=orders.find(x=>x.id===oid),t=(o.tasks||[]).find(x=>x.id===tid);
+  if(!t)return;
+  t.completed=val;
+  if(val&&t.part_status==='available')t.part_status='installed';
+
+  const tasks=Array.isArray(o.tasks)?o.tasks:[];
+  if(tasks.length&&tasks.every(x=>x.completed))o.completed_at=o.completed_at||new Date().toISOString();
+  else o.completed_at=null;
+
+  await saveOrder(o);
+  render();
+  openOrder(oid);
+}
+async function setPart(oid,tid,state){
+  const o=orders.find(x=>x.id===oid),t=(o.tasks||[]).find(x=>x.id===tid);
+  if(!t)return;
+
+  const was=t.part_status||'none';
+  t.part_status=was===state?'none':state;
+
+  if(t.part_status==='installed'){
+    t.completed=true;
+  }else if(was==='installed'){
+    t.completed=false;
+  }
+
+  const tasks=Array.isArray(o.tasks)?o.tasks:[];
+  if(tasks.length && tasks.every(x=>x.completed)){
+    o.completed_at=o.completed_at||new Date().toISOString();
+  }else{
+    o.completed_at=null;
+  }
+
+  await saveOrder(o);
+  render();
+  openOrder(oid);
+}
+async function addTask(oid){const o=orders.find(x=>x.id===oid),title=$('#newTask').value.trim();if(!title)return;o.tasks=o.tasks||[];o.tasks.push({id:uid('t'),title,completed:false,position:o.tasks.length+1,part_status:'none'});await saveOrder(o);openOrder(oid);render()}
+async function addNote(oid){const o=orders.find(x=>x.id===oid),text=$('#noteText').value.trim();if(!text)return;o.notes=o.notes||[];o.notes.push({id:uid('n'),text,created_at:new Date().toISOString()});await saveOrder(o);openOrder(oid)}
+async function markFinished(oid,val){const o=orders.find(x=>x.id===oid);o.completed_at=val?new Date().toISOString():null;render();await saveOrder(o);openOrder(oid)}
+async function setPayment(oid,status){
+  const o=orders.find(x=>x.id===oid);if(!o)return;
+  o.payment_status=status;
+  await saveOrder(o);
+  render();
+  openOrder(oid);
+}
+async function toggleArchive(oid){
+  const o=orders.find(x=>x.id===oid);if(!o||!o.completed_at)return;
+  o.archived_at=o.archived_at?null:new Date().toISOString();
+  await saveOrder(o);
+  closeModal();
+  render();
+  toast(o.archived_at?'Auftrag ins Archiv verschoben.':'Auftrag wiederhergestellt.');
+}
+
+$('#authSwitchBtn').onclick=()=>{authMode=authMode==='login'?'signup':'login';const s=authMode==='signup';$('#confirmWrap').classList.toggle('hidden',!s);$('#authMainBtn').textContent=s?'Account erstellen':'Anmelden';$('#authSwitchText').textContent=s?'Bereits ein Konto?':'Noch kein Konto?';$('#authSwitchBtn').textContent=s?'Anmelden':'Account erstellen';$('#authMessage').classList.add('hidden')};
+$('#authMainBtn').onclick=async()=>{const u=$('#loginUser').value.trim(),p=$('#loginPass').value;try{if(u.length<3||p.length<8)throw new Error('Benutzername mindestens 3 Zeichen, Passwort mindestens 8 Zeichen.');if(authMode==='signup'){if(p!==$('#loginConfirm').value)throw new Error('Passwörter stimmen nicht überein.');await register(u,p)}else await signIn(u,p);await enterApp()}catch(e){$('#authMessage').textContent=e.message;$('#authMessage').classList.remove('hidden')}};
+$('#loginPass').onkeydown=e=>{if(e.key==='Enter')$('#authMainBtn').click()};
+$('#logoutBtn').onclick=logout;$('#topNew').onclick=openNewOrder;$('#search').oninput=e=>{search=e.target.value;render()};
+document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>{if(b.classList.contains('hidden'))return;page=b.dataset.page;render()});
+enterApp();
+</script>
+</body>
+</html>
