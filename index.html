@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>erle – Werkstattplanung</title>
+<title>Erle.Werkstatt – Werkstattplanung</title>
 <style>
-:root{--bg:#fbfbfc;--card:#fff;--line:#dfe4ea;--text:#182033;--muted:#697386;--blue:#2f6fd5;--blueSoft:#eaf2ff;--red:#c23b50;--redSoft:#fff0f2;--yellow:#a98512;--yellowSoft:#fff9df;--green:#20825c;--greenSoft:#edf8f2}
+:root{--bg:#f6f9fd;--card:#fff;--line:#dbe5f0;--text:#142033;--muted:#718096;--blue:#1769e0;--blueDark:#0d3f91;--blueSoft:#eaf3ff;--red:#9b4a55;--redSoft:#f7f3f4;--yellow:#9a7a1a;--yellowSoft:#fff9e8;--green:#227a59;--greenSoft:#edf8f3}
 *{box-sizing:border-box} body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);font-size:15px}
 button,input,select,textarea{font:inherit} button{cursor:pointer} .hidden{display:none!important}
-.btn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:11px 15px;font-weight:700;color:var(--text)}
-.btn.primary{background:var(--blue);border-color:var(--blue);color:#fff} .btn.danger{color:var(--red);border-color:#efc3ca}
+.btn{border:1px solid var(--line);background:#fff;border-radius:9px;padding:10px 14px;font-weight:700;color:var(--text);transition:.18s ease}.btn:hover{border-color:#b9cbe0;background:#f8fbff}
+.btn.primary{background:var(--blue);border-color:var(--blue);color:#fff}.btn.primary:hover{background:#0f5fce}.btn.danger{color:#4b5870;border-color:#d8e2ec;background:#f8fafc}.btn.danger:hover{background:#eef4fa;border-color:#c7d6e6}
 .input,.select,.textarea{width:100%;border:1px solid var(--line);background:#fff;border-radius:10px;padding:12px 13px;outline:none}
 .input:focus,.select:focus,.textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(47,111,213,.10)}
 .field{display:flex;flex-direction:column;gap:7px} .field label{font-size:13px;font-weight:800}
@@ -30,12 +30,12 @@ button,input,select,textarea{font:inherit} button{cursor:pointer} .hidden{displa
 
 /* App shell */
 #app{display:grid;grid-template-columns:220px minmax(0,1fr);min-height:100vh}
-.sidebar{position:sticky;top:0;height:100vh;background:#fff;border-right:1px solid var(--line);padding:20px 15px;display:flex;flex-direction:column}
-.sidebar .brand{margin-bottom:30px} .sidebar .brandmark{width:38px;height:38px} .sidebar .brandsub{display:none}
-.nav{display:flex;flex-direction:column;gap:4px} .nav button{border:0;background:transparent;text-align:left;border-radius:9px;padding:13px 14px;font-weight:700;color:#536072;font-size:15px}
-.nav button.active{background:var(--blueSoft);color:var(--blue)} .nav button:hover{background:#f2f5f8}
-.sidefoot{margin-top:auto;border-top:1px solid var(--line);padding:14px 8px 0} .sidefoot strong{display:block} .sidefoot button{border:0;background:none;padding:10px 0;color:var(--muted)}
-.main{min-width:0} .top{position:sticky;top:0;z-index:20;background:rgba(245,247,250,.95);backdrop-filter:blur(8px);padding:20px 28px 10px}
+.sidebar{position:sticky;top:0;height:100vh;background:linear-gradient(180deg,#0e4ca7 0%,#0a377b 100%);border-right:1px solid #0a397e;padding:20px 15px;display:flex;flex-direction:column;color:#fff}
+.sidebar .brand{margin-bottom:30px}.sidebar .brandmark{width:38px;height:38px;background:#fff;color:var(--blueDark)}.sidebar .brandtitle{color:#fff}.sidebar .brandsub{display:none}
+.nav{display:flex;flex-direction:column;gap:5px}.nav button{border:0;background:transparent;text-align:left;border-radius:9px;padding:12px 13px;font-weight:700;color:rgba(255,255,255,.82);font-size:14px}
+.nav button.active{background:rgba(255,255,255,.16);color:#fff}.nav button:hover{background:rgba(255,255,255,.10);color:#fff}
+.sidefoot{margin-top:auto;border-top:1px solid rgba(255,255,255,.16);padding:14px 8px 0}.sidefoot strong{display:block;color:#fff;font-size:13px;font-weight:700}.sidefoot .small{color:rgba(255,255,255,.62)}.sidefoot button{border:0;background:none;padding:9px 0;color:rgba(255,255,255,.75);font-size:12px}
+.main{min-width:0} .top{position:sticky;top:0;z-index:20;background:rgba(246,249,253,.94);backdrop-filter:blur(10px);padding:20px 28px 10px}
 .topinner{display:flex;gap:10px;justify-content:flex-end} .top .input{max-width:360px} .content{padding:10px 28px 44px}
 .pagehead{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin:6px 0 16px} .pagehead h1{margin:0;font-size:29px} .pagehead p{margin:5px 0 0;color:var(--muted);font-size:13px}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:12px} .stat{background:#fff;border:1px solid var(--line);border-radius:13px;padding:13px 15px;min-height:70px} .stat strong{font-size:23px;display:block} .stat span{font-size:11px;color:var(--muted)}
@@ -46,7 +46,7 @@ button,input,select,textarea{font:inherit} button{cursor:pointer} .hidden{displa
 .col{background:#f4f5f6;border:1px solid #e0e6ec;border-radius:15px;padding:12px;min-height:520px} .col.over{outline:2px solid rgba(47,111,213,.35)}
 .colhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:11px;font-weight:900} .colcount{background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px 8px;font-size:11px;color:var(--muted)}
 .ordercard{background:#fff;border:1px solid var(--line);border-radius:13px;padding:16px;margin-bottom:10px;box-shadow:0 3px 10px rgba(20,30,50,.035);cursor:pointer} .ordercard.dragging{opacity:.5}
-.plate{font-size:22px;font-weight:900;letter-spacing:.2px} .vehicle{font-size:14px;font-weight:700;margin-top:4px} .desc{font-size:14px;line-height:1.45;margin:10px 0}
+.plate{font-size:22px;font-weight:900;letter-spacing:.2px} .vehicle{font-size:14px;font-weight:700;margin-top:4px}.customername{font-size:12px;font-weight:400;color:#94a0b2;line-height:1.35}.cardtop{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.customer-right{text-align:right;margin-top:3px;max-width:42%;word-break:break-word} .desc{font-size:14px;line-height:1.45;margin:10px 0}
 .cardmeta{font-size:12px;color:var(--muted);display:flex;flex-direction:column;gap:5px} .statusline{height:4px;border-radius:8px;margin-top:12px} .statusline.planned{background:var(--blue)} .statusline.buy{background:var(--red)} .statusline.working{background:var(--yellow)} .statusline.done{background:var(--green)}
 
 /* tables */
@@ -67,6 +67,30 @@ button,input,select,textarea{font:inherit} button{cursor:pointer} .hidden{displa
 
 @media(max-width:900px){#app{grid-template-columns:180px minmax(0,1fr)} .sidebar{padding:16px 10px} .nav button{padding:11px 10px} .grid2,.grid3{grid-template-columns:1fr}}
 @media(max-width:680px){#app{display:block} .sidebar{display:none} .top,.content{padding-left:12px;padding-right:12px} .stats{display:flex;overflow:auto} .stat{min-width:150px} .modal{width:calc(100vw - 20px);max-height:calc(100vh - 20px)} .backdrop{padding:10px} .task{grid-template-columns:28px 1fr} .partstates{grid-column:2;justify-content:flex-start}}
+@media(max-width:680px){
+  #app{display:block}
+  .sidebar{display:flex;position:sticky;top:0;z-index:40;width:100%;height:auto;padding:10px 10px 8px;flex-direction:column;border-right:0;border-bottom:1px solid rgba(255,255,255,.16)}
+  .sidebar .brand{margin:0 0 8px 2px}.sidebar .brandmark{width:30px;height:30px;font-size:15px}.sidebar .brandtitle{font-size:16px}
+  .nav{flex-direction:row;overflow-x:auto;padding-bottom:2px}.nav button{white-space:nowrap;padding:9px 11px;font-size:13px}
+  .sidefoot{display:block;padding:7px 2px 0;margin-top:7px}.sideuserrow{gap:8px}.sideidentity{display:none}.logoutbtn{flex:0 0 auto!important;border:1px solid rgba(255,255,255,.55)!important;background:#fff!important;color:#0d3f91!important;border-radius:8px!important;padding:8px 11px!important;font-size:12px!important;font-weight:800!important;box-shadow:0 2px 8px rgba(0,0,0,.10)}
+  .top,.content{padding-left:12px;padding-right:12px}
+  .top{top:94px}
+  .topinner{justify-content:stretch}.top .input{max-width:none;flex:1}
+  .stats{display:flex;overflow:auto}.stat{min-width:150px}
+  .board{grid-template-columns:repeat(4,minmax(250px,1fr));min-width:1040px}
+  .modal{width:calc(100vw - 20px);max-height:calc(100vh - 20px)}
+  .backdrop{padding:10px}.grid2,.grid3{grid-template-columns:1fr}
+  .task{grid-template-columns:1fr}.partstates{grid-column:1;justify-content:flex-start}
+}
+.sideuserrow{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.sideidentity{min-width:0;text-align:left}
+.sideidentity strong{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.logoutbtn{flex:0 0 auto!important;border:1px solid rgba(255,255,255,.28)!important;background:rgba(255,255,255,.10)!important;color:#fff!important;border-radius:8px!important;padding:7px 9px!important;font-size:11px!important;font-weight:700!important}
+.logoutbtn:hover{background:#eef5ff!important;border-color:#fff!important}
+.purchase-list{display:flex;flex-direction:column;gap:12px}
+.purchase-card{width:100%}
+.purchase-items{margin-top:12px}
+.purchase-item{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:10px 0;border-top:1px solid var(--line)}
 </style>
 </head>
 <body>
@@ -96,10 +120,15 @@ button,input,select,textarea{font:inherit} button{cursor:pointer} .hidden{displa
       <button id="usersNav" data-page="users">Benutzer</button>
       <button id="settingsNav" data-page="settings">Einstellungen</button>
     </nav>
-    <div class="sidefoot"><strong id="sideUser"></strong><span id="sideRole" class="small muted"></span><button id="logoutBtn">Abmelden</button></div>
+    <div class="sidefoot">
+  <div class="sideuserrow">
+    <div class="sideidentity"><strong id="sideUser"></strong><span id="sideRole" class="small muted"></span></div>
+    <button id="logoutBtn" class="logoutbtn">Abmelden</button>
+  </div>
+</div>
   </aside>
   <main class="main">
-    <div class="top"><div class="topinner"><input id="search" class="input" placeholder="Kennzeichen oder Fahrzeug suchen…"><button id="topNew" class="btn primary">+ Neuer Auftrag</button></div></div>
+    <div class="top"><div class="topinner"><input id="search" class="input" placeholder="Kennzeichen oder Fahrzeug suchen…"></div></div>
     <div id="content" class="content"></div>
   </main>
 </section>
@@ -487,6 +516,7 @@ let page='board', filter='all', search='', authMode='login', pollTimer=null;
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
 const uid=p=>p+'-'+crypto.randomUUID();
+function capFirst(s){s=String(s||'').trim();return s?s.charAt(0).toLocaleUpperCase('de-DE')+s.slice(1):s}
 const technicalEmail=username=>{
   const bytes=new TextEncoder().encode(username.trim().toLowerCase());
   let bin=''; bytes.forEach(b=>bin+=String.fromCharCode(b));
@@ -606,20 +636,58 @@ function render(){
 function renderBoard(){
   const a=visibleOrders(), all=orders.filter(o=>!isArchived(o));
   const counts={planned:0,buy:0,working:0,done:0};all.forEach(o=>counts[statusOf(o)]++);
-  return `<div class="pagehead"><div><h1>Werkstattübersicht</h1><p>Was steht an, was fehlt, was ist fertig?</p></div></div>
+  return `<div class="pagehead"><div><h1>Werkstattübersicht</h1><p>Was steht an, was fehlt, was ist fertig?</p></div><button class="btn primary" data-action="new">+ Neuer Auftrag</button></div>
   <div class="stats"><div class="stat"><strong>${all.length}</strong><span>Aktuelle Fahrzeuge</span></div><div class="stat"><strong>${counts.buy}</strong><span>Einkauf nötig</span></div><div class="stat"><strong>${counts.working}</strong><span>In Arbeit</span></div><div class="stat"><strong>${counts.done}</strong><span>Fertig</span></div></div>
   <div class="filters">${[['all','Alle'],['buy','Einkauf'],['working','In Arbeit'],['done','Fertig']].map(([k,l])=>`<button class="filter ${filter===k?'active':''}" data-filter="${k}">${l}</button>`).join('')}</div>
   <div class="boardwrap"><div class="board">${['planned','buy','working','done'].map(st=>{const list=a.filter(o=>statusOf(o)===st);return `<section class="col" data-drop="${st}"><div class="colhead"><span>${statLabel[st]}</span><span class="colcount">${list.length}</span></div>${list.map(card).join('')}</section>`}).join('')}</div></div>`;
 }
 function card(o){
-  const v=vehicle(o.vehicle_id),tasks=Array.isArray(o.tasks)?o.tasks:[],done=tasks.filter(t=>t.completed).length,missing=tasks.filter(t=>taskState(t)==='missing').length,st=statusOf(o);
-  return `<article class="ordercard" draggable="true" data-order="${o.id}"><div class="plate">${esc(v?.license_plate)}</div><div class="vehicle">${esc((v?.manufacturer||'')+' '+(v?.model||''))}</div><div class="desc">${esc(o.description)}</div><div class="cardmeta">${o.appointment_date?`<span>${new Date(o.appointment_date).toLocaleString('de-DE',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})}</span>`:''}${missing?`<span style="color:var(--red)">${missing} Arbeit(en) mit fehlenden Teilen</span>`:''}<span>${done}/${tasks.length} erledigt</span><span class="badge ${o.payment_status==='paid'?'green':'red'}">${o.payment_status==='paid'?'Bezahlt':'Offen'}</span></div><div class="statusline ${st}"></div></article>`;
+  const v=vehicle(o.vehicle_id),c=customer(o.customer_id),tasks=Array.isArray(o.tasks)?o.tasks:[],done=tasks.filter(t=>t.completed).length,missing=tasks.filter(t=>taskState(t)==='missing').length,st=statusOf(o);
+  return `<article class="ordercard" draggable="true" data-order="${o.id}">
+    <div class="cardtop"><div><div class="plate">${esc(v?.license_plate)}</div><div class="vehicle">${esc((v?.manufacturer||'')+' '+(v?.model||''))}</div></div>${c?.name?`<div class="customername customer-right">${esc(c.name)}</div>`:''}</div>
+    <div class="desc">${esc(o.description)}</div>
+    <div class="cardmeta">
+      ${o.appointment_date?`<span>${new Date(o.appointment_date).toLocaleString('de-DE',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})}</span>`:''}
+      ${missing?`<span style="color:var(--red)">${missing} Arbeit(en) mit fehlenden Teilen</span>`:''}
+      <span>${done}/${tasks.length} erledigt</span>
+      <span class="badge ${o.payment_status==='paid'?'green':'red'}">${o.payment_status==='paid'?'Bezahlt':'Offen'}</span>
+    </div>
+    <div class="statusline ${st}"></div>
+  </article>`;
 }
 function renderOrders(){
-  const a=visibleOrders();return `<div class="pagehead"><div><h1>Aufträge</h1><p>Alle sichtbaren Werkstattaufträge.</p></div></div><div class="panel tablewrap"><table><thead><tr><th>Kennzeichen</th><th>Fahrzeug</th><th>Auftrag</th><th>Status</th><th></th></tr></thead><tbody>${a.map(o=>{const v=vehicle(o.vehicle_id),s=statusOf(o);return `<tr><td><strong>${esc(v?.license_plate)}</strong></td><td>${esc((v?.manufacturer||'')+' '+(v?.model||''))}</td><td>${esc(o.description)}</td><td>${statLabel[s]}</td><td><button class="btn" data-open="${o.id}">Öffnen</button></td></tr>`}).join('')}</tbody></table></div>`;
+  const a=visibleOrders();
+  return `<div class="pagehead"><div><h1>Aufträge</h1><p>Alle sichtbaren Werkstattaufträge.</p></div><button class="btn primary" data-action="new">+ Neuer Auftrag</button></div>
+  <div class="panel tablewrap"><table><thead><tr><th>Kennzeichen</th><th>Fahrzeug</th><th>Auftrag</th><th>Status</th><th>Zuständig</th><th>Aktionen</th></tr></thead><tbody>
+  ${a.map(o=>{const v=vehicle(o.vehicle_id),s=statusOf(o),p=profiles.find(x=>x.id===o.assigned_user_id);return `<tr>
+    <td><strong>${esc(v?.license_plate)}</strong></td>
+    <td>${esc((v?.manufacturer||'')+' '+(v?.model||''))}</td>
+    <td>${esc(o.description)}</td>
+    <td>${statLabel[s]}</td>
+    <td>${esc(p?.username||((o.assigned_user_id===me?.id)?me?.username:'–'))}</td>
+    <td><div class="row"><button class="btn" data-open="${o.id}">Öffnen</button><button class="btn" data-delete-order="${o.id}">Löschen</button></div></td>
+  </tr>`}).join('')}</tbody></table></div>`;
 }
 function renderPurchase(){
-  const a=orders.filter(o=>statusOf(o)==='buy');return `<div class="pagehead"><div><h1>Einkauf</h1><p>Nur Aufträge mit fehlenden Teilen.</p></div></div><div class="row" style="align-items:stretch;flex-wrap:wrap">${a.length?a.map(o=>{const v=vehicle(o.vehicle_id),miss=(o.tasks||[]).filter(t=>taskState(t)==='missing');return `<div class="panel" style="min-width:320px;flex:1"><div class="between"><div><strong>${esc(v?.license_plate)}</strong><div class="small muted">${esc(o.description)}</div></div><button class="btn" data-open="${o.id}">Öffnen</button></div>${miss.map(t=>`<div style="padding:10px 0;border-bottom:1px solid var(--line)">${esc(t.title)} <span class="badge red">Fehlt</span></div>`).join('')}</div>`}).join(''):'<div class="panel">Aktuell fehlt nichts.</div>'}</div>`;
+  const a=orders.filter(o=>statusOf(o)==='buy'&&!isArchived(o));
+  return `<div class="pagehead"><div><h1>Einkauf</h1><p>Nur Aufträge mit fehlenden Teilen.</p></div></div>
+  <div class="purchase-list">${a.length?a.map(o=>{
+    const v=vehicle(o.vehicle_id),c=customer(o.customer_id),miss=(o.tasks||[]).filter(t=>taskState(t)==='missing');
+    return `<div class="panel purchase-card">
+      <div class="between">
+        <div>
+          <strong>${esc(v?.license_plate)}</strong>
+          <div class="small muted">${esc((v?.manufacturer||'')+' '+(v?.model||''))}</div>
+          ${c?.name?`<div class="customername">${esc(c.name)}</div>`:''}
+          <div class="small muted" style="margin-top:4px">${esc(o.description)}</div>
+        </div>
+        <button class="btn" data-open="${o.id}">Öffnen</button>
+      </div>
+      <div class="purchase-items">
+        ${miss.map(t=>`<div class="purchase-item"><span>${esc(capFirst(t.title))}</span><span class="badge red">Fehlt</span></div>`).join('')}
+      </div>
+    </div>`;
+  }).join(''):'<div class="panel">Aktuell fehlt nichts.</div>'}</div>`;
 }
 function renderAppointments(){
   const a=orders.filter(o=>o.appointment_date).sort((a,b)=>a.appointment_date.localeCompare(b.appointment_date));return `<div class="pagehead"><div><h1>Termine</h1><p>Geplante Werkstatttermine.</p></div></div><div class="panel tablewrap"><table><thead><tr><th>Datum</th><th>Kennzeichen</th><th>Auftrag</th></tr></thead><tbody>${a.map(o=>{const v=vehicle(o.vehicle_id);return `<tr><td>${new Date(o.appointment_date).toLocaleString('de-DE')}</td><td><strong>${esc(v?.license_plate)}</strong></td><td><button class="btn" data-open="${o.id}">${esc(o.description)}</button></td></tr>`}).join('')}</tbody></table></div>`;
@@ -656,6 +724,7 @@ function renderSettings(){
 function wire(){
   document.querySelectorAll('[data-action="new"]').forEach(b=>b.onclick=openNewOrder);
   document.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>openOrder(b.dataset.open));
+  document.querySelectorAll('[data-delete-order]').forEach(b=>b.onclick=()=>deleteOrderFromList(b.dataset.deleteOrder));
   document.querySelectorAll('[data-filter]').forEach(b=>b.onclick=()=>{filter=b.dataset.filter;render()});
   document.querySelectorAll('.ordercard').forEach(cardEl=>{cardEl.onclick=()=>openOrder(cardEl.dataset.order);cardEl.ondragstart=()=>cardEl.classList.add('dragging');cardEl.ondragend=()=>cardEl.classList.remove('dragging')});
   document.querySelectorAll('[data-drop]').forEach(col=>{col.ondragover=e=>{e.preventDefault();col.classList.add('over')};col.ondragleave=()=>col.classList.remove('over');col.ondrop=async e=>{e.preventDefault();col.classList.remove('over');const el=document.querySelector('.ordercard.dragging');if(!el)return;const o=orders.find(x=>x.id===el.dataset.order);if(!o)return;const st=col.dataset.drop;if(st==='done'){await markFinished(o.id,true);return}if(st==='buy'){const t=(o.tasks||[])[0];if(t)t.part_status='missing'}if(st==='working'){(o.tasks||[]).forEach(t=>{if(t.part_status==='missing')t.part_status='available'})}if(st==='planned'){(o.tasks||[]).forEach(t=>{if(!t.completed)t.part_status='none'})}await saveOrder(o);render()}});
@@ -663,6 +732,15 @@ function wire(){
   if($('#reloadUsers')) $('#reloadUsers').onclick=loadUsersNow;
   document.querySelectorAll('[data-user-role]').forEach(b=>b.onclick=()=>updateUserProfile(b.dataset.userRole,{role:b.dataset.role}));
   document.querySelectorAll('[data-user-active]').forEach(b=>b.onclick=()=>updateUserProfile(b.dataset.userActive,{active:b.dataset.active==='true'}));
+}
+
+
+async function deleteOrderFromList(oid){
+  const o=orders.find(x=>x.id===oid);if(!o)return;
+  o.archived_at=new Date().toISOString();
+  await saveOrder(o);
+  render();
+  toast('Auftrag ins Archiv verschoben.');
 }
 
 async function loadUsersNow(){
@@ -729,7 +807,7 @@ async function createOrder(){
     }
 
     const work=desc.split(/\n|;|,/).map(x=>x.trim()).filter(Boolean);
-    const tasks=work.map((title,i)=>({id:uid('t'),title,completed:false,position:i+1,part_status:'none'}));
+    const tasks=work.map((title,i)=>({id:uid('t'),title:capFirst(title),completed:false,position:i+1,part_status:'none'}));
     const dt=$('#ndate').value?$('#ndate').value+'T'+($('#ntime').value||'08:00')+':00':null;
 
     const o={
@@ -786,29 +864,71 @@ async function createOrder(){
     toast('Auftrag konnte nicht erstellt werden: '+e.message);
   }
 }
+
+async function saveOrderWindow(oid){
+  const o=orders.find(x=>x.id===oid);if(!o)return;
+  o.description=$('#editDescription')?.value.trim()||o.description;
+  o.extra_info=$('#editExtra')?.value.trim()||'';
+  o.appointment_date=$('#editAppointment')?.value?$('#editAppointment').value+':00':null;
+  if(isAdmin()&&$('#editAssignee'))o.assigned_user_id=$('#editAssignee').value;
+  const note=$('#noteText')?.value.trim();
+  if(note){
+    o.notes=o.notes||[];
+    o.notes.push({id:uid('n'),text:note,created_at:new Date().toISOString()});
+  }
+  await saveOrder(o);
+  render();
+  closeModal();
+  toast('Auftrag gespeichert.');
+}
+
 async function saveOrder(o){try{const rr=await rest('erle_orders','?id=eq.'+encodeURIComponent(o.id),{method:'PATCH',headers:{Prefer:'return=representation'},body:JSON.stringify({tasks:o.tasks,notes:o.notes,description:o.description,extra_info:o.extra_info,appointment_date:o.appointment_date,completed_at:o.completed_at,assigned_user_id:o.assigned_user_id,payment_status:o.payment_status||'open',archived_at:o.archived_at||null})});if(rr?.[0])Object.assign(o,rr[0])}catch(e){toast('Speichern fehlgeschlagen: '+e.message);await loadData(true)}}
 function openOrder(id){
-  const o=orders.find(x=>x.id===id);if(!o)return;const v=vehicle(o.vehicle_id),tasks=Array.isArray(o.tasks)?o.tasks:[],st=statusOf(o);
-  openModal(esc(v?.license_plate||''),`<div class="muted">${esc((v?.manufacturer||'')+' '+(v?.model||''))}</div>
-  <div class="section"><div class="grid2"><div><div class="small muted">Auftrag</div><strong>${esc(o.description)}</strong></div><div><div class="small muted">Status</div><strong>${statLabel[st]}</strong></div></div></div>
-  <div class="section"><div class="between"><div class="sectiontitle">Arbeiten <span class="small muted">${tasks.filter(t=>t.completed).length}/${tasks.length} erledigt</span></div><span class="small muted">Teilestatus direkt je Arbeit</span></div>
-  <div id="taskList">${tasks.map(t=>taskRow(o,t)).join('')}</div>
-  <div class="addrow"><input id="newTask" class="input" placeholder="Neue Arbeit hinzufügen…"><button id="addTaskBtn" class="btn">Hinzufügen</button></div></div>
-  <div class="section"><div class="sectiontitle">Fahrzeugstatus</div><label class="row"><input id="finishCar" type="checkbox" ${o.completed_at?'checked':''} style="width:19px;height:19px"><strong>Fahrzeug fertig</strong></label></div>
-  <div class="section"><div class="between"><div><div class="sectiontitle" style="margin-bottom:4px">Zahlung</div><div class="small muted">Zahlungsstatus des Auftrags</div></div><div class="row"><button id="payOpen" class="btn ${o.payment_status==='paid'?'':'danger'}">Offen</button><button id="payPaid" class="btn ${o.payment_status==='paid'?'primary':''}" style="${o.payment_status==='paid'?'background:var(--green);border-color:var(--green);':''}">Bezahlt</button></div></div></div>
-  ${o.completed_at?`<div class="section"><div class="between"><div><div class="sectiontitle" style="margin-bottom:4px">${o.archived_at?'Archiv':'Fertiger Auftrag'}</div><div class="small muted">${o.archived_at?'Der Auftrag bleibt insgesamt 6 Wochen im Archiv.':'Löschen entfernt den Auftrag aus der aktiven Übersicht und verschiebt ihn ins Archiv.'}</div></div><button id="archiveBtn" class="btn ${o.archived_at?'':'danger'}">${o.archived_at?'Wiederherstellen':'Löschen'}</button></div></div>`:''}
-  <div class="section"><div class="sectiontitle">Notizen</div><div>${(o.notes||[]).map(n=>`<div style="padding:8px 0;border-bottom:1px solid var(--line)">${esc(n.text)}<div class="small muted">${new Date(n.created_at).toLocaleString('de-DE')}</div></div>`).join('')||'<div class="small muted">Keine Notizen.</div>'}</div><div class="addrow"><input id="noteText" class="input" placeholder="Notiz hinzufügen…"><button id="addNoteBtn" class="btn">Speichern</button></div></div>`);
-  document.querySelectorAll('[data-taskcheck]').forEach(x=>x.onchange=()=>toggleTask(o.id,x.dataset.taskcheck,x.checked));
+  const o=orders.find(x=>x.id===id);if(!o)return;
+  const v=vehicle(o.vehicle_id),tasks=Array.isArray(o.tasks)?o.tasks:[],st=statusOf(o);
+  const assigneeOptions=(isAdmin()?profiles.filter(p=>p.active):profiles.filter(p=>p.id===me.id)).map(p=>`<option value="${p.id}" ${p.id===o.assigned_user_id?'selected':''}>${esc(p.username)}</option>`).join('');
+  openModal(esc(v?.license_plate||''),`
+    <div class="muted">${esc((v?.manufacturer||'')+' '+(v?.model||''))}</div>
+    <div class="section">
+      <div class="grid2">
+        <div class="field"><label>Auftrag</label><textarea id="editDescription" class="textarea" rows="3">${esc(o.description||'')}</textarea></div>
+        <div class="field"><label>Zusatzinformation</label><textarea id="editExtra" class="textarea" rows="3">${esc(o.extra_info||'')}</textarea></div>
+      </div>
+      <div class="grid2" style="margin-top:14px">
+        <div class="field"><label>Termin</label><input id="editAppointment" type="datetime-local" class="input" value="${o.appointment_date?String(o.appointment_date).slice(0,16):''}"></div>
+        <div class="field"><label>Zuständig</label>${isAdmin()?`<select id="editAssignee" class="select">${assigneeOptions}</select>`:`<div class="input" style="background:#f8fafc">${esc(profiles.find(p=>p.id===o.assigned_user_id)?.username||me.username)}</div>`}</div>
+      </div>
+    </div>
+
+    <div class="section"><div class="between"><div class="sectiontitle">Arbeiten <span class="small muted">${tasks.filter(t=>t.completed).length}/${tasks.length} erledigt</span></div><span class="small muted">${statLabel[st]}</span></div>
+      <div id="taskList">${tasks.map(t=>taskRow(o,t)).join('')}</div>
+      <div class="addrow"><input id="newTask" class="input" placeholder="Neue Arbeit hinzufügen…"><button id="addTaskBtn" class="btn">Hinzufügen</button></div>
+    </div>
+
+    <div class="section"><div class="between"><div><div class="sectiontitle" style="margin-bottom:4px">Zahlung</div><div class="small muted">Zahlungsstatus des Auftrags</div></div><div class="row"><button id="payOpen" class="btn ${o.payment_status==='paid'?'':'primary'}">Offen</button><button id="payPaid" class="btn ${o.payment_status==='paid'?'primary':''}">Bezahlt</button></div></div></div>
+
+    <div class="section"><div class="sectiontitle">Notizen</div>
+      <div>${(o.notes||[]).map(n=>`<div style="padding:8px 0;border-bottom:1px solid var(--line)">${esc(n.text)}<div class="small muted">${new Date(n.created_at).toLocaleString('de-DE')}</div></div>`).join('')||'<div class="small muted">Keine Notizen.</div>'}</div>
+      <div class="addrow"><input id="noteText" class="input" placeholder="Notiz hinzufügen…"></div>
+    </div>
+
+    <div class="actions">
+      ${o.archived_at?`<button id="archiveBtn" class="btn">Wiederherstellen</button>`:`<button id="archiveBtn" class="btn">Löschen</button>`}
+      <button id="saveOrderBtn" class="btn primary">Auftrag Speichern</button>
+    </div>
+  `);
+
   document.querySelectorAll('[data-part]').forEach(x=>x.onclick=()=>setPart(o.id,x.dataset.task,x.dataset.part));
-  $('#addTaskBtn').onclick=()=>addTask(o.id);$('#newTask').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();addTask(o.id)}};
-  $('#finishCar').onchange=()=>markFinished(o.id,$('#finishCar').checked);
-  if($('#payOpen')) $('#payOpen').onclick=()=>setPayment(o.id,'open');
-  if($('#payPaid')) $('#payPaid').onclick=()=>setPayment(o.id,'paid');
-  if($('#archiveBtn')) $('#archiveBtn').onclick=()=>toggleArchive(o.id);
-  $('#addNoteBtn').onclick=()=>addNote(o.id);$('#noteText').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();addNote(o.id)}};
+  $('#addTaskBtn').onclick=()=>addTask(o.id);
+  $('#newTask').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();addTask(o.id)}};
+  if($('#payOpen'))$('#payOpen').onclick=()=>setPayment(o.id,'open');
+  if($('#payPaid'))$('#payPaid').onclick=()=>setPayment(o.id,'paid');
+  if($('#archiveBtn'))$('#archiveBtn').onclick=()=>toggleArchive(o.id);
+  if($('#saveOrderBtn'))$('#saveOrderBtn').onclick=()=>saveOrderWindow(o.id);
 }
 function taskRow(o,t){
-  const s=taskState(t);return `<div class="task ${t.completed?'done':''}"><input type="checkbox" data-taskcheck="${t.id}" ${t.completed?'checked':''}><div class="tasktitle">${esc(t.title)}</div><div class="partstates"><button class="partbtn ${s==='missing'?'missing':''}" data-part="missing" data-task="${t.id}">${s==='missing'?'✓ ':''}Fehlt</button><button class="partbtn ${s==='available'?'available':''}" data-part="available" data-task="${t.id}">${s==='available'?'✓ ':''}Da</button><button class="partbtn ${s==='installed'?'installed':''}" data-part="installed" data-task="${t.id}">${s==='installed'?'✓ ':''}Verbaut</button></div></div>`;
+  const s=taskState(t);
+  return `<div class="task" style="grid-template-columns:minmax(0,1fr) auto"><div class="tasktitle">${esc(capFirst(t.title))}</div><div class="partstates"><button class="partbtn ${s==='missing'?'missing':''}" data-part="missing" data-task="${t.id}">${s==='missing'?'✓ ':''}Fehlt</button><button class="partbtn ${s==='available'?'available':''}" data-part="available" data-task="${t.id}">${s==='available'?'✓ ':''}Da</button><button class="partbtn ${s==='installed'?'installed':''}" data-part="installed" data-task="${t.id}">${s==='installed'?'✓ ':''}Verbaut</button></div></div>`;
 }
 async function toggleTask(oid,tid,val){
   const o=orders.find(x=>x.id===oid),t=(o.tasks||[]).find(x=>x.id===tid);
@@ -848,7 +968,7 @@ async function setPart(oid,tid,state){
   render();
   openOrder(oid);
 }
-async function addTask(oid){const o=orders.find(x=>x.id===oid),title=$('#newTask').value.trim();if(!title)return;o.tasks=o.tasks||[];o.tasks.push({id:uid('t'),title,completed:false,position:o.tasks.length+1,part_status:'none'});await saveOrder(o);openOrder(oid);render()}
+async function addTask(oid){const o=orders.find(x=>x.id===oid),title=$('#newTask').value.trim();if(!title)return;o.tasks=o.tasks||[];o.tasks.push({id:uid('t'),title:capFirst(title),completed:false,position:o.tasks.length+1,part_status:'none'});await saveOrder(o);openOrder(oid);render()}
 async function addNote(oid){const o=orders.find(x=>x.id===oid),text=$('#noteText').value.trim();if(!text)return;o.notes=o.notes||[];o.notes.push({id:uid('n'),text,created_at:new Date().toISOString()});await saveOrder(o);openOrder(oid)}
 async function markFinished(oid,val){const o=orders.find(x=>x.id===oid);o.completed_at=val?new Date().toISOString():null;render();await saveOrder(o);openOrder(oid)}
 async function setPayment(oid,status){
@@ -859,7 +979,7 @@ async function setPayment(oid,status){
   openOrder(oid);
 }
 async function toggleArchive(oid){
-  const o=orders.find(x=>x.id===oid);if(!o||!o.completed_at)return;
+  const o=orders.find(x=>x.id===oid);if(!o)return;
   o.archived_at=o.archived_at?null:new Date().toISOString();
   await saveOrder(o);
   closeModal();
@@ -870,8 +990,14 @@ async function toggleArchive(oid){
 $('#authSwitchBtn').onclick=()=>{authMode=authMode==='login'?'signup':'login';const s=authMode==='signup';$('#confirmWrap').classList.toggle('hidden',!s);$('#authMainBtn').textContent=s?'Account erstellen':'Anmelden';$('#authSwitchText').textContent=s?'Bereits ein Konto?':'Noch kein Konto?';$('#authSwitchBtn').textContent=s?'Anmelden':'Account erstellen';$('#authMessage').classList.add('hidden')};
 $('#authMainBtn').onclick=async()=>{const u=$('#loginUser').value.trim(),p=$('#loginPass').value;try{if(u.length<3||p.length<8)throw new Error('Benutzername mindestens 3 Zeichen, Passwort mindestens 8 Zeichen.');if(authMode==='signup'){if(p!==$('#loginConfirm').value)throw new Error('Passwörter stimmen nicht überein.');await register(u,p)}else await signIn(u,p);await enterApp()}catch(e){$('#authMessage').textContent=e.message;$('#authMessage').classList.remove('hidden')}};
 $('#loginPass').onkeydown=e=>{if(e.key==='Enter')$('#authMainBtn').click()};
-$('#logoutBtn').onclick=logout;$('#topNew').onclick=openNewOrder;$('#search').oninput=e=>{search=e.target.value;render()};
-document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>{if(b.classList.contains('hidden'))return;page=b.dataset.page;render()});
+if($('#logoutBtn'))$('#logoutBtn').onclick=logout;
+if($('#topNew'))$('#topNew').onclick=openNewOrder;
+if($('#search'))$('#search').oninput=e=>{search=e.target.value;render()};
+document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>{
+  if(b.classList.contains('hidden'))return;
+  page=b.dataset.page;
+  render();
+});
 enterApp();
 </script>
 </body>
