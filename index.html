@@ -4099,6 +4099,107 @@ body.login-mode .login-card{
   }
 }
 
+
+/* ==========================================================
+   FINAL MICRO FIXES – clean order meta, round +, appointment width
+   ========================================================== */
+@media(max-width:680px){
+  /* exact circular plus */
+  .responsive-add,
+  .board-page>.pagehead .responsive-add,
+  .calendar-add-btn{
+    width:44px!important;
+    min-width:44px!important;
+    max-width:44px!important;
+    height:44px!important;
+    min-height:44px!important;
+    max-height:44px!important;
+    aspect-ratio:1 / 1!important;
+    border-radius:50%!important;
+    padding:0!important;
+    margin:0!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    flex:0 0 44px!important;
+    line-height:1!important;
+  }
+  .responsive-add .mobile-add-label,
+  .calendar-add-btn .mobile-add-label{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    width:44px!important;
+    height:44px!important;
+    padding:0!important;
+    margin:0!important;
+    font-size:28px!important;
+    font-weight:400!important;
+    line-height:1!important;
+    transform:translateY(-1px)!important;
+  }
+
+  /* selection circle always on far left */
+  .order-simple-row.is-editing{
+    grid-template-columns:32px 1fr 20px!important;
+    grid-template-areas:
+      "select main arrow"
+      "select task arrow"
+      "select meta arrow"!important;
+    column-gap:10px!important;
+  }
+  .order-simple-row.is-editing .order-select-col{
+    grid-area:select!important;
+    align-self:start!important;
+    justify-self:start!important;
+    padding-top:2px!important;
+  }
+  .order-simple-row.is-editing .order-simple-main{grid-area:main!important;}
+  .order-simple-row.is-editing .order-simple-task{grid-area:task!important;}
+  .order-simple-row.is-editing .order-simple-meta{grid-area:meta!important;}
+  .order-simple-row.is-editing .order-simple-arrow{grid-area:arrow!important;}
+
+  /* appointment fields all same width */
+  .modalbody .grid2{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    width:100%!important;
+    max-width:100%!important;
+    gap:14px!important;
+  }
+  .modalbody .field{
+    width:100%!important;
+    min-width:0!important;
+    max-width:100%!important;
+    box-sizing:border-box!important;
+  }
+  #apptDate,
+  #apptTime,
+  #apptVehicle,
+  #apptDescription{
+    display:block!important;
+    width:100%!important;
+    min-width:0!important;
+    max-width:100%!important;
+    box-sizing:border-box!important;
+  }
+  #apptDate,
+  #apptTime{
+    -webkit-appearance:none!important;
+    appearance:none!important;
+    min-height:52px!important;
+    height:52px!important;
+    padding:0 14px!important;
+    font-size:17px!important;
+    text-align:left!important;
+  }
+  #apptDate::-webkit-date-and-time-value,
+  #apptTime::-webkit-date-and-time-value{
+    text-align:left!important;
+    min-width:0!important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -4828,6 +4929,7 @@ function renderOrders(){
       <span class="desktop-add-label">+ Neuer Auftrag</span><span class="mobile-add-label">+</span>
     </button>
   </div>
+
   <div class="edit-toolbar simple-editbar">
     <div class="bulk-count">${editing?`${selections.orders.size} ausgewählt`:''}</div>
     <div class="edit-actions simple-edit-actions">
@@ -4836,18 +4938,19 @@ function renderOrders(){
       <button class="text-action" data-edit-orders>Fertig</button>`:`<button class="text-action" data-edit-orders>Bearbeiten</button>`}
     </div>
   </div>
+
   <div class="orders-simple-list">
     ${a.length?a.map(o=>{
-      const v=vehicle(o.vehicle_id),s=statusOf(o),p=profiles.find(x=>x.id===o.assigned_user_id);
+      const v=vehicle(o.vehicle_id),s=statusOf(o);
       const selected=selections.orders.has(o.id);
-      return `<div class="order-simple-row ${selected?'row-selected':''}" data-order-row="${o.id}">
-        ${editing?`<button class="select-action" data-select-order="${o.id}">${selectMark(selected)}</button>`:''}
+      return `<div class="order-simple-row ${editing?'is-editing ':''}${selected?'row-selected':''}" data-order-row="${o.id}">
+        ${editing?`<div class="order-select-col"><button class="select-action" data-select-order="${o.id}" aria-label="Auftrag auswählen">${selectMark(selected)}</button></div>`:''}
         <div class="order-simple-main">
           <strong>${esc(v?.license_plate||'–')}</strong>
           <span>${esc((v?.manufacturer||'')+' '+(v?.model||''))}</span>
         </div>
         <div class="order-simple-task">${esc(o.description||'')}</div>
-        <div class="order-simple-meta"><span>${statLabel[s]}</span><span>${esc(p?.username||((o.assigned_user_id===me?.id)?me?.username:'–'))}</span></div>
+        <div class="order-simple-meta"><span>${statLabel[s]}</span></div>
         <span class="order-simple-arrow">›</span>
       </div>`;
     }).join(''):'<div class="empty-simple">Keine Aufträge vorhanden.</div>'}
