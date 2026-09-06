@@ -3931,6 +3931,174 @@ body.login-mode .login-card{
   display:none!important;
 }
 
+
+/* ==========================================================
+   STEP FIX – Übersicht, Aufträge, Termine, Fahrzeuge
+   ========================================================== */
+
+/* Desktop list rows also feel clickable */
+.order-simple-row[data-order-row],
+.vehicle-list-row[data-vehicle]{
+  cursor:pointer!important;
+}
+
+/* Mobile: true circular +, perfectly centered */
+@media(max-width:680px){
+  .responsive-add,
+  .board-page>.pagehead .responsive-add,
+  .calendar-add-btn{
+    width:44px!important;
+    min-width:44px!important;
+    max-width:44px!important;
+    height:44px!important;
+    min-height:44px!important;
+    max-height:44px!important;
+    aspect-ratio:1/1!important;
+    border-radius:999px!important;
+    padding:0!important;
+    margin:0!important;
+    display:grid!important;
+    place-items:center!important;
+    line-height:1!important;
+    flex:0 0 44px!important;
+  }
+
+  .responsive-add .mobile-add-label,
+  .calendar-add-btn .mobile-add-label{
+    position:static!important;
+    display:grid!important;
+    place-items:center!important;
+    width:44px!important;
+    height:44px!important;
+    padding:0!important;
+    margin:0!important;
+    font-size:27px!important;
+    font-weight:400!important;
+    line-height:1!important;
+    transform:translateY(-1px)!important;
+  }
+
+  /* Home: + stays compact at right of welcome */
+  .board-page{
+    position:relative!important;
+  }
+  .mobile-overview-hero{
+    min-height:54px!important;
+    padding-right:58px!important;
+    margin:4px 0 16px!important;
+    display:flex!important;
+    align-items:center!important;
+  }
+  .board-page>.pagehead{
+    position:absolute!important;
+    top:5px!important;
+    right:0!important;
+    width:44px!important;
+    height:44px!important;
+    margin:0!important;
+    padding:0!important;
+  }
+  .board-page>.pagehead>div{
+    display:none!important;
+  }
+
+  /* Orders: simple full-width rows */
+  .orders-simple-list{
+    width:100%!important;
+    overflow:hidden!important;
+  }
+  .order-simple-row{
+    width:100%!important;
+    box-sizing:border-box!important;
+    cursor:pointer!important;
+    touch-action:manipulation!important;
+  }
+
+  /* Vehicles: same card/list language as orders */
+  .vehicle-list{
+    width:100%!important;
+    background:#fff!important;
+    border:1px solid var(--line)!important;
+    border-radius:14px!important;
+    overflow:hidden!important;
+  }
+  .vehicle-list-row{
+    width:100%!important;
+    box-sizing:border-box!important;
+    cursor:pointer!important;
+    touch-action:manipulation!important;
+    background:#fff!important;
+    border-bottom:1px solid var(--line)!important;
+  }
+  .vehicle-list-row:last-child{
+    border-bottom:0!important;
+  }
+
+  /* Appointment modal: iOS date/time must never exceed viewport */
+  .modalbody,
+  .modalbody *{
+    box-sizing:border-box!important;
+  }
+
+  .modalbody .grid2,
+  .modalbody .grid3{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    width:100%!important;
+    max-width:100%!important;
+  }
+
+  .modalbody .field{
+    width:100%!important;
+    min-width:0!important;
+    max-width:100%!important;
+  }
+
+  .modalbody input,
+  .modalbody select,
+  .modalbody textarea,
+  .modalbody input[type="date"],
+  .modalbody input[type="time"]{
+    display:block!important;
+    width:100%!important;
+    min-width:0!important;
+    max-width:100%!important;
+    box-sizing:border-box!important;
+  }
+
+  .modalbody input[type="date"],
+  .modalbody input[type="time"]{
+    min-height:52px!important;
+    padding:10px 13px!important;
+    font-size:17px!important;
+    text-align:left!important;
+  }
+
+  .modalbody input[type="date"]::-webkit-date-and-time-value,
+  .modalbody input[type="time"]::-webkit-date-and-time-value{
+    text-align:left!important;
+  }
+
+  /* Keep appointment action buttons inside viewport */
+  .modalbody .actions{
+    width:100%!important;
+    display:grid!important;
+    grid-template-columns:1fr 1fr!important;
+    gap:10px!important;
+  }
+  .modalbody .actions .btn{
+    width:100%!important;
+    min-width:0!important;
+    white-space:normal!important;
+  }
+}
+
+@media(max-width:390px){
+  .modalbody .actions{
+    grid-template-columns:1fr!important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -5083,9 +5251,9 @@ function wire(){
   document.querySelectorAll('[data-caldate]').forEach(b=>b.onclick=()=>{selectedCalendarDate=b.dataset.caldate;render()});
   if($('#newAppointmentTop'))$('#newAppointmentTop').onclick=()=>openNewAppointment(selectedCalendarDate);
 
-  document.querySelectorAll('.vehicle-row').forEach(r=>r.onclick=e=>{if(editModes.vehicles||e.target.closest('button,input'))return;openVehicle(r.dataset.vehicle)});
+  document.querySelectorAll('.vehicle-row,[data-vehicle].vehicle-list-row').forEach(r=>r.onclick=e=>{if(editModes.vehicles||e.target.closest('button,input,select,textarea'))return;openVehicle(r.dataset.vehicle)});
   document.querySelectorAll('[data-delete-vehicle]').forEach(b=>b.onclick=e=>{e.stopPropagation();archiveVehicle(b.dataset.deleteVehicle)});
-  document.querySelectorAll('.order-row').forEach(r=>r.onclick=e=>{if(editModes.orders||e.target.closest('button,input'))return;openOrder(r.dataset.orderRow)});
+  document.querySelectorAll('.order-row,.order-simple-row[data-order-row]').forEach(r=>r.onclick=e=>{if(editModes.orders||e.target.closest('button,input,select,textarea'))return;openOrder(r.dataset.orderRow)});
   document.querySelectorAll('.archive-row[data-archive-order]').forEach(r=>r.onclick=e=>{if(editModes.archiveOrders||e.target.closest('button,input'))return;openOrder(r.dataset.archiveOrder)});
   document.querySelectorAll('.archive-row[data-archive-vehicle]').forEach(r=>r.onclick=e=>{if(editModes.archiveVehicles||e.target.closest('button,input'))return;openVehicle(r.dataset.archiveVehicle)});
   document.querySelectorAll('[data-restore-vehicle]').forEach(b=>b.onclick=e=>{e.stopPropagation();restoreVehicle(b.dataset.restoreVehicle)});
