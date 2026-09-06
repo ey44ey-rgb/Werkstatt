@@ -1332,7 +1332,7 @@ body,button,input,select,textarea{
 }
 
 body{
-  background:linear-gradient(180deg,#f7faff 0%,#f3f7fb 100%)!important;
+  background:#f7f9fc!important;
   color:var(--text)!important;
   font-size:15px!important;
   font-weight:470!important;
@@ -1361,7 +1361,7 @@ body{
 }
 
 .sidebar{
-  background:linear-gradient(180deg,#155bb4 0%,#0d448d 100%)!important;
+  background:#3f78b4!important;
   box-shadow:10px 0 30px rgba(12,59,124,.08)!important;
 }
 
@@ -1416,7 +1416,7 @@ body{
 }
 
 .btn.primary{
-  background:linear-gradient(180deg,#1d73eb 0%,#1767da 100%)!important;
+  background:#4f8fce!important;
   border-color:#1767da!important;
   color:#fff!important;
   box-shadow:0 7px 18px rgba(23,103,218,.16)!important;
@@ -1575,7 +1575,7 @@ body{
 
 /* Login */
 #login{
-  background:linear-gradient(180deg,#f7faff 0%,#f3f7fb 100%)!important;
+  background:#f7f9fc!important;
 }
 
 .login-card{
@@ -1636,7 +1636,7 @@ body{
     top:0!important;
     z-index:70!important;
     padding:0!important;
-    background:linear-gradient(180deg,#1b72e8 0%,#155fc4 100%)!important;
+    background:#4f8fce!important;
     border-bottom:0!important;
     box-shadow:0 5px 18px rgba(16,79,164,.14)!important;
   }
@@ -1694,7 +1694,7 @@ body{
 
   .sidebar{
     width:min(82vw,310px)!important;
-    background:linear-gradient(180deg,#155bb4 0%,#0d448d 100%)!important;
+    background:#3f78b4!important;
   }
 
   .sidebar .brand{
@@ -1911,6 +1911,173 @@ body{
 @media(max-width:680px){
   .mobile-logo-center.brand-wordmark{
     font-size:36px!important;
+  }
+}
+
+
+/* ==========================================================
+   Erle. – Final Soft Blue Palette
+   Kein Verlauf, ruhiger modernes Blau
+   ========================================================== */
+:root{
+  --blue:#4f8fce;
+  --blueDark:#3f78b4;
+  --blueDeep:#376da7;
+  --blueSoft:#eef5fb;
+  --bg:#f7f9fc;
+  --card:#ffffff;
+  --line:#e2e8f0;
+  --text:#152033;
+  --muted:#7b8798;
+  --red:#a24f59;
+  --redSoft:#fbf4f5;
+  --yellow:#a47b15;
+  --yellowSoft:#fff8df;
+  --green:#2d8a62;
+  --greenSoft:#edf8f2;
+}
+
+/* Keine Verläufe mehr */
+body{
+  background:#f7f9fc!important;
+}
+
+.sidebar{
+  background:#3f78b4!important;
+  box-shadow:10px 0 28px rgba(32,72,115,.08)!important;
+}
+
+.top{
+  background:rgba(247,249,252,.96)!important;
+}
+
+.btn.primary{
+  background:#4f8fce!important;
+  border-color:#4f8fce!important;
+  box-shadow:0 7px 18px rgba(79,143,206,.14)!important;
+}
+.btn.primary:hover{
+  background:#467fba!important;
+  border-color:#467fba!important;
+}
+
+.filter.active{
+  background:#4f8fce!important;
+  border-color:#4f8fce!important;
+}
+
+.brand-login .brand-wordmark{
+  color:#4f8fce!important;
+}
+
+.badge.blue{
+  background:#eef5fb!important;
+  color:#4f8fce!important;
+}
+
+.creator-pill{
+  background:#f0f5fa!important;
+  color:#55718e!important;
+}
+
+.calendar-day.selected{
+  background:#eef5fb!important;
+  border-color:#c8daea!important;
+}
+
+.event-dot{
+  background:#4f8fce!important;
+}
+
+.mobile-logo-center.brand-wordmark{
+  color:#fff!important;
+}
+
+@media(max-width:680px){
+  .top{
+    background:#4f8fce!important;
+    box-shadow:0 5px 18px rgba(60,116,170,.12)!important;
+  }
+
+  .mobile-menu-btn{
+    background:transparent!important;
+    box-shadow:none!important;
+  }
+
+  .mobile-menu-btn span{
+    background:#fff!important;
+  }
+
+  .topinner{
+    background:#f7f9fc!important;
+  }
+
+  .board-page>.pagehead .btn.primary{
+    background:#4f8fce!important;
+    border-color:#4f8fce!important;
+    box-shadow:0 8px 18px rgba(79,143,206,.13)!important;
+  }
+
+  .colcount{
+    background:#eef5fb!important;
+    color:#4f8fce!important;
+  }
+
+  .stage-buy .colcount{
+    background:#fff1e9!important;
+    color:#bd641c!important;
+  }
+
+  .stage-working .colcount{
+    background:#fff7dc!important;
+    color:#a97700!important;
+  }
+
+  .stage-done .colcount{
+    background:#eaf8ef!important;
+    color:#27875b!important;
+  }
+
+  .sidebar{
+    background:#3f78b4!important;
+  }
+}
+
+
+/* Erle. – Exact Brand Blue #1473E6 */
+:root{
+  --blue:#1473E6;
+  --blueDark:#1473E6;
+  --blueDeep:#1473E6;
+}
+.sidebar{
+  background:#1473E6!important;
+}
+.btn.primary,
+.filter.active{
+  background:#1473E6!important;
+  border-color:#1473E6!important;
+}
+.btn.primary:hover{
+  background:#1268cf!important;
+  border-color:#1268cf!important;
+}
+.brand-login .brand-wordmark,
+.badge.blue,
+.colcount{
+  color:#1473E6!important;
+}
+.event-dot{
+  background:#1473E6!important;
+}
+@media(max-width:680px){
+  .top,
+  .sidebar{
+    background:#1473E6!important;
+  }
+  .board-page>.pagehead .btn.primary{
+    background:#1473E6!important;
+    border-color:#1473E6!important;
   }
 }
 
