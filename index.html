@@ -91,6 +91,879 @@ button,input,select,textarea{font:inherit} button{cursor:pointer} .hidden{displa
 .purchase-card{width:100%}
 .purchase-items{margin-top:12px}
 .purchase-item{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:10px 0;border-top:1px solid var(--line)}
+
+/* Mobile One-Pager */
+@media(max-width:680px){
+  #app{display:block}
+  .sidebar{display:flex;position:sticky;top:0;z-index:50;width:100%;height:auto;padding:10px 12px 9px;flex-direction:column;border-right:0;border-bottom:1px solid rgba(255,255,255,.18)}
+  .sidebar .brand{margin:0 0 8px 2px}
+  .sidebar .brandmark{width:30px;height:30px;font-size:15px}
+  .sidebar .brandtitle{font-size:16px}
+  .nav{flex-direction:row;overflow-x:auto;gap:5px;padding-bottom:2px;scrollbar-width:none}
+  .nav::-webkit-scrollbar{display:none}
+  .nav button{white-space:nowrap;padding:9px 11px;font-size:13px}
+  .sidefoot{display:none}
+  .top{position:static;padding:12px}
+  .topinner{display:block}
+  .top .input{max-width:none;width:100%}
+  .content{padding:0 12px 28px}
+  .pagehead{align-items:center;margin-top:10px}
+  .pagehead h1{font-size:24px}
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;overflow:visible}
+  .stat{min-width:0;min-height:74px;padding:12px}
+  .filters{margin:10px 0 14px}
+  .boardwrap{overflow:visible}
+  .board{display:block;min-width:0}
+  .col{width:100%;min-height:0;margin-bottom:14px;padding:10px;border-radius:14px}
+  .ordercard{width:100%;margin-bottom:9px;padding:14px}
+  .modal{width:100%;height:100%;max-height:100vh;border-radius:0}
+  .backdrop{padding:0}
+  .modalhead{padding-top:max(16px,env(safe-area-inset-top))}
+  .modalbody{padding:14px}
+  .grid2,.grid3{grid-template-columns:1fr}
+  .task{grid-template-columns:1fr}
+  .partstates{grid-column:1;justify-content:flex-start}
+  .partbtn{min-height:42px;padding:9px 13px;font-size:12px}
+}
+
+
+.calendar-shell{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px}
+.calendar-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.calendar-title{font-size:20px;font-weight:900}
+.calendar-nav{display:flex;gap:7px}
+.calendar-nav button{min-width:38px;height:38px;border:1px solid var(--line);background:#fff;border-radius:9px}
+.calendar-grid{display:grid;grid-template-columns:44px repeat(7,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.calendar-cell{min-height:92px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:8px;position:relative;background:#fff}
+.calendar-head{min-height:auto;padding:8px 6px;text-align:center;font-size:12px;font-weight:800;color:#6f7a8d;background:#f8fafc}
+.calendar-head.weekend{color:#354153;background:#eef1f5}
+.calendar-kw{display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#7f8a9b;background:#f8fafc}
+.calendar-day.weekend{background:#f6f7f9}
+.calendar-day.outside{color:#b9c1cc;background:#fbfbfc}
+.daynum{font-size:13px;font-weight:800}
+.event-dot{position:absolute;right:8px;top:8px;width:7px;height:7px;border-radius:50%;background:var(--blue)}
+.calendar-legend{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:12px;color:var(--muted)}
+.calendar-legend-dot{width:7px;height:7px;border-radius:50%;background:var(--blue)}
+.calendar-events{margin-top:14px;display:flex;flex-direction:column;gap:8px}
+.calendar-event{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#fff}
+.calendar-event-main strong{display:block}
+.calendar-event-main span{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+@media(max-width:680px){
+  .calendar-shell{padding:12px}
+  .calendar-grid{grid-template-columns:34px repeat(7,1fr)}
+  .calendar-cell{min-height:56px;padding:5px}
+  .calendar-head{font-size:10px;padding:6px 2px}
+  .calendar-kw{font-size:9px}
+  .daynum{font-size:11px}
+  .event-dot{width:6px;height:6px;right:5px;top:5px}
+}
+
+
+/* Clean 2025/26 Design Refresh – Farben & Informationsarchitektur bleiben */
+:root{
+  --bg:#f7f9fc;
+  --card:#ffffff;
+  --line:#e6ebf2;
+  --text:#152033;
+  --muted:#788395;
+  --blue:#1769e0;
+  --blueDark:#0d3f91;
+  --blueSoft:#edf5ff;
+  --red:#a25763;
+  --redSoft:#fbf4f5;
+  --yellow:#987b1d;
+  --yellowSoft:#fff9e8;
+  --green:#277a5b;
+  --greenSoft:#eef8f3;
+  --shadow:0 10px 30px rgba(18,35,60,.06);
+  --shadow-soft:0 3px 14px rgba(18,35,60,.045);
+}
+body{
+  background:linear-gradient(180deg,#f8fafc 0%,#f4f7fb 100%);
+  letter-spacing:-.01em;
+}
+.panel,.stat,.ordercard,.section,.calendar-shell{
+  border-color:var(--line)!important;
+  box-shadow:var(--shadow-soft);
+}
+.panel,.stat,.ordercard,.section{
+  backdrop-filter:saturate(120%) blur(2px);
+}
+.btn{
+  border-radius:12px!important;
+  padding:10px 14px!important;
+  box-shadow:none;
+}
+.btn.primary{
+  box-shadow:0 6px 14px rgba(23,105,224,.16);
+}
+.input,.select,.textarea{
+  border-radius:12px!important;
+  background:rgba(255,255,255,.92)!important;
+}
+.input:focus,.select:focus,.textarea:focus{
+  box-shadow:0 0 0 4px rgba(23,105,224,.09)!important;
+}
+.pagehead h1{
+  font-weight:850!important;
+  letter-spacing:-.03em;
+}
+.stat strong,.plate,.modalhead h2{
+  letter-spacing:-.03em;
+}
+.col{
+  background:rgba(244,247,251,.82)!important;
+  border-color:#e5ebf2!important;
+}
+.ordercard{
+  border-radius:16px!important;
+  box-shadow:0 6px 18px rgba(18,35,60,.05)!important;
+}
+.filters .filter{
+  border-radius:999px!important;
+  padding:8px 13px!important;
+}
+.sidebar{
+  box-shadow:8px 0 24px rgba(14,55,123,.08);
+}
+.nav button{
+  transition:background .18s ease,color .18s ease,transform .18s ease;
+}
+.nav button:active{transform:scale(.99)}
+.modal{
+  border:1px solid rgba(224,230,238,.95);
+  box-shadow:0 30px 90px rgba(18,35,60,.20)!important;
+}
+.modalhead{
+  backdrop-filter:blur(14px) saturate(130%);
+}
+.badge{
+  border:1px solid rgba(0,0,0,.02);
+}
+
+
+/* Moderner Monatskalender */
+.calendar-shell{
+  padding:20px!important;
+  border-radius:20px!important;
+  background:rgba(255,255,255,.94)!important;
+}
+.calendar-top{
+  margin-bottom:16px!important;
+}
+.calendar-title{
+  font-size:22px!important;
+  font-weight:850!important;
+  letter-spacing:-.03em!important;
+}
+.calendar-nav .btn{
+  min-width:40px;
+  height:40px;
+  padding:0 12px!important;
+}
+.calendar-grid{
+  display:grid!important;
+  grid-template-columns:36px repeat(7,minmax(0,1fr))!important;
+  gap:10px!important;
+  border:0!important;
+  background:transparent!important;
+}
+.calendar-cell{
+  border:0!important;
+}
+.calendar-head{
+  min-height:auto!important;
+  padding:4px 0 8px!important;
+  background:transparent!important;
+  color:#8a95a6!important;
+  font-size:12px!important;
+  font-weight:750!important;
+}
+.calendar-head.weekend{
+  background:transparent!important;
+  color:#566173!important;
+}
+.calendar-kw{
+  min-height:auto!important;
+  background:transparent!important;
+  color:#9aa4b3!important;
+  font-size:10px!important;
+  font-weight:800!important;
+  padding-top:13px!important;
+}
+.calendar-day{
+  aspect-ratio:1/1!important;
+  min-height:0!important;
+  border-radius:16px!important;
+  background:#fff!important;
+  box-shadow:0 2px 10px rgba(18,35,60,.035);
+  border:1px solid #edf1f5!important;
+  padding:8px!important;
+  transition:transform .16s ease,box-shadow .16s ease,background .16s ease,border-color .16s ease;
+  cursor:pointer;
+}
+.calendar-day:hover{
+  transform:translateY(-1px);
+  box-shadow:0 8px 20px rgba(18,35,60,.07);
+  border-color:#dfe7f0!important;
+}
+.calendar-day.weekend{
+  background:#f5f7fa!important;
+}
+.calendar-day.outside{
+  opacity:.48;
+  background:#fafbfc!important;
+}
+.calendar-day.selected{
+  background:var(--blueSoft)!important;
+  border-color:#bdd6fb!important;
+  box-shadow:0 8px 22px rgba(23,105,224,.10);
+}
+.daynum{
+  font-size:13px!important;
+  font-weight:800!important;
+}
+.event-dot{
+  width:6px!important;
+  height:6px!important;
+  right:9px!important;
+  top:9px!important;
+  background:var(--blue)!important;
+  box-shadow:0 0 0 3px rgba(23,105,224,.08);
+}
+.calendar-legend{
+  margin-top:14px!important;
+}
+.calendar-selected{
+  margin-top:18px;
+  background:#f8fafc;
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:14px;
+}
+.calendar-selected-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-bottom:10px;
+}
+.calendar-selected-title{
+  font-size:15px;
+  font-weight:850;
+}
+.calendar-selected-list{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.calendar-event{
+  border-radius:14px!important;
+  padding:12px 13px!important;
+  box-shadow:none!important;
+}
+@media(max-width:680px){
+  .calendar-shell{padding:12px!important}
+  .calendar-grid{
+    grid-template-columns:28px repeat(7,minmax(0,1fr))!important;
+    gap:5px!important;
+  }
+  .calendar-day{
+    border-radius:12px!important;
+    padding:5px!important;
+  }
+  .calendar-head{font-size:10px!important}
+  .daynum{font-size:11px!important}
+  .event-dot{
+    width:5px!important;
+    height:5px!important;
+    right:5px!important;
+    top:5px!important;
+  }
+  .calendar-selected{padding:12px}
+}
+
+
+.click-table tbody tr,.order-row,.archive-row,.history-row{cursor:pointer}
+.click-table tbody tr:hover,.order-row:hover,.archive-row:hover,.history-row:hover{background:#f8fbff}
+.archive-row,.history-row{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:11px 0;border-bottom:1px solid var(--line);border-radius:10px}
+.archive-row:hover,.history-row:hover{padding-left:8px;padding-right:8px}
+
+
+/* ==========================================================
+   Erle.Werkstatt – Clean System Design
+   Farbstruktur bleibt bestehen, Typografie und Rhythmus modernisiert.
+   ========================================================== */
+:root{
+  --radius-xs:8px;
+  --radius-sm:12px;
+  --radius-md:16px;
+  --radius-lg:20px;
+  --surface:#ffffff;
+  --surface-soft:#f8fafc;
+  --surface-raised:rgba(255,255,255,.96);
+  --hairline:rgba(20,32,51,.08);
+}
+html{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body,button,input,select,textarea{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Inter","Helvetica Neue",Arial,sans-serif!important;
+}
+body{font-weight:400;letter-spacing:-.012em}
+h1,h2,h3,.brandtitle,.plate,.calendar-title,.sectiontitle,.stat strong{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Inter","Helvetica Neue",Arial,sans-serif!important;
+}
+.pagehead h1{font-weight:750!important;letter-spacing:-.035em!important}
+.pagehead p{line-height:1.45}
+.panel,.stat,.ordercard,.section,.calendar-shell{
+  border:1px solid var(--hairline)!important;
+  box-shadow:0 8px 24px rgba(17,31,52,.045)!important;
+}
+.ordercard,.panel,.stat,.section{border-radius:var(--radius-md)!important}
+.btn{
+  border-radius:10px!important;
+  min-height:38px;
+  font-weight:650!important;
+  letter-spacing:-.01em;
+}
+.input,.select,.textarea{border-radius:11px!important}
+.tablewrap table{border-collapse:separate;border-spacing:0}
+.tablewrap th{font-weight:650;letter-spacing:-.01em}
+.tablewrap tbody tr{transition:background .15s ease}
+.tablewrap tbody tr:hover{background:#f8fbff}
+.edit-toolbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:12px;
+}
+.edit-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.select-cell{width:42px}
+.row-select{
+  width:18px;height:18px;
+  accent-color:var(--blue);
+}
+.bulk-count{font-size:12px;color:var(--muted)}
+.icon-trash{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:18px;height:18px;
+  margin-right:6px;
+}
+.detail-actionbar{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:14px;
+}
+.list-row-title{font-weight:700}
+.list-row-sub{font-size:12px;color:var(--muted);margin-top:2px}
+
+
+/* Kalender vollständig im sichtbaren Fenster */
+.calendar-shell{
+  max-height:calc(100vh - 150px);
+  overflow:hidden!important;
+  display:flex;
+  flex-direction:column;
+}
+.calendar-top{flex:0 0 auto}
+.calendar-grid{
+  flex:1 1 auto;
+  min-height:0;
+  grid-auto-rows:minmax(0,1fr)!important;
+  gap:6px!important;
+}
+.calendar-day{
+  aspect-ratio:auto!important;
+  min-height:0!important;
+  height:100%!important;
+  border-radius:13px!important;
+}
+.calendar-selected{
+  flex:0 0 auto;
+  margin-top:10px!important;
+  padding:10px!important;
+}
+.calendar-selected-list{
+  max-height:100px;
+  overflow:auto;
+}
+@media(max-width:680px){
+  .calendar-shell{max-height:calc(100vh - 128px)}
+  .calendar-grid{gap:3px!important}
+  .calendar-selected-list{max-height:86px}
+}
+
+
+/* ==========================================================
+   Final Calm UI – Desktop + Mobile
+   ========================================================== */
+:root{
+  --bg:#f7f8fa;
+  --card:#ffffff;
+  --line:#e7e9ed;
+  --text:#1c1c1e;
+  --muted:#7d828b;
+  --blue:#0a66d8;
+  --blueDark:#083b78;
+  --blueSoft:#eef5ff;
+  --red:#b04a55;
+  --redSoft:#fbf4f5;
+  --green:#277a5b;
+  --greenSoft:#eef8f3;
+}
+html{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body,button,input,select,textarea{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Inter","Segoe UI","Helvetica Neue",Arial,sans-serif!important;
+}
+body{background:#f7f8fa!important;color:var(--text)!important;font-weight:400;letter-spacing:-.012em}
+.pagehead h1{font-size:28px!important;font-weight:720!important;letter-spacing:-.035em!important}
+.pagehead p,.settings-copy,.list-row-sub{color:#858b95!important}
+.brandtitle{font-weight:700!important;letter-spacing:-.025em}
+.panel,.section,.stat,.ordercard{
+  border:1px solid rgba(28,28,30,.07)!important;
+  box-shadow:0 4px 18px rgba(20,30,45,.035)!important;
+  border-radius:16px!important;
+}
+.col{
+  background:#f2f4f7!important;
+  border:1px solid rgba(28,28,30,.045)!important;
+  border-radius:18px!important;
+}
+.ordercard{box-shadow:0 2px 10px rgba(20,30,45,.035)!important}
+.btn{border-radius:10px!important;box-shadow:none!important}
+.btn.primary{background:#0a66d8!important;border-color:#0a66d8!important}
+.text-action{
+  border:0!important;
+  background:transparent!important;
+  color:var(--blue)!important;
+  padding:6px 4px!important;
+  min-height:auto!important;
+  font-weight:600!important;
+  cursor:pointer;
+}
+.text-action:hover{opacity:.72}
+.icon-action{
+  width:36px;height:36px;
+  display:inline-flex;align-items:center;justify-content:center;
+  border:0!important;background:transparent!important;
+  border-radius:50%!important;padding:0!important;
+  cursor:pointer;
+}
+.icon-action svg{width:18px;height:18px;fill:currentColor}
+.delete-action{color:#9b4b55!important}
+.delete-action:hover{background:#f7f0f1!important}
+.icon-action:disabled{opacity:.28;cursor:default}
+.quiet-toolbar{min-height:36px;margin:0 0 8px!important}
+.edit-actions{gap:12px!important}
+.bulk-count{color:#9a9fa7!important;font-size:12px!important}
+.select-action{
+  border:0;background:transparent;padding:0;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.select-mark{
+  width:20px;height:20px;border-radius:50%;
+  border:1.5px solid #c7ccd3;
+  display:inline-flex;align-items:center;justify-content:center;
+  color:#fff;font-size:12px;font-weight:700;
+  background:#fff;
+}
+.select-mark.selected{background:var(--blue);border-color:var(--blue)}
+.row-selected{background:#f2f7ff!important}
+.archive-row,.history-row{border-bottom:1px solid rgba(28,28,30,.06)!important}
+.settings-grid{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;
+}
+.settings-card{margin-top:0!important}
+.settings-kicker{
+  font-size:11px;text-transform:uppercase;letter-spacing:.06em;
+  color:#9a9fa7;font-weight:650;margin-bottom:6px;
+}
+.settings-copy{font-size:13px;line-height:1.45;margin-bottom:12px}
+.settings-inline{display:flex;gap:8px;align-items:center}
+.settings-stack{display:flex;flex-direction:column;gap:9px}
+.settings-result{font-size:12px;color:var(--muted);margin-top:8px;min-height:16px}
+.account-role{display:flex;flex-direction:column;gap:3px}
+.account-role strong{font-size:15px}
+.account-role span{font-size:12px;color:var(--muted);font-style:italic}
+.sidefoot{
+  margin-top:auto!important;
+  border-top:1px solid rgba(255,255,255,.14)!important;
+  padding:16px 8px 4px!important;
+  display:block!important;
+}
+.sideidentity{display:flex!important;flex-direction:column;gap:2px;text-align:left}
+.sideidentity strong{font-size:13px!important;font-weight:650!important;color:#fff!important}
+.side-role{font-size:11px;color:rgba(255,255,255,.58);font-style:italic;font-weight:400}
+.logout-link{
+  display:block;
+  border:0!important;background:transparent!important;
+  padding:14px 0 0!important;margin:0!important;
+  color:rgba(255,255,255,.78)!important;
+  font-size:12px!important;font-weight:500!important;
+  text-align:left;cursor:pointer;
+}
+.logout-link:hover{color:#fff!important}
+.mobile-account-footer{display:none}
+.colhead-button{
+  width:100%;border:0;background:transparent;padding:0;
+  color:inherit;font:inherit;cursor:default;text-align:left;
+}
+.colhead-right{display:flex;align-items:center;gap:8px}
+.collapse-chevron{display:none;color:#8b9199;font-size:14px}
+.calendar-shell{
+  width:100%!important;
+  max-width:min(860px,calc(100vh - 170px))!important;
+  margin:0 auto!important;
+  max-height:none!important;
+  overflow:visible!important;
+  display:block!important;
+  padding:14px!important;
+  background:#fff!important;
+  border-radius:18px!important;
+}
+.calendar-grid{
+  display:grid!important;
+  grid-template-columns:30px repeat(7,minmax(0,1fr))!important;
+  grid-auto-rows:auto!important;
+  gap:5px!important;
+  border:0!important;
+}
+.calendar-cell{border:0!important}
+.calendar-day{
+  aspect-ratio:1/1!important;
+  height:auto!important;
+  min-height:0!important;
+  border-radius:12px!important;
+  background:#fff!important;
+  box-shadow:none!important;
+  border:1px solid rgba(28,28,30,.055)!important;
+  padding:6px!important;
+}
+.calendar-day.weekend{background:#f3f4f6!important}
+.calendar-day.outside{opacity:.42;background:#fafafa!important}
+.calendar-day.selected{background:#eef5ff!important;border-color:#c8dcfa!important}
+.calendar-head{background:transparent!important;color:#8f949c!important}
+.calendar-head.weekend{color:#5f6570!important}
+.calendar-kw{background:transparent!important;color:#a2a6ad!important}
+.calendar-selected{margin-top:10px!important;padding:10px!important;border-radius:14px!important}
+.calendar-selected-list{max-height:90px!important;overflow:auto!important}
+@media(max-width:900px){
+  .settings-grid{grid-template-columns:1fr}
+}
+@media(max-width:680px){
+  .sidebar{padding-bottom:8px!important}
+  .sidefoot{display:none!important}
+  .mobile-account-footer{
+    display:block;padding:18px 16px 24px;margin:10px 12px 0;
+    border-top:1px solid rgba(28,28,30,.08);
+  }
+  .mobile-identity{display:flex;flex-direction:column;gap:2px}
+  .mobile-identity strong{font-size:13px;font-weight:650}
+  .mobile-identity span{font-size:11px;color:var(--muted);font-style:italic}
+  .mobile-account-footer .logout-link{
+    color:#666d77!important;padding-top:14px!important;
+  }
+  .board{display:block!important;min-width:0!important}
+  .col{width:100%!important;min-height:0!important;margin-bottom:12px!important}
+  .colhead-button{cursor:pointer!important}
+  .collapse-chevron{display:inline!important}
+  .colbody.mobile-collapsed{display:none!important}
+  .stats{grid-template-columns:1fr 1fr!important}
+  .pagehead h1{font-size:24px!important}
+  .settings-inline{flex-direction:column;align-items:stretch}
+  .calendar-shell{
+    max-width:100%!important;
+    padding:10px!important;
+  }
+  .calendar-grid{
+    grid-template-columns:24px repeat(7,minmax(0,1fr))!important;
+    gap:3px!important;
+  }
+  .calendar-day{border-radius:9px!important;padding:4px!important}
+  .calendar-selected-list{max-height:110px!important}
+  .tablewrap{overflow-x:auto}
+  .edit-toolbar{align-items:center}
+}
+@media(pointer:coarse){
+  .text-action{padding:9px 4px!important}
+  .icon-action{width:42px;height:42px}
+  .select-mark{width:22px;height:22px}
+}
+
+
+/* ==========================================================
+   Balanced Layout – Kalender + Archiv
+   ========================================================== */
+body,button,input,select,textarea{
+  font-size:15px!important;
+}
+.pagehead h1{font-size:29px!important;font-weight:760!important}
+.pagehead p{font-size:13px!important}
+.nav button{font-size:14px!important}
+.tablewrap th{font-size:12px!important}
+.tablewrap td{font-size:14px!important}
+.small{font-size:12px!important}
+.sectiontitle{font-size:15px!important}
+.btn,.text-action{font-size:13px!important}
+
+/* Kalender: mittlere Größe, zentriert, quadratisch */
+.calendar-shell{
+  width:min(100%,920px)!important;
+  max-width:920px!important;
+  margin:0 auto!important;
+  padding:16px!important;
+  max-height:none!important;
+  overflow:visible!important;
+}
+.calendar-title{font-size:22px!important}
+.calendar-grid{
+  grid-template-columns:34px repeat(7,minmax(0,1fr))!important;
+  gap:6px!important;
+}
+.calendar-day{
+  aspect-ratio:1/1!important;
+  height:auto!important;
+  min-height:0!important;
+  padding:7px!important;
+  border-radius:14px!important;
+}
+.calendar-head{font-size:11px!important}
+.calendar-kw{font-size:10px!important;padding-top:11px!important}
+.daynum{font-size:12px!important}
+.calendar-selected{
+  margin-top:12px!important;
+  padding:12px!important;
+}
+.calendar-selected-title{font-size:14px!important}
+.calendar-selected-list{max-height:190px!important;overflow:auto!important}
+.calendar-event-click{
+  width:100%;
+  border:0!important;
+  background:#fff!important;
+  text-align:left;
+  cursor:pointer;
+  display:flex!important;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.calendar-event-click:hover{background:#f7faff!important}
+.calendar-event-arrow{
+  color:#a0a6af;
+  font-size:20px;
+  line-height:1;
+}
+
+/* Editieren: Alle auswählen – Löschen – Fertig nebeneinander */
+.simple-editbar{
+  min-height:38px;
+  margin-bottom:10px!important;
+}
+.simple-edit-actions{
+  display:flex!important;
+  align-items:center!important;
+  gap:18px!important;
+  flex-wrap:nowrap!important;
+}
+.text-action{
+  border:0!important;
+  background:transparent!important;
+  padding:5px 0!important;
+  min-height:auto!important;
+  color:var(--blue)!important;
+  font-weight:600!important;
+}
+.delete-text{color:#a24b55!important}
+.text-action:disabled{opacity:.32}
+.bulk-count{text-align:left!important}
+
+/* Archiv: alles in einer ruhigen Liste, linksbündig */
+.archive-list{
+  padding:0 14px!important;
+}
+.archive-list-row{
+  min-height:58px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:10px 2px;
+  border-bottom:1px solid rgba(28,28,30,.07);
+  cursor:pointer;
+  text-align:left!important;
+}
+.archive-list-row:last-child{border-bottom:0}
+.archive-list-row:hover{background:#f8faff}
+.archive-main{
+  flex:1;
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  text-align:left!important;
+  gap:2px;
+}
+.archive-main strong{
+  font-size:14px;
+  font-weight:720;
+}
+.archive-main span{
+  font-size:12px;
+  color:var(--muted);
+  font-weight:400;
+}
+.archive-arrow{color:#adb2ba;font-size:20px}
+.archive-empty{padding:18px 2px;color:var(--muted)}
+.archive-select{flex:0 0 auto}
+
+@media(max-width:680px){
+  body,button,input,select,textarea{font-size:16px!important}
+  .pagehead h1{font-size:24px!important}
+  .calendar-shell{width:100%!important;max-width:none!important;padding:10px!important}
+  .calendar-grid{grid-template-columns:25px repeat(7,minmax(0,1fr))!important;gap:3px!important}
+  .calendar-day{padding:4px!important;border-radius:9px!important}
+  .calendar-head{font-size:9px!important}
+  .calendar-kw{font-size:9px!important;padding-top:7px!important}
+  .daynum{font-size:10px!important}
+  .calendar-selected-list{max-height:220px!important}
+  .simple-edit-actions{gap:14px!important}
+  .archive-list-row{min-height:62px}
+}
+
+
+/* Parts & Vehicle Precision Update */
+body,button,input,select,textarea{font-weight:450!important}
+.pagehead h1,.sectiontitle,.plate,.calendar-title{font-weight:760!important}
+.nav button,.btn,.text-action{font-weight:650!important}
+.tablewrap th{font-weight:700!important}
+.tablewrap td,.ordercard,.purchase-card{font-weight:480!important}
+.vehicle,.customername,.small,.muted{font-weight:450!important}
+
+.purchase-card{
+  cursor:pointer;
+  transition:background .15s ease,transform .15s ease,box-shadow .15s ease;
+}
+.purchase-card:hover{
+  background:#fbfdff!important;
+  transform:translateY(-1px);
+}
+.parts-search-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:10px 0;
+  border-bottom:1px solid rgba(28,28,30,.07);
+}
+.parts-search-row:last-child{border-bottom:0}
+.parts-search-main{min-width:0}
+.parts-search-main strong{display:block;font-size:14px}
+.parts-search-main span{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+.parts-links{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+.parts-link{
+  border:0;background:transparent;color:var(--blue);
+  font-weight:650;font-size:12px;cursor:pointer;padding:5px 0;
+  text-decoration:none;
+}
+.parts-link:hover{text-decoration:underline}
+.vehicle-id-strip{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;
+  margin-top:12px;
+}
+.vehicle-id-item{
+  padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#fafbfc;
+}
+.vehicle-id-item span{display:block;font-size:11px;color:var(--muted);margin-bottom:3px}
+.vehicle-id-item strong{font-size:13px}
+@media(max-width:680px){
+  .parts-search-row{align-items:flex-start;flex-direction:column}
+  .parts-links{justify-content:flex-start}
+  .vehicle-id-strip{grid-template-columns:1fr 1fr}
+}
+
+
+/* ==========================================================
+   Erle.Werkstatt – Probeversion
+   Ruhige Werkstatt-UI mit klarer Herkunft für Admins
+   ========================================================== */
+.creator-badge{
+  margin-top:4px;
+  font-size:10.5px;
+  font-weight:600;
+  color:#8c94a0;
+  text-align:right;
+  white-space:nowrap;
+}
+.creator-pill{
+  display:inline-flex;
+  align-items:center;
+  min-height:24px;
+  padding:4px 8px;
+  border-radius:999px;
+  background:#f1f5fb;
+  color:#47627f;
+  font-size:11px;
+  font-weight:650;
+  white-space:nowrap;
+}
+.cardright{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:1px;
+  max-width:46%;
+}
+body,button,input,select,textarea{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter","Segoe UI","Helvetica Neue",Arial,sans-serif!important;
+}
+body{font-weight:450}
+.pagehead h1,.sectiontitle,.plate,.calendar-title{font-weight:760!important}
+.nav button,.btn,.text-action,.tablewrap th{font-weight:650!important}
+.tablewrap td,.ordercard,.purchase-card{font-weight:480!important}
+.ordercard,.panel,.section,.calendar-shell{border-color:rgba(28,28,30,.07)!important}
+.ordercard{box-shadow:0 3px 12px rgba(16,24,40,.035)!important}
+.ordercard:hover{box-shadow:0 8px 18px rgba(16,24,40,.05)!important}
+@media(max-width:680px){
+  .creator-badge{font-size:10px}
+  .creator-pill{font-size:10.5px}
+  .cardright{max-width:48%}
+}
+
+
+/* Probeversion Kalender – breiter, gleiche Form */
+.calendar-shell{
+  width:min(100%,1180px)!important;
+  max-width:1180px!important;
+  margin:0 auto!important;
+}
+.calendar-grid{
+  grid-template-columns:38px repeat(7,minmax(0,1fr))!important;
+  gap:7px!important;
+}
+.calendar-day{
+  aspect-ratio:1/1!important;
+  height:auto!important;
+  min-height:0!important;
+}
+@media(max-width:1350px){
+  .calendar-shell{
+    width:min(100%,1040px)!important;
+    max-width:1040px!important;
+  }
+}
+@media(max-width:680px){
+  .calendar-shell{
+    width:100%!important;
+    max-width:none!important;
+  }
+  .calendar-grid{
+    grid-template-columns:25px repeat(7,minmax(0,1fr))!important;
+    gap:3px!important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -121,15 +994,23 @@ button,input,select,textarea{font:inherit} button{cursor:pointer} .hidden{displa
       <button id="settingsNav" data-page="settings">Einstellungen</button>
     </nav>
     <div class="sidefoot">
-  <div class="sideuserrow">
-    <div class="sideidentity"><strong id="sideUser"></strong><span id="sideRole" class="small muted"></span></div>
-    <button id="logoutBtn" class="logoutbtn">Abmelden</button>
-  </div>
-</div>
+      <div class="sideidentity">
+        <strong id="sideUser"></strong>
+        <span id="sideRole" class="side-role"></span>
+      </div>
+      <button id="logoutBtn" class="logout-link">Abmelden</button>
+    </div>
   </aside>
   <main class="main">
     <div class="top"><div class="topinner"><input id="search" class="input" placeholder="Kennzeichen oder Fahrzeug suchen…"></div></div>
     <div id="content" class="content"></div>
+    <div class="mobile-account-footer">
+      <div class="mobile-identity">
+        <strong id="mobileUser"></strong>
+        <span id="mobileRole"></span>
+      </div>
+      <button id="mobileLogoutBtn" class="logout-link">Abmelden</button>
+    </div>
   </main>
 </section>
 
@@ -140,6 +1021,7 @@ button,input,select,textarea{font:inherit} button{cursor:pointer} .hidden{displa
 const SUPABASE_URL='https://yntrnwzzsmhzmqtwnyyb.supabase.co';
 const SUPABASE_KEY='sb_publishable_gYvZ4Awk6O_MvFvOIFXIaA_WzAD8Ns3';
 const SESSION_KEY='erle_supabase_session_v1';
+const FORCE_LOGIN_ON_LOAD=true;
 
 const commonModels = [
   'Alfa Romeo 147',
@@ -512,16 +1394,44 @@ const manufacturers=[...new Set(commonModels.map(x=>{
 let session=JSON.parse(localStorage.getItem(SESSION_KEY)||'null');
 let me=null, profiles=[], orders=[], vehicles=[], customers=[];
 let page='board', filter='all', search='', authMode='login', pollTimer=null;
+let calendarCursor=new Date();
+let editModes={orders:false,vehicles:false,archiveOrders:false,archiveVehicles:false,archiveAll:false};
+let collapsedStages={planned:false,buy:false,working:false,done:false};
+let selections={orders:new Set(),vehicles:new Set(),archiveOrders:new Set(),archiveVehicles:new Set(),archiveAll:new Set()};
+let selectedCalendarDate=null;
 
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
 const uid=p=>p+'-'+crypto.randomUUID();
 function capFirst(s){s=String(s||'').trim();return s?s.charAt(0).toLocaleUpperCase('de-DE')+s.slice(1):s}
+
+function partSearchQuery(v,task){
+  const raw=String(task||'').trim();
+  const oil=/öl|oel|oil|ölservice|ölwechsel/i.test(raw);
+  const part=oil?'Ölservice Set Motoröl Ölfilter Ablassschraube':raw;
+  return [v?.manufacturer,v?.model,v?.year,v?.hsn?`HSN ${v.hsn}`:'',v?.tsn?`TSN ${v.tsn}`:'',part].filter(Boolean).join(' ');
+}
+function partsSearchUrl(v,task,mode='shopping'){
+  const q=encodeURIComponent(partSearchQuery(v,task));
+  if(mode==='daparto')return 'https://www.google.com/search?q='+encodeURIComponent('site:daparto.de '+partSearchQuery(v,task));
+  if(mode==='autodoc')return 'https://www.google.com/search?q='+encodeURIComponent('site:autodoc.de '+partSearchQuery(v,task));
+  if(mode==='motointegrator')return 'https://www.google.com/search?q='+encodeURIComponent('site:motointegrator.de '+partSearchQuery(v,task));
+  if(mode==='kfzteile24')return 'https://www.google.com/search?q='+encodeURIComponent('site:kfzteile24.de '+partSearchQuery(v,task));
+  return 'https://www.google.com/search?tbm=shop&q='+q;
+}
 const technicalEmail=username=>{
   const bytes=new TextEncoder().encode(username.trim().toLowerCase());
   let bin=''; bytes.forEach(b=>bin+=String.fromCharCode(b));
   return 'u_'+btoa(bin).replace(/=/g,'').replace(/\+/g,'-').replace(/\//g,'_')+'@erle.local';
 };
+
+function trashIcon(){
+  return `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6l1 2h4v2H4V5h4l1-2Zm-2 6h10l-.7 11H7.7L7 9Zm3 2v7h2v-7h-2Zm4 0v7h2v-7h-2Z"/></svg>`;
+}
+function selectMark(selected){
+  return `<span class="select-mark ${selected?'selected':''}">${selected?'✓':''}</span>`;
+}
+
 function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.remove('hidden');setTimeout(()=>t.classList.add('hidden'),2600)}
 function headers(extra={}){const h={apikey:SUPABASE_KEY,'Content-Type':'application/json',...extra};if(session?.access_token)h.Authorization='Bearer '+session.access_token;return h}
 async function api(path,opts={}){const r=await fetch(SUPABASE_URL+path,{...opts,headers:headers(opts.headers||{})});let body=null;const txt=await r.text();if(txt){try{body=JSON.parse(txt)}catch{body=txt}}if(!r.ok)throw new Error((body&&body.message)||body?.error_description||body?.hint||('Fehler '+r.status));return body}
@@ -546,9 +1456,19 @@ async function signUpRaw(username,password){
 }
 async function register(username,password){
   if(username.toLowerCase()==='admin')throw new Error('Der Benutzername Admin ist reserviert.');
-  const s=await signUpRaw(username,password);
-  if(!s?.access_token)throw new Error('Registrierung angelegt, aber keine Sitzung erhalten. In Supabase muss „Confirm email“ ausgeschaltet sein.');
-  session=s;localStorage.setItem(SESSION_KEY,JSON.stringify(session));
+  try{
+    const s=await signUpRaw(username,password);
+    if(s?.user && Array.isArray(s.user.identities) && s.user.identities.length===0){
+      throw new Error('Dieser Benutzername ist bereits vergeben.');
+    }
+    if(!s?.access_token)throw new Error('Registrierung angelegt, aber keine Sitzung erhalten. In Supabase muss „Confirm email“ ausgeschaltet sein.');
+    session=s;
+    localStorage.setItem(SESSION_KEY,JSON.stringify(session));
+  }catch(e){
+    const msg=String(e?.message||e);
+    if(/already|registered|exists|unique|duplicate/i.test(msg))throw new Error('Dieser Benutzername ist bereits vergeben.');
+    throw e;
+  }
 }
 async function refreshSession(){
   if(!session?.refresh_token)return false;
@@ -564,7 +1484,51 @@ async function loadMe(){
   return me;
 }
 function isAdmin(){return me?.role==='admin'}
+
+function toggleEditMode(key){
+  editModes[key]=!editModes[key];
+  if(!editModes[key])selections[key].clear();
+  render();
+}
+function toggleSelection(key,id,checked){
+  if(checked)selections[key].add(id);else selections[key].delete(id);
+  render();
+}
+function selectAllVisible(key,ids){
+  const s=selections[key];
+  const allSelected=ids.length>0&&ids.every(id=>s.has(id));
+  s.clear();
+  if(!allSelected)ids.forEach(id=>s.add(id));
+  render();
+}
+async function bulkArchiveOrders(ids){
+  for(const id of ids){
+    const o=orders.find(x=>x.id===id);
+    if(!o)continue;
+    o.archived_at=new Date().toISOString();
+    await saveOrder(o);
+  }
+  selections.orders.clear();editModes.orders=false;render();
+  toast('Ausgewählte Aufträge ins Archiv verschoben.');
+}
+async function bulkArchiveVehicles(ids){
+  for(const id of ids)await archiveVehicle(id,false);
+  selections.vehicles.clear();editModes.vehicles=false;render();
+  toast('Ausgewählte Fahrzeuge ins Archiv verschoben.');
+}
+async function bulkDeleteArchivedOrders(ids){
+  for(const id of ids)await hardDeleteOrder(id,false);
+  selections.archiveOrders.clear();render();
+  toast('Ausgewählte Aufträge endgültig gelöscht.');
+}
+async function bulkDeleteArchivedVehicles(ids){
+  for(const id of ids)await hardDeleteVehicle(id,false);
+  selections.archiveVehicles.clear();render();
+  toast('Ausgewählte Fahrzeuge endgültig gelöscht.');
+}
+
 function isArchived(o){return !!o.archived_at}
+function isVehicleArchived(v){return !!v.archived_at}
 function archiveExpired(o){
   if(!o.archived_at)return false;
   return (Date.now()-new Date(o.archived_at).getTime()) > 42*24*60*60*1000;
@@ -598,11 +1562,27 @@ async function enterApp(){
   catch(e){if(await refreshSession())return enterApp();logout()}
 }
 function showLogin(){$('#app').classList.add('hidden');$('#login').classList.remove('hidden')}
-function showApp(){$('#login').classList.add('hidden');$('#app').classList.remove('hidden');$('#sideUser').textContent=me.username;$('#sideRole').textContent=isAdmin()?'Administrator':'Mitarbeiter';$('#usersNav').classList.toggle('hidden',!isAdmin());$('#settingsNav').classList.toggle('hidden',!isAdmin());render()}
+function showApp(){
+  $('#login').classList.add('hidden');
+  $('#app').classList.remove('hidden');
+  $('#sideUser').textContent=me.username;
+  $('#sideRole').textContent=isAdmin()?'Administrator':'Mitarbeiter';
+  if($('#mobileUser'))$('#mobileUser').textContent=me.username;
+  if($('#mobileRole'))$('#mobileRole').textContent=isAdmin()?'Administrator':'Mitarbeiter';
+  $('#usersNav').classList.toggle('hidden',!isAdmin());
+  $('#settingsNav').classList.remove('hidden');
+  render();
+}
 function logout(){session=null;me=null;localStorage.removeItem(SESSION_KEY);clearInterval(pollTimer);showLogin()}
 function startPolling(){clearInterval(pollTimer);pollTimer=setInterval(()=>loadData(true),15000)}
 
 function vehicle(id){return vehicles.find(v=>v.id===id)} function customer(id){return customers.find(c=>c.id===id)}
+function creatorName(o){
+  if(!o)return '–';
+  const id=o.created_by_user_id||o.assigned_user_id;
+  if(id===me?.id)return me?.username||'–';
+  return profiles.find(p=>p.id===id)?.username||'–';
+}
 function taskState(t){return t.part_status||'none'}
 function statusOf(o){
   if(o.completed_at)return 'done';
@@ -639,12 +1619,21 @@ function renderBoard(){
   return `<div class="pagehead"><div><h1>Werkstattübersicht</h1><p>Was steht an, was fehlt, was ist fertig?</p></div><button class="btn primary" data-action="new">+ Neuer Auftrag</button></div>
   <div class="stats"><div class="stat"><strong>${all.length}</strong><span>Aktuelle Fahrzeuge</span></div><div class="stat"><strong>${counts.buy}</strong><span>Einkauf nötig</span></div><div class="stat"><strong>${counts.working}</strong><span>In Arbeit</span></div><div class="stat"><strong>${counts.done}</strong><span>Fertig</span></div></div>
   <div class="filters">${[['all','Alle'],['buy','Einkauf'],['working','In Arbeit'],['done','Fertig']].map(([k,l])=>`<button class="filter ${filter===k?'active':''}" data-filter="${k}">${l}</button>`).join('')}</div>
-  <div class="boardwrap"><div class="board">${['planned','buy','working','done'].map(st=>{const list=a.filter(o=>statusOf(o)===st);return `<section class="col" data-drop="${st}"><div class="colhead"><span>${statLabel[st]}</span><span class="colcount">${list.length}</span></div>${list.map(card).join('')}</section>`}).join('')}</div></div>`;
+  <div class="boardwrap"><div class="board">${['planned','buy','working','done'].map(st=>{
+    const list=a.filter(o=>statusOf(o)===st);
+    return `<section class="col" data-drop="${st}">
+      <button type="button" class="colhead colhead-button" data-collapse-stage="${st}">
+        <span>${statLabel[st]}</span>
+        <span class="colhead-right"><span class="colcount">${list.length}</span><span class="collapse-chevron">${collapsedStages[st]?'⌄':'⌃'}</span></span>
+      </button>
+      <div class="colbody ${collapsedStages[st]?'mobile-collapsed':''}">${list.map(card).join('')}</div>
+    </section>`;
+  }).join('')}</div></div>`;
 }
 function card(o){
   const v=vehicle(o.vehicle_id),c=customer(o.customer_id),tasks=Array.isArray(o.tasks)?o.tasks:[],done=tasks.filter(t=>t.completed).length,missing=tasks.filter(t=>taskState(t)==='missing').length,st=statusOf(o);
   return `<article class="ordercard" draggable="true" data-order="${o.id}">
-    <div class="cardtop"><div><div class="plate">${esc(v?.license_plate)}</div><div class="vehicle">${esc((v?.manufacturer||'')+' '+(v?.model||''))}</div></div>${c?.name?`<div class="customername customer-right">${esc(c.name)}</div>`:''}</div>
+    <div class="cardtop"><div><div class="plate">${esc(v?.license_plate)}</div><div class="vehicle">${esc((v?.manufacturer||'')+' '+(v?.model||''))}</div></div><div class="cardright">${c?.name?`<div class="customername customer-right">${esc(c.name)}</div>`:''}${isAdmin()?`<div class="creator-badge">Erstellt: ${esc(creatorName(o))}</div>`:''}</div></div>
     <div class="desc">${esc(o.description)}</div>
     <div class="cardmeta">
       ${o.appointment_date?`<span>${new Date(o.appointment_date).toLocaleString('de-DE',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})}</span>`:''}
@@ -657,31 +1646,49 @@ function card(o){
 }
 function renderOrders(){
   const a=visibleOrders();
+  const ids=a.map(o=>o.id);
+  const editing=editModes.orders;
+  const allSelected=ids.length>0&&ids.every(id=>selections.orders.has(id));
+
   return `<div class="pagehead"><div><h1>Aufträge</h1><p>Alle sichtbaren Werkstattaufträge.</p></div><button class="btn primary" data-action="new">+ Neuer Auftrag</button></div>
-  <div class="panel tablewrap"><table><thead><tr><th>Kennzeichen</th><th>Fahrzeug</th><th>Auftrag</th><th>Status</th><th>Zuständig</th><th>Aktionen</th></tr></thead><tbody>
-  ${a.map(o=>{const v=vehicle(o.vehicle_id),s=statusOf(o),p=profiles.find(x=>x.id===o.assigned_user_id);return `<tr>
-    <td><strong>${esc(v?.license_plate)}</strong></td>
-    <td>${esc((v?.manufacturer||'')+' '+(v?.model||''))}</td>
-    <td>${esc(o.description)}</td>
-    <td>${statLabel[s]}</td>
-    <td>${esc(p?.username||((o.assigned_user_id===me?.id)?me?.username:'–'))}</td>
-    <td><div class="row"><button class="btn" data-open="${o.id}">Öffnen</button><button class="btn" data-delete-order="${o.id}">Löschen</button></div></td>
-  </tr>`}).join('')}</tbody></table></div>`;
+  <div class="edit-toolbar simple-editbar">
+    <div class="bulk-count">${editing?`${selections.orders.size} ausgewählt`:''}</div>
+    <div class="edit-actions simple-edit-actions">
+      ${editing?`<button class="text-action" data-select-all-orders>${allSelected?'Auswahl aufheben':'Alle auswählen'}</button>
+      <button class="text-action delete-text" data-bulk-archive-orders ${selections.orders.size?'':'disabled'}>Löschen</button>
+      <button class="text-action" data-edit-orders>Fertig</button>`:`<button class="text-action" data-edit-orders>Bearbeiten</button>`}
+    </div>
+  </div>
+  <div class="panel tablewrap"><table>
+    <thead><tr>${editing?'<th class="select-cell"></th>':''}<th>Kennzeichen</th><th>Fahrzeug</th><th>Auftrag</th><th>Status</th><th>Zuständig</th>${isAdmin()?'<th>Erstellt von</th>':''}</tr></thead>
+    <tbody>${a.map(o=>{
+      const v=vehicle(o.vehicle_id),s=statusOf(o),p=profiles.find(x=>x.id===o.assigned_user_id);
+      const selected=selections.orders.has(o.id);
+      return `<tr class="order-row ${selected?'row-selected':''}" data-order-row="${o.id}">
+        ${editing?`<td class="select-cell"><button class="select-action" data-select-order="${o.id}">${selectMark(selected)}</button></td>`:''}
+        <td><strong>${esc(v?.license_plate)}</strong></td>
+        <td>${esc((v?.manufacturer||'')+' '+(v?.model||''))}</td>
+        <td>${esc(o.description)}</td>
+        <td>${statLabel[s]}</td>
+        <td>${esc(p?.username||((o.assigned_user_id===me?.id)?me?.username:'–'))}</td>
+        ${isAdmin()?`<td><span class="creator-pill">${esc(creatorName(o))}</span></td>`:''}
+      </tr>`;
+    }).join('')}</tbody>
+  </table></div>`;
 }
 function renderPurchase(){
   const a=orders.filter(o=>statusOf(o)==='buy'&&!isArchived(o));
-  return `<div class="pagehead"><div><h1>Einkauf</h1><p>Nur Aufträge mit fehlenden Teilen.</p></div></div>
+  return `<div class="pagehead"><div><h1>Einkauf</h1><p>Aufträge mit fehlenden Teilen.</p></div></div>
   <div class="purchase-list">${a.length?a.map(o=>{
     const v=vehicle(o.vehicle_id),c=customer(o.customer_id),miss=(o.tasks||[]).filter(t=>taskState(t)==='missing');
-    return `<div class="panel purchase-card">
+    return `<div class="panel purchase-card" data-purchase-order="${o.id}">
       <div class="between">
         <div>
           <strong>${esc(v?.license_plate)}</strong>
           <div class="small muted">${esc((v?.manufacturer||'')+' '+(v?.model||''))}</div>
           ${c?.name?`<div class="customername">${esc(c.name)}</div>`:''}
-          <div class="small muted" style="margin-top:4px">${esc(o.description)}</div>
         </div>
-        <button class="btn" data-open="${o.id}">Öffnen</button>
+        <span class="badge red">${miss.length} Fehlt</span>
       </div>
       <div class="purchase-items">
         ${miss.map(t=>`<div class="purchase-item"><span>${esc(capFirst(t.title))}</span><span class="badge red">Fehlt</span></div>`).join('')}
@@ -689,14 +1696,279 @@ function renderPurchase(){
     </div>`;
   }).join(''):'<div class="panel">Aktuell fehlt nichts.</div>'}</div>`;
 }
-function renderAppointments(){
-  const a=orders.filter(o=>o.appointment_date).sort((a,b)=>a.appointment_date.localeCompare(b.appointment_date));return `<div class="pagehead"><div><h1>Termine</h1><p>Geplante Werkstatttermine.</p></div></div><div class="panel tablewrap"><table><thead><tr><th>Datum</th><th>Kennzeichen</th><th>Auftrag</th></tr></thead><tbody>${a.map(o=>{const v=vehicle(o.vehicle_id);return `<tr><td>${new Date(o.appointment_date).toLocaleString('de-DE')}</td><td><strong>${esc(v?.license_plate)}</strong></td><td><button class="btn" data-open="${o.id}">${esc(o.description)}</button></td></tr>`}).join('')}</tbody></table></div>`;
+
+
+function openPurchaseParts(oid){
+  const o=orders.find(x=>x.id===oid);if(!o)return;
+  const v=vehicle(o.vehicle_id);
+  const tasks=(o.tasks||[]).filter(t=>taskState(t)==='missing');
+  openModal('Einkauf · '+esc(v?.license_plate||''),`
+    <div class="muted">${esc((v?.manufacturer||'')+' '+(v?.model||''))}</div>
+    <div class="vehicle-id-strip">
+      <div class="vehicle-id-item"><span>Baujahr</span><strong>${esc(v?.year||'–')}</strong></div>
+      <div class="vehicle-id-item"><span>HSN</span><strong>${esc(v?.hsn||'–')}</strong></div>
+      <div class="vehicle-id-item"><span>TSN</span><strong>${esc(v?.tsn||'–')}</strong></div>
+    </div>
+    <div class="section" style="margin-top:14px">
+      <div class="between"><div class="sectiontitle">Benötigte Teile</div><span class="small muted">Preisvergleich Deutschland</span></div>
+      ${tasks.length?tasks.map(t=>`<div class="parts-search-row">
+        <div class="parts-search-main">
+          <strong>${esc(capFirst(t.title))}</strong>
+          <span>${/öl|oel|oil/i.test(t.title)?'Ölservice: Motoröl, Ölfilter und passende Service-Teile berücksichtigen.':'Passend zum Fahrzeug suchen.'}</span>
+        </div>
+        <div class="parts-links">
+          <a class="parts-link" href="${partsSearchUrl(v,t.title,'shopping')}" target="_blank" rel="noopener">Preise Vergleichen</a>
+          <a class="parts-link" href="${partsSearchUrl(v,t.title,'daparto')}" target="_blank" rel="noopener">DAPARTO</a>
+          <a class="parts-link" href="${partsSearchUrl(v,t.title,'autodoc')}" target="_blank" rel="noopener">AUTODOC</a>
+          <a class="parts-link" href="${partsSearchUrl(v,t.title,'motointegrator')}" target="_blank" rel="noopener">Motointegrator</a>
+        </div>
+      </div>`).join(''):'<div class="small muted">Keine fehlenden Teile.</div>'}
+    </div>
+    <div class="actions"><button class="btn" id="purchaseToOrder">Auftrag Öffnen</button></div>
+  `);
+  $('#purchaseToOrder').onclick=()=>openOrder(oid);
 }
-function renderVehicles(){return `<div class="pagehead"><div><h1>Fahrzeuge</h1><p>Alle für dich sichtbaren Fahrzeuge.</p></div></div><div class="panel tablewrap"><table><thead><tr><th>Kennzeichen</th><th>Hersteller</th><th>Modell</th></tr></thead><tbody>${vehicles.map(v=>`<tr><td><strong>${esc(v.license_plate)}</strong></td><td>${esc(v.manufacturer)}</td><td>${esc(v.model)}</td></tr>`).join('')}</tbody></table></div>`}
+
+function isoWeekNumber(date){
+  const d=new Date(Date.UTC(date.getFullYear(),date.getMonth(),date.getDate()));
+  const day=d.getUTCDay()||7;
+  d.setUTCDate(d.getUTCDate()+4-day);
+  const yearStart=new Date(Date.UTC(d.getUTCFullYear(),0,1));
+  return Math.ceil((((d-yearStart)/86400000)+1)/7);
+}
+function sameDay(a,b){return a.getFullYear()===b.getFullYear()&&a.getMonth()===b.getMonth()&&a.getDate()===b.getDate()}
+
+
+function openPurchaseParts(oid){
+  const o=orders.find(x=>x.id===oid);if(!o)return;
+  const v=vehicle(o.vehicle_id);
+  const tasks=(o.tasks||[]).filter(t=>taskState(t)==='missing');
+  openModal('Einkauf · '+esc(v?.license_plate||''),`
+    <div class="muted">${esc((v?.manufacturer||'')+' '+(v?.model||''))}</div>
+    <div class="vehicle-id-strip">
+      <div class="vehicle-id-item"><span>Baujahr</span><strong>${esc(v?.year||'–')}</strong></div>
+      <div class="vehicle-id-item"><span>HSN</span><strong>${esc(v?.hsn||'–')}</strong></div>
+      <div class="vehicle-id-item"><span>TSN</span><strong>${esc(v?.tsn||'–')}</strong></div>
+    </div>
+    <div class="section" style="margin-top:14px">
+      <div class="between"><div class="sectiontitle">Benötigte Teile</div><span class="small muted">Preisvergleich Deutschland</span></div>
+      ${tasks.length?tasks.map(t=>`<div class="parts-search-row">
+        <div class="parts-search-main">
+          <strong>${esc(capFirst(t.title))}</strong>
+          <span>${/öl|oel|oil/i.test(t.title)?'Ölservice: Motoröl, Ölfilter und passende Service-Teile berücksichtigen.':'Passend zum Fahrzeug suchen.'}</span>
+        </div>
+        <div class="parts-links">
+          <a class="parts-link" href="${partsSearchUrl(v,t.title,'shopping')}" target="_blank" rel="noopener">Preise Vergleichen</a>
+          <a class="parts-link" href="${partsSearchUrl(v,t.title,'daparto')}" target="_blank" rel="noopener">DAPARTO</a>
+          <a class="parts-link" href="${partsSearchUrl(v,t.title,'autodoc')}" target="_blank" rel="noopener">AUTODOC</a>
+          <a class="parts-link" href="${partsSearchUrl(v,t.title,'motointegrator')}" target="_blank" rel="noopener">Motointegrator</a>
+        </div>
+      </div>`).join(''):'<div class="small muted">Keine fehlenden Teile.</div>'}
+    </div>
+    <div class="actions"><button class="btn" id="purchaseToOrder">Auftrag Öffnen</button></div>
+  `);
+  $('#purchaseToOrder').onclick=()=>openOrder(oid);
+}
+
+function isoWeekNumber(date){
+  const d=new Date(Date.UTC(date.getFullYear(),date.getMonth(),date.getDate()));
+  const day=d.getUTCDay()||7;
+  d.setUTCDate(d.getUTCDate()+4-day);
+  const yearStart=new Date(Date.UTC(d.getUTCFullYear(),0,1));
+  return Math.ceil((((d-yearStart)/86400000)+1)/7);
+}
+function sameDay(a,b){return a.getFullYear()===b.getFullYear()&&a.getMonth()===b.getMonth()&&a.getDate()===b.getDate()}
+function dateKey(d){
+  const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),day=String(d.getDate()).padStart(2,'0');
+  return `${y}-${m}-${day}`;
+}
+function selectedDateObj(){
+  if(selectedCalendarDate){
+    const [y,m,d]=selectedCalendarDate.split('-').map(Number);
+    return new Date(y,m-1,d);
+  }
+  return new Date(calendarCursor.getFullYear(),calendarCursor.getMonth(),1);
+}
+function renderAppointments(){
+  const year=calendarCursor.getFullYear(),month=calendarCursor.getMonth();
+  const monthName=new Intl.DateTimeFormat('de-DE',{month:'long',year:'numeric'}).format(new Date(year,month,1));
+  const first=new Date(year,month,1),last=new Date(year,month+1,0);
+  const mondayOffset=(first.getDay()+6)%7;
+  const start=new Date(year,month,1-mondayOffset);
+  const endOffset=6-((last.getDay()+6)%7);
+  const end=new Date(year,month,last.getDate()+endOffset);
+  let rows=[],cursor=new Date(start);
+  while(cursor<=end){
+    const week=[];
+    for(let i=0;i<7;i++){week.push(new Date(cursor));cursor.setDate(cursor.getDate()+1)}
+    rows.push(week);
+  }
+
+  if(!selectedCalendarDate){
+    const today=new Date();
+    if(today.getFullYear()===year&&today.getMonth()===month) selectedCalendarDate=dateKey(today);
+    else selectedCalendarDate=dateKey(new Date(year,month,1));
+  }
+
+  const weekDays=['Mo','Di','Mi','Do','Fr','Sa','So'];
+  const header=`<div class="calendar-cell calendar-head">KW</div>${weekDays.map((d,i)=>`<div class="calendar-cell calendar-head ${i>=5?'weekend':''}">${d}</div>`).join('')}`;
+  const body=rows.map(week=>{
+    const kw=isoWeekNumber(week[0]);
+    return `<div class="calendar-cell calendar-kw">${kw}</div>`+week.map((d,i)=>{
+      const appts=orders.filter(o=>o.appointment_date&&!isArchived(o)&&sameDay(new Date(o.appointment_date),d));
+      const key=dateKey(d);
+      return `<button type="button" class="calendar-cell calendar-day ${i>=5?'weekend ':''}${d.getMonth()!==month?'outside ':''}${selectedCalendarDate===key?'selected':''}" data-caldate="${key}">
+        <span class="daynum">${d.getDate()}</span>${appts.length?'<span class="event-dot"></span>':''}
+      </button>`;
+    }).join('');
+  }).join('');
+
+  const sel=selectedDateObj();
+  const selectedAppointments=orders.filter(o=>o.appointment_date&&!isArchived(o)&&sameDay(new Date(o.appointment_date),sel))
+    .sort((a,b)=>new Date(a.appointment_date)-new Date(b.appointment_date));
+  const selectedLabel=new Intl.DateTimeFormat('de-DE',{weekday:'long',day:'2-digit',month:'long',year:'numeric'}).format(sel);
+
+  return `<div class="pagehead"><div><h1>Termine</h1><p>Monatsansicht mit Kalenderwochen und markierten Terminen.</p></div><button class="btn primary" id="newAppointmentTop">+ Neuer Termin</button></div>
+  <div class="calendar-shell">
+    <div class="calendar-top">
+      <div class="calendar-title">${monthName}</div>
+      <div class="calendar-nav">
+        <button class="btn" id="calPrev">‹</button>
+        <button class="btn" id="calToday">Heute</button>
+        <button class="btn" id="calNext">›</button>
+      </div>
+    </div>
+    <div class="calendar-grid">${header}${body}</div>
+    <div class="calendar-legend"><span class="calendar-legend-dot"></span><span>Termin vorhanden</span></div>
+
+    <div class="calendar-selected">
+      <div class="calendar-selected-head">
+        <div class="calendar-selected-title">${selectedLabel}</div>
+        <button class="btn" id="newAppointmentSelected">+ Termin hinzufügen</button>
+      </div>
+      <div class="calendar-selected-list">
+        ${selectedAppointments.length?selectedAppointments.map(o=>{
+          const v=vehicle(o.vehicle_id),d=new Date(o.appointment_date);
+          return `<button type="button" class="calendar-event calendar-event-click" data-open="${o.id}">
+            <div class="calendar-event-main">
+              <strong>${d.toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'})} · ${esc(v?.license_plate||'')}</strong>
+              <span>${esc((v?.manufacturer||'')+' '+(v?.model||''))} · ${esc(o.description||'')}</span>
+            </div>
+            <span class="calendar-event-arrow">›</span>
+          </button>`;
+        }).join(''):'<div class="small muted">Keine Termine an diesem Tag.</div>'}
+      </div>
+    </div>
+  </div>`;
+}
+
+
+function renderVehicles(){
+  const activeVehicles=vehicles.filter(v=>!isVehicleArchived(v));
+  const ids=activeVehicles.map(v=>v.id);
+  const editing=editModes.vehicles;
+  const allSelected=ids.length>0&&ids.every(id=>selections.vehicles.has(id));
+
+  return `<div class="pagehead"><div><h1>Fahrzeuge</h1><p>Fahrzeuge, Kundenbezug und Historie.</p></div></div>
+  <div class="edit-toolbar simple-editbar">
+    <div class="bulk-count">${editing?`${selections.vehicles.size} ausgewählt`:''}</div>
+    <div class="edit-actions simple-edit-actions">
+      ${editing?`<button class="text-action" data-select-all-vehicles>${allSelected?'Auswahl aufheben':'Alle auswählen'}</button>
+      <button class="text-action delete-text" data-bulk-archive-vehicles ${selections.vehicles.size?'':'disabled'}>Löschen</button>
+      <button class="text-action" data-edit-vehicles>Fertig</button>`:`<button class="text-action" data-edit-vehicles>Bearbeiten</button>`}
+    </div>
+  </div>
+  <div class="panel tablewrap"><table class="click-table">
+    <thead><tr>${editing?'<th class="select-cell"></th>':''}<th>Kennzeichen</th><th>Hersteller</th><th>Modell</th><th>Kunde</th><th>Aufträge</th></tr></thead>
+    <tbody>${activeVehicles.map(v=>{
+      const c=customer(v.customer_id),related=orders.filter(o=>o.vehicle_id===v.id);
+      const selected=selections.vehicles.has(v.id);
+      return `<tr class="vehicle-row ${selected?'row-selected':''}" data-vehicle="${v.id}">
+        ${editing?`<td class="select-cell"><button class="select-action" data-select-vehicle="${v.id}">${selectMark(selected)}</button></td>`:''}
+        <td><strong>${esc(v.license_plate)}</strong></td>
+        <td>${esc(v.manufacturer||'–')}</td>
+        <td>${esc(v.model||'–')}</td>
+        <td>${esc(c?.name||'–')}</td>
+        <td>${related.length}</td>
+      </tr>`;
+    }).join('')}</tbody>
+  </table></div>`;
+}
+function openVehicle(id){
+  const v=vehicles.find(x=>x.id===id);if(!v)return;
+  const c=customer(v.customer_id);
+  const related=orders.filter(o=>o.vehicle_id===id).sort((a,b)=>new Date(b.created_at||0)-new Date(a.created_at||0));
+
+  openModal(esc(v.license_plate||''),`
+    <div class="muted">${esc((v.manufacturer||'')+' '+(v.model||''))}</div>
+    <div class="vehicle-id-strip">
+      <div class="vehicle-id-item"><span>Baujahr</span><strong>${esc(v.year||'–')}</strong></div>
+      <div class="vehicle-id-item"><span>HSN</span><strong>${esc(v.hsn||'–')}</strong></div>
+      <div class="vehicle-id-item"><span>TSN</span><strong>${esc(v.tsn||'–')}</strong></div>
+    </div>
+    <div class="section">
+      <div class="grid2">
+        <div><div class="small muted">Kunde</div><strong>${esc(c?.name||'–')}</strong></div>
+        <div><div class="small muted">Aufträge Gesamt</div><strong>${related.length}</strong></div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="sectiontitle">Fahrzeughistorie</div>
+      ${related.length?related.map(o=>`<div class="history-row" data-history-order="${o.id}">
+        <div><strong>${esc(o.description)}</strong><div class="small muted">${o.created_at?new Date(o.created_at).toLocaleDateString('de-DE'):'–'} · ${statLabel[statusOf(o)]}</div></div>
+        <span class="badge ${o.payment_status==='paid'?'green':'red'}">${o.payment_status==='paid'?'Bezahlt':'Offen'}</span>
+      </div>`).join(''):'<div class="small muted">Keine Aufträge vorhanden.</div>'}
+    </div>
+    <div class="detail-actionbar">
+      ${v.archived_at?`<button id="restoreVehicleDetail" class="text-action">Wiederherstellen</button><button id="hardDeleteVehicleDetail" class="text-action delete-text">Löschen</button>`:`<button id="deleteVehicleDetail" class="text-action delete-text">Löschen</button>`}
+    </div>
+  `);
+
+  document.querySelectorAll('[data-history-order]').forEach(r=>r.onclick=()=>openOrder(r.dataset.historyOrder));
+  if($('#deleteVehicleDetail'))$('#deleteVehicleDetail').onclick=()=>archiveVehicle(id);
+  if($('#restoreVehicleDetail'))$('#restoreVehicleDetail').onclick=()=>restoreVehicle(id);
+  if($('#hardDeleteVehicleDetail'))$('#hardDeleteVehicleDetail').onclick=()=>hardDeleteVehicle(id);
+}
 function renderArchive(){
-  const a=orders.filter(o=>isArchived(o)&&!archiveExpired(o)).sort((x,y)=>new Date(y.archived_at)-new Date(x.archived_at));
-  return `<div class="pagehead"><div><h1>Archiv</h1><p>Gelöschte fertige Aufträge bleiben 6 Wochen im Archiv.</p></div></div>
-  <div class="panel">${a.length?a.map(o=>{const v=vehicle(o.vehicle_id);const days=Math.max(0,42-Math.floor((Date.now()-new Date(o.archived_at).getTime())/86400000));return `<div class="between" style="padding:11px 0;border-bottom:1px solid var(--line)"><div><strong>${esc(v?.license_plate)}</strong><div class="small muted">${esc(o.description)} · noch ca. ${days} Tage</div></div><div class="row"><span class="badge ${o.payment_status==='paid'?'green':'red'}">${o.payment_status==='paid'?'Bezahlt':'Offen'}</span><button class="btn" data-open="${o.id}">Öffnen</button></div></div>`}).join(''):'Noch nichts archiviert.'}</div>`;
+  const archivedOrders=orders.filter(o=>isArchived(o)&&!archiveExpired(o)).sort((a,b)=>new Date(b.archived_at)-new Date(a.archived_at));
+  const archivedVehicles=vehicles.filter(v=>isVehicleArchived(v)).sort((a,b)=>new Date(b.archived_at)-new Date(a.archived_at));
+
+  const entries=[
+    ...archivedOrders.map(o=>{
+      const v=vehicle(o.vehicle_id);
+      return {key:'o:'+o.id,type:'order',id:o.id,plate:v?.license_plate||'–',model:(v?.manufacturer||'')+' '+(v?.model||''),date:o.archived_at};
+    }),
+    ...archivedVehicles.map(v=>({key:'v:'+v.id,type:'vehicle',id:v.id,plate:v.license_plate||'–',model:(v.manufacturer||'')+' '+(v.model||''),date:v.archived_at}))
+  ].sort((a,b)=>new Date(b.date||0)-new Date(a.date||0));
+
+  const ids=entries.map(e=>e.key);
+  const editing=editModes.archiveAll;
+  const allSelected=ids.length>0&&ids.every(id=>selections.archiveAll.has(id));
+
+  return `<div class="pagehead"><div><h1>Archiv</h1><p>Archivierte Fahrzeuge und Werkstattvorgänge.</p></div></div>
+
+  <div class="edit-toolbar simple-editbar archive-editbar">
+    <div class="bulk-count">${editing?`${selections.archiveAll.size} ausgewählt`:''}</div>
+    <div class="edit-actions simple-edit-actions">
+      ${editing?`<button class="text-action" data-select-all-archive-all>${allSelected?'Auswahl aufheben':'Alle auswählen'}</button>
+      <button class="text-action delete-text" data-delete-archive-all ${selections.archiveAll.size?'':'disabled'}>Löschen</button>
+      <button class="text-action" data-edit-archive-all>Fertig</button>`:`<button class="text-action" data-edit-archive-all>Bearbeiten</button>`}
+    </div>
+  </div>
+
+  <div class="panel archive-list">
+    ${entries.length?entries.map(e=>{
+      const selected=selections.archiveAll.has(e.key);
+      return `<div class="archive-list-row ${selected?'row-selected':''}" data-archive-kind="${e.type}" data-archive-id="${e.id}">
+        ${editing?`<button class="select-action archive-select" data-select-archive-all="${e.key}">${selectMark(selected)}</button>`:''}
+        <div class="archive-main">
+          <strong>${esc(e.plate)}</strong>
+          <span>${esc(e.model.trim()||'–')}</span>
+        </div>
+        <span class="archive-arrow">›</span>
+      </div>`;
+    }).join(''):'<div class="archive-empty">Noch nichts archiviert.</div>'}
+  </div>`;
 }
 function renderUsers(){
   if(!isAdmin())return '<div class="panel">Kein Zugriff.</div>';
@@ -717,8 +1989,46 @@ function renderUsers(){
   </div>`;
 }
 function renderSettings(){
-  if(!isAdmin())return '<div class="panel">Kein Zugriff.</div>';
-  return `<div class="pagehead"><div><h1>Einstellungen</h1><p>Nur für Administratoren.</p></div></div><div class="panel"><div class="sectiontitle">Zentrale Supabase-Verbindung</div><div class="notice"><strong>Diese Erle.Werkstatt-Datei ist bereits mit deinem Supabase-Projekt verbunden.</strong><br>Alle Nutzer verwenden dieselbe Datenbank. Andere Nutzer brauchen kein Supabase-Konto und sehen diese Einstellungen nicht.</div><div style="margin-top:14px"><button class="btn" id="testConnection">Verbindung testen</button></div><div id="connResult" style="margin-top:12px"></div><div class="sectiontitle" style="margin-top:22px">Einmalige Voraussetzung</div><div class="notice">In Supabase unter <strong>Authentication → Providers → Email</strong> muss <strong>Confirm email ausgeschaltet</strong> sein, da Erle.Werkstatt intern technische E-Mail-Adressen verwendet und der Nutzer nur Benutzername + Passwort sieht.</div></div>`;
+  return `<div class="pagehead"><div><h1>Einstellungen</h1><p>Konto und persönliche Einstellungen.</p></div></div>
+
+  <div class="settings-grid">
+    <section class="section settings-card">
+      <div class="settings-kicker">Konto</div>
+      <div class="sectiontitle">Anmeldename</div>
+      <div class="settings-copy">Dein Benutzername ist gleichzeitig dein Anmeldename.</div>
+      <div class="settings-inline">
+        <input id="settingsUsername" class="input" value="${esc(me?.username||'')}" autocomplete="username">
+        <button id="saveUsername" class="btn primary">Ändern</button>
+      </div>
+      <div id="usernameResult" class="settings-result"></div>
+    </section>
+
+    <section class="section settings-card">
+      <div class="settings-kicker">Sicherheit</div>
+      <div class="sectiontitle">Passwort Ändern</div>
+      <div class="settings-copy">Mindestens 8 Zeichen.</div>
+      <div class="settings-stack">
+        <input id="settingsPassword" class="input" type="password" placeholder="Neues Passwort" autocomplete="new-password">
+        <input id="settingsPassword2" class="input" type="password" placeholder="Passwort Wiederholen" autocomplete="new-password">
+        <div><button id="savePassword" class="btn primary">Passwort Ändern</button></div>
+      </div>
+      <div id="passwordResult" class="settings-result"></div>
+    </section>
+
+    <section class="section settings-card">
+      <div class="settings-kicker">Konto</div>
+      <div class="sectiontitle">Deine Rolle</div>
+      <div class="account-role"><strong>${isAdmin()?'Administrator':'Mitarbeiter'}</strong><span>${isAdmin()?'Vollzugriff auf Benutzer und alle Aufträge':'Werkstattzugriff auf die zugewiesenen Bereiche'}</span></div>
+    </section>
+
+    ${isAdmin()?`<section class="section settings-card admin-settings">
+      <div class="settings-kicker">Administrator</div>
+      <div class="sectiontitle">Systemverbindung</div>
+      <div class="settings-copy">Erle.Werkstatt ist mit dem zentralen Supabase-Projekt verbunden.</div>
+      <button class="text-action" id="testConnection">Verbindung Testen</button>
+      <div id="connResult" class="settings-result"></div>
+    </section>`:''}
+  </div>`;
 }
 
 function wire(){
@@ -732,6 +2042,72 @@ function wire(){
   if($('#reloadUsers')) $('#reloadUsers').onclick=loadUsersNow;
   document.querySelectorAll('[data-user-role]').forEach(b=>b.onclick=()=>updateUserProfile(b.dataset.userRole,{role:b.dataset.role}));
   document.querySelectorAll('[data-user-active]').forEach(b=>b.onclick=()=>updateUserProfile(b.dataset.userActive,{active:b.dataset.active==='true'}));
+
+  if($('#calPrev'))$('#calPrev').onclick=()=>{calendarCursor=new Date(calendarCursor.getFullYear(),calendarCursor.getMonth()-1,1);selectedCalendarDate=null;render()};
+  if($('#calNext'))$('#calNext').onclick=()=>{calendarCursor=new Date(calendarCursor.getFullYear(),calendarCursor.getMonth()+1,1);selectedCalendarDate=null;render()};
+  if($('#calToday'))$('#calToday').onclick=()=>{calendarCursor=new Date();selectedCalendarDate=dateKey(new Date());render()};
+  document.querySelectorAll('[data-caldate]').forEach(b=>b.onclick=()=>{selectedCalendarDate=b.dataset.caldate;render()});
+  if($('#newAppointmentTop'))$('#newAppointmentTop').onclick=()=>openNewAppointment(selectedCalendarDate);
+  if($('#newAppointmentSelected'))$('#newAppointmentSelected').onclick=()=>openNewAppointment(selectedCalendarDate);
+
+  document.querySelectorAll('.vehicle-row').forEach(r=>r.onclick=e=>{if(editModes.vehicles||e.target.closest('button,input'))return;openVehicle(r.dataset.vehicle)});
+  document.querySelectorAll('[data-delete-vehicle]').forEach(b=>b.onclick=e=>{e.stopPropagation();archiveVehicle(b.dataset.deleteVehicle)});
+  document.querySelectorAll('.order-row').forEach(r=>r.onclick=e=>{if(editModes.orders||e.target.closest('button,input'))return;openOrder(r.dataset.orderRow)});
+  document.querySelectorAll('.archive-row[data-archive-order]').forEach(r=>r.onclick=e=>{if(editModes.archiveOrders||e.target.closest('button,input'))return;openOrder(r.dataset.archiveOrder)});
+  document.querySelectorAll('.archive-row[data-archive-vehicle]').forEach(r=>r.onclick=e=>{if(editModes.archiveVehicles||e.target.closest('button,input'))return;openVehicle(r.dataset.archiveVehicle)});
+  document.querySelectorAll('[data-restore-vehicle]').forEach(b=>b.onclick=e=>{e.stopPropagation();restoreVehicle(b.dataset.restoreVehicle)});
+  document.querySelectorAll('[data-hard-delete-vehicle]').forEach(b=>b.onclick=e=>{e.stopPropagation();hardDeleteVehicle(b.dataset.hardDeleteVehicle)});
+  document.querySelectorAll('[data-restore-order]').forEach(b=>b.onclick=e=>{e.stopPropagation();restoreOrder(b.dataset.restoreOrder)});
+  document.querySelectorAll('[data-hard-delete-order]').forEach(b=>b.onclick=e=>{e.stopPropagation();hardDeleteOrder(b.dataset.hardDeleteOrder)});
+
+  if($('[data-edit-orders]'))$('[data-edit-orders]').onclick=()=>toggleEditMode('orders');
+  if($('[data-select-all-orders]'))$('[data-select-all-orders]').onclick=()=>selectAllVisible('orders',visibleOrders().map(o=>o.id));
+  document.querySelectorAll('[data-select-order]').forEach(x=>x.onclick=e=>{e.stopPropagation();toggleSelection('orders',x.dataset.selectOrder,!selections.orders.has(x.dataset.selectOrder))});
+  if($('[data-bulk-archive-orders]'))$('[data-bulk-archive-orders]').onclick=()=>bulkArchiveOrders([...selections.orders]);
+
+  if($('[data-edit-vehicles]'))$('[data-edit-vehicles]').onclick=()=>toggleEditMode('vehicles');
+  if($('[data-select-all-vehicles]'))$('[data-select-all-vehicles]').onclick=()=>selectAllVisible('vehicles',vehicles.filter(v=>!isVehicleArchived(v)).map(v=>v.id));
+  document.querySelectorAll('[data-select-vehicle]').forEach(x=>x.onclick=e=>{e.stopPropagation();toggleSelection('vehicles',x.dataset.selectVehicle,!selections.vehicles.has(x.dataset.selectVehicle))});
+  if($('[data-bulk-archive-vehicles]'))$('[data-bulk-archive-vehicles]').onclick=()=>bulkArchiveVehicles([...selections.vehicles]);
+
+  if($('[data-edit-archive-orders]'))$('[data-edit-archive-orders]').onclick=()=>toggleEditMode('archiveOrders');
+  if($('[data-select-all-archive-orders]'))$('[data-select-all-archive-orders]').onclick=()=>selectAllVisible('archiveOrders',orders.filter(o=>isArchived(o)&&!archiveExpired(o)).map(o=>o.id));
+  document.querySelectorAll('[data-select-archive-order]').forEach(x=>x.onclick=e=>{e.stopPropagation();toggleSelection('archiveOrders',x.dataset.selectArchiveOrder,!selections.archiveOrders.has(x.dataset.selectArchiveOrder))});
+  if($('[data-bulk-delete-archive-orders]'))$('[data-bulk-delete-archive-orders]').onclick=()=>bulkDeleteArchivedOrders([...selections.archiveOrders]);
+
+  if($('[data-edit-archive-vehicles]'))$('[data-edit-archive-vehicles]').onclick=()=>toggleEditMode('archiveVehicles');
+  if($('[data-select-all-archive-vehicles]'))$('[data-select-all-archive-vehicles]').onclick=()=>selectAllVisible('archiveVehicles',vehicles.filter(v=>isVehicleArchived(v)).map(v=>v.id));
+  document.querySelectorAll('[data-select-archive-vehicle]').forEach(x=>x.onclick=e=>{e.stopPropagation();toggleSelection('archiveVehicles',x.dataset.selectArchiveVehicle,!selections.archiveVehicles.has(x.dataset.selectArchiveVehicle))});
+  if($('[data-bulk-delete-archive-vehicles]'))$('[data-bulk-delete-archive-vehicles]').onclick=()=>bulkDeleteArchivedVehicles([...selections.archiveVehicles]);
+
+  document.querySelectorAll('[data-collapse-stage]').forEach(b=>b.onclick=e=>{
+    if(!window.matchMedia('(max-width:680px)').matches)return;
+    e.preventDefault();e.stopPropagation();
+    const st=b.dataset.collapseStage;
+    collapsedStages[st]=!collapsedStages[st];
+    render();
+  });
+  if($('#saveUsername'))$('#saveUsername').onclick=updateOwnUsername;
+  if($('#savePassword'))$('#savePassword').onclick=updateOwnPassword;
+
+  if($('[data-edit-archive-all]'))$('[data-edit-archive-all]').onclick=()=>toggleEditMode('archiveAll');
+  if($('[data-select-all-archive-all]'))$('[data-select-all-archive-all]').onclick=()=>{
+    const keys=[...document.querySelectorAll('[data-select-archive-all]')].map(x=>x.dataset.selectArchiveAll);
+    selectAllVisible('archiveAll',keys);
+  };
+  document.querySelectorAll('[data-select-archive-all]').forEach(x=>x.onclick=e=>{
+    e.stopPropagation();
+    toggleSelection('archiveAll',x.dataset.selectArchiveAll,!selections.archiveAll.has(x.dataset.selectArchiveAll));
+  });
+  if($('[data-delete-archive-all]'))$('[data-delete-archive-all]').onclick=()=>bulkDeleteArchiveAll([...selections.archiveAll]);
+  document.querySelectorAll('.archive-list-row').forEach(r=>r.onclick=e=>{
+    if(editModes.archiveAll||e.target.closest('button'))return;
+    if(r.dataset.archiveKind==='order')openOrder(r.dataset.archiveId);
+    else openVehicle(r.dataset.archiveId);
+  });
+
+  document.querySelectorAll('[data-purchase-order]').forEach(r=>r.onclick=()=>openPurchaseParts(r.dataset.purchaseOrder));
+
 }
 
 
@@ -741,6 +2117,108 @@ async function deleteOrderFromList(oid){
   await saveOrder(o);
   render();
   toast('Auftrag ins Archiv verschoben.');
+}
+
+
+async function archiveVehicle(id,showToast=true){
+  const v=vehicles.find(x=>x.id===id);if(!v)return;
+  v.archived_at=new Date().toISOString();
+  await rest('erle_vehicles','?id=eq.'+encodeURIComponent(id),{
+    method:'PATCH',
+    headers:{Prefer:'return=minimal'},
+    body:JSON.stringify({archived_at:v.archived_at})
+  });
+  closeModal();render();if(showToast)toast('Fahrzeug ins Archiv verschoben.');
+}
+
+async function restoreVehicle(id){
+  const v=vehicles.find(x=>x.id===id);if(!v)return;
+  v.archived_at=null;
+  await rest('erle_vehicles','?id=eq.'+encodeURIComponent(id),{
+    method:'PATCH',
+    headers:{Prefer:'return=minimal'},
+    body:JSON.stringify({archived_at:null})
+  });
+  render();toast('Fahrzeug wiederhergestellt.');
+}
+
+async function hardDeleteVehicle(id,showToast=true){
+  try{
+    const related=orders.filter(o=>o.vehicle_id===id);
+    for(const o of related){
+      await rest('erle_orders','?id=eq.'+encodeURIComponent(o.id),{method:'DELETE'});
+    }
+    orders=orders.filter(o=>o.vehicle_id!==id);
+    await rest('erle_vehicles','?id=eq.'+encodeURIComponent(id),{method:'DELETE'});
+    vehicles=vehicles.filter(v=>v.id!==id);
+    render();if(showToast)toast('Fahrzeug endgültig gelöscht.');
+  }catch(e){
+    toast('Endgültiges Löschen nicht möglich: '+e.message);
+  }
+}
+
+async function restoreOrder(id){
+  const o=orders.find(x=>x.id===id);if(!o)return;
+  o.archived_at=null;
+  await saveOrder(o);
+  render();toast('Auftrag wiederhergestellt.');
+}
+
+async function hardDeleteOrder(id,showToast=true){
+  try{
+    await rest('erle_orders','?id=eq.'+encodeURIComponent(id),{method:'DELETE'});
+    orders=orders.filter(o=>o.id!==id);
+    render();if(showToast)toast('Auftrag endgültig gelöscht.');
+  }catch(e){toast('Löschen fehlgeschlagen: '+e.message)}
+}
+
+
+async function updateOwnUsername(){
+  const input=$('#settingsUsername');
+  const result=$('#usernameResult');
+  const next=(input?.value||'').trim();
+  if(next.length<3){result.textContent='Mindestens 3 Zeichen.';return}
+  if(next.toLowerCase()===(me?.username||'').toLowerCase()){result.textContent='Keine Änderung.';return}
+  try{
+    const r=await api('/auth/v1/user',{
+      method:'PUT',
+      body:JSON.stringify({email:technicalEmail(next),data:{username:next}})
+    });
+    me.username=next;
+    const p=profiles.find(x=>x.id===me.id);if(p)p.username=next;
+    if(session?.user){session.user=r?.id?r:session.user;localStorage.setItem(SESSION_KEY,JSON.stringify(session))}
+    $('#sideUser').textContent=next;
+    if($('#mobileUser'))$('#mobileUser').textContent=next;
+    result.textContent='Anmeldename Geändert.';
+  }catch(e){
+    const msg=String(e?.message||e);
+    result.textContent=/already|registered|exists|unique|duplicate/i.test(msg)?'Dieser Benutzername ist bereits vergeben.':'Änderung nicht möglich: '+msg;
+  }
+}
+async function updateOwnPassword(){
+  const a=$('#settingsPassword')?.value||'';
+  const b=$('#settingsPassword2')?.value||'';
+  const result=$('#passwordResult');
+  if(a.length<8){result.textContent='Mindestens 8 Zeichen.';return}
+  if(a!==b){result.textContent='Die Passwörter stimmen nicht überein.';return}
+  try{
+    await api('/auth/v1/user',{method:'PUT',body:JSON.stringify({password:a})});
+    $('#settingsPassword').value='';$('#settingsPassword2').value='';
+    result.textContent='Passwort Geändert.';
+  }catch(e){result.textContent='Änderung nicht möglich: '+String(e?.message||e)}
+}
+
+
+async function bulkDeleteArchiveAll(keys){
+  for(const key of keys){
+    const [type,id]=key.split(':');
+    if(type==='o')await hardDeleteOrder(id,false);
+    if(type==='v')await hardDeleteVehicle(id,false);
+  }
+  selections.archiveAll.clear();
+  editModes.archiveAll=false;
+  render();
+  toast('Ausgewählte Einträge gelöscht.');
 }
 
 async function loadUsersNow(){
@@ -772,19 +2250,79 @@ function combo(id,list,getLabel,onChoose,nextId){
   input.onfocus=draw;input.oninput=()=>{idx=-1;draw()};input.onkeydown=e=>{const a=values();if(e.key==='ArrowDown'){e.preventDefault();idx=Math.min(idx+1,a.length-1);draw()}else if(e.key==='ArrowUp'){e.preventDefault();idx=Math.max(idx-1,0);draw()}else if(e.key==='Enter'){e.preventDefault();const x=a[Math.max(0,idx)];if(x){input.value=getLabel(x);box.classList.add('hidden');onChoose?.(x)}if(nextId)$('#'+nextId)?.focus()}else if(e.key==='Escape')box.classList.add('hidden')};
   document.addEventListener('pointerdown',function out(e){if(!input.isConnected){document.removeEventListener('pointerdown',out);return}if(!input.closest('.combo').contains(e.target))box.classList.add('hidden')},{capture:true});
 }
+
+function openNewAppointment(dateStr){
+  const chosen=dateStr||selectedCalendarDate||dateKey(new Date());
+  const vehicleOptions=vehicles.map(v=>`<option value="${v.id}">${esc(v.license_plate)} · ${esc((v.manufacturer||'')+' '+(v.model||''))}</option>`).join('');
+  openModal('Neuer Termin',`
+    <div class="grid2">
+      <div class="field"><label>Datum</label><input id="apptDate" class="input" type="date" value="${chosen}"></div>
+      <div class="field"><label>Uhrzeit</label><input id="apptTime" class="input" type="time" value="09:00"></div>
+    </div>
+    <div class="field" style="margin-top:14px"><label>Fahrzeug</label><select id="apptVehicle" class="select"><option value="">Fahrzeug auswählen…</option>${vehicleOptions}</select></div>
+    <div class="field" style="margin-top:14px"><label>Auftrag / Termin</label><input id="apptDescription" class="input" placeholder="z. B. Inspektion, Reifenwechsel, Diagnose"></div>
+    <div class="actions"><button class="btn" id="apptCancel">Abbrechen</button><button class="btn primary" id="apptSave">Termin Speichern</button></div>
+  `);
+  $('#apptCancel').onclick=closeModal;
+  $('#apptSave').onclick=async()=>{
+    const vehicleId=$('#apptVehicle').value;
+    const description=$('#apptDescription').value.trim();
+    const date=$('#apptDate').value;
+    const time=$('#apptTime').value||'09:00';
+    if(!vehicleId||!description||!date){toast('Bitte Datum, Fahrzeug und Termin angeben.');return}
+    const o={
+      id:uid('o'),
+      vehicle_id:vehicleId,
+      customer_id:vehicle(vehicleId)?.customer_id||null,
+      order_number:'A-'+Date.now().toString().slice(-6),
+      description,
+      extra_info:'',
+      priority:'normal',
+      appointment_date:date+'T'+time+':00',
+      assigned_user_id:me.id,
+      payment_status:'open',
+      archived_at:null,
+      tasks:[],
+      notes:[]
+    };
+    await rest('erle_orders','',{method:'POST',headers:{Prefer:'return=minimal'},body:JSON.stringify(o)});
+    orders.push(o);
+    selectedCalendarDate=date;
+    calendarCursor=new Date(Number(date.slice(0,4)),Number(date.slice(5,7))-1,1);
+    closeModal();
+    render();
+    toast('Termin angelegt.');
+  };
+}
+
 function openNewOrder(){
   const workerOptions=isAdmin()?profiles.filter(p=>p.active).map(p=>`<option value="${p.id}">${esc(p.username)}</option>`).join(''):`<option value="${me.id}">${esc(me.username)}</option>`;
-  openModal('Neuer Auftrag',`<div class="grid2"><div class="field"><label>Kennzeichen *</label><input id="np" class="input" placeholder="z. B. HB-AB-123"></div><div class="field"><label>Hersteller *</label><div class="combo"><input id="nm" class="input" autocomplete="off" placeholder="Hersteller suchen…"><div id="nmBox" class="suggestions hidden"></div></div></div></div>
-  <div class="grid2" style="margin-top:15px"><div class="field"><label>Modell</label><div class="combo"><input id="nmodel" class="input" autocomplete="off" placeholder="Modell suchen…"><div id="nmodelBox" class="suggestions hidden"></div></div></div><div class="field"><label>Kunde</label><input id="nc" class="input" placeholder="optional"></div></div>
+  openModal('Neuer Auftrag',`
+  <div class="grid2">
+    <div class="field"><label>Kennzeichen *</label><input id="np" class="input" placeholder="z. B. HB-AB-123"></div>
+    <div class="field"><label>Hersteller *</label><div class="combo"><input id="nm" class="input" autocomplete="off" placeholder="Hersteller suchen…"><div id="nmBox" class="suggestions hidden"></div></div></div>
+  </div>
+  <div class="grid2" style="margin-top:15px">
+    <div class="field"><label>Modell</label><div class="combo"><input id="nmodel" class="input" autocomplete="off" placeholder="Modell suchen…"><div id="nmodelBox" class="suggestions hidden"></div></div></div>
+    <div class="field"><label>Baujahr</label><input id="nyear" class="input" inputmode="numeric" maxlength="4" placeholder="z. B. 2018"></div>
+  </div>
+  <div class="grid2" style="margin-top:15px">
+    <div class="field"><label>HSN</label><input id="nhsn" class="input" inputmode="numeric" maxlength="4" placeholder="4-stellig"></div>
+    <div class="field"><label>TSN</label><input id="ntsn" class="input" maxlength="3" placeholder="z. B. ABC"></div>
+  </div>
+  <div class="field" style="margin-top:15px"><label>Kunde</label><input id="nc" class="input" placeholder="optional"></div>
   <div class="field" style="margin-top:15px"><label>Auftrag *</label><textarea id="nd" class="textarea" rows="3" placeholder="z. B. Ölservice, Bremsen vorne, Reifen wechseln"></textarea><div class="small muted">Mit Komma, Semikolon oder neuer Zeile trennen. Daraus entstehen automatisch die Arbeiten.</div></div>
   <div class="field" style="margin-top:15px"><label>Zusatzinformation</label><textarea id="ne" class="textarea" rows="2"></textarea></div>
   <div class="grid3" style="margin-top:15px"><div class="field"><label>Datum</label><input id="ndate" type="date" class="input"></div><div class="field"><label>Uhrzeit</label><input id="ntime" type="time" class="input"></div><div class="field"><label>Zuständig</label><select id="nass" class="select">${workerOptions}</select></div></div>
-  <div class="actions"><button class="btn" id="cancelNew">Abbrechen</button><button class="btn primary" id="saveNew">Auftrag erstellen</button></div>`);
+  <div class="actions"><button class="btn" id="cancelNew">Abbrechen</button><button class="btn primary" id="saveNew">Auftrag Erstellen</button></div>`);
   $('#cancelNew').onclick=closeModal;
   $('#np').onblur=()=>$('#np').value=normalizePlate($('#np').value);
   $('#np').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();$('#np').value=normalizePlate($('#np').value);$('#nm').focus()}};
   combo('nm',()=>manufacturers,x=>x,()=>{$('#nmodel').value=''},'nmodel');
-  combo('nmodel',()=>{const m=$('#nm').value.trim();return commonModels.filter(x=>x.toLowerCase().startsWith(m.toLowerCase()+' '))},x=>{const m=$('#nm').value.trim();return x.slice(m.length+1)},null,'nc');
+  combo('nmodel',()=>{const m=$('#nm').value.trim();return commonModels.filter(x=>x.toLowerCase().startsWith(m.toLowerCase()+' '))},x=>{const m=$('#nm').value.trim();return x.slice(m.length+1)},null,'nyear');
+  $('#nyear').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();$('#nhsn').focus()}};
+  $('#nhsn').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();$('#ntsn').focus()}};
+  $('#ntsn').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();$('#nc').focus()}};
   $('#saveNew').onclick=createOrder;
 }
 async function createOrder(){
@@ -792,18 +2330,23 @@ async function createOrder(){
     const plate=normalizePlate($('#np').value),maker=$('#nm').value.trim(),model=$('#nmodel').value.trim(),desc=$('#nd').value.trim();
     if(!plate||!maker||!desc)throw new Error('Kennzeichen, Hersteller und Auftrag sind Pflichtfelder.');
 
+    const year=$('#nyear').value.trim(),hsn=$('#nhsn').value.trim().toUpperCase(),tsn=$('#ntsn').value.trim().toUpperCase();
+    if(year && !/^\d{4}$/.test(year))throw new Error('Baujahr bitte vierstellig eingeben.');
+    if(hsn && !/^\d{4}$/.test(hsn))throw new Error('HSN muss vierstellig sein.');
+    if(tsn && !/^[A-Z0-9]{3}$/.test(tsn))throw new Error('TSN muss dreistellig sein.');
+
     const assignee=$('#nass').value || me.id;
     let v=vehicles.find(x=>(x.license_plate||'').replace(/-/g,'')===plate.replace(/-/g,''));
     const cname=$('#nc').value.trim();
 
     if(!v){
-      v={id:uid('v'),customer_id:null,license_plate:plate,manufacturer:maker,model};
-      await rest('erle_vehicles','',{
-        method:'POST',
-        headers:{Prefer:'return=minimal'},
-        body:JSON.stringify(v)
-      });
+      v={id:uid('v'),customer_id:null,license_plate:plate,manufacturer:maker,model,year:year||null,hsn:hsn||null,tsn:tsn||null};
+      await rest('erle_vehicles','',{method:'POST',headers:{Prefer:'return=minimal'},body:JSON.stringify(v)});
       vehicles.push(v);
+    }else{
+      const patch={manufacturer:maker,model,year:year||v.year||null,hsn:hsn||v.hsn||null,tsn:tsn||v.tsn||null};
+      Object.assign(v,patch);
+      await rest('erle_vehicles','?id=eq.'+encodeURIComponent(v.id),{method:'PATCH',headers:{Prefer:'return=minimal'},body:JSON.stringify(patch)});
     }
 
     const work=desc.split(/\n|;|,/).map(x=>x.trim()).filter(Boolean);
@@ -811,58 +2354,25 @@ async function createOrder(){
     const dt=$('#ndate').value?$('#ndate').value+'T'+($('#ntime').value||'08:00')+':00':null;
 
     const o={
-      id:uid('o'),
-      vehicle_id:v.id,
-      customer_id:null,
-      order_number:'A-'+Date.now().toString().slice(-6),
-      description:desc,
-      extra_info:$('#ne').value.trim(),
-      priority:'normal',
-      appointment_date:dt,
-      assigned_user_id:assignee,
-      payment_status:'open',
-      archived_at:null,
-      tasks,
-      notes:[]
+      id:uid('o'),vehicle_id:v.id,customer_id:null,order_number:'A-'+Date.now().toString().slice(-6),
+      description:desc,extra_info:$('#ne').value.trim(),priority:'normal',appointment_date:dt,
+      assigned_user_id:assignee,created_by_user_id:me.id,payment_status:'open',archived_at:null,tasks,notes:[]
     };
 
-    await rest('erle_orders','',{
-      method:'POST',
-      headers:{Prefer:'return=minimal'},
-      body:JSON.stringify(o)
-    });
+    await rest('erle_orders','',{method:'POST',headers:{Prefer:'return=minimal'},body:JSON.stringify(o)});
     orders.push(o);
 
     if(cname){
       const cust={id:uid('c'),name:cname};
-      await rest('erle_customers','',{
-        method:'POST',
-        headers:{Prefer:'return=minimal'},
-        body:JSON.stringify(cust)
-      });
+      await rest('erle_customers','',{method:'POST',headers:{Prefer:'return=minimal'},body:JSON.stringify(cust)});
       customers.push(cust);
-
-      o.customer_id=cust.id;
-      v.customer_id=cust.id;
-
-      await rest('erle_orders','?id=eq.'+encodeURIComponent(o.id),{
-        method:'PATCH',
-        headers:{Prefer:'return=minimal'},
-        body:JSON.stringify({customer_id:cust.id})
-      });
-      await rest('erle_vehicles','?id=eq.'+encodeURIComponent(v.id),{
-        method:'PATCH',
-        headers:{Prefer:'return=minimal'},
-        body:JSON.stringify({customer_id:cust.id})
-      });
+      o.customer_id=cust.id;v.customer_id=cust.id;
+      await rest('erle_orders','?id=eq.'+encodeURIComponent(o.id),{method:'PATCH',headers:{Prefer:'return=minimal'},body:JSON.stringify({customer_id:cust.id})});
+      await rest('erle_vehicles','?id=eq.'+encodeURIComponent(v.id),{method:'PATCH',headers:{Prefer:'return=minimal'},body:JSON.stringify({customer_id:cust.id})});
     }
 
-    closeModal();
-    render();
-    openOrder(o.id);
-  }catch(e){
-    toast('Auftrag konnte nicht erstellt werden: '+e.message);
-  }
+    closeModal();render();openOrder(o.id);
+  }catch(e){toast('Auftrag konnte nicht erstellt werden: '+e.message)}
 }
 
 async function saveOrderWindow(oid){
@@ -888,7 +2398,12 @@ function openOrder(id){
   const v=vehicle(o.vehicle_id),tasks=Array.isArray(o.tasks)?o.tasks:[],st=statusOf(o);
   const assigneeOptions=(isAdmin()?profiles.filter(p=>p.active):profiles.filter(p=>p.id===me.id)).map(p=>`<option value="${p.id}" ${p.id===o.assigned_user_id?'selected':''}>${esc(p.username)}</option>`).join('');
   openModal(esc(v?.license_plate||''),`
-    <div class="muted">${esc((v?.manufacturer||'')+' '+(v?.model||''))}</div>
+    <div class="between"><div class="muted">${esc((v?.manufacturer||'')+' '+(v?.model||''))}</div>${isAdmin()?`<div class="creator-pill">Erstellt von ${esc(creatorName(o))}</div>`:''}</div>
+    <div class="vehicle-id-strip">
+      <div class="vehicle-id-item"><span>Baujahr</span><strong>${esc(v?.year||'–')}</strong></div>
+      <div class="vehicle-id-item"><span>HSN</span><strong>${esc(v?.hsn||'–')}</strong></div>
+      <div class="vehicle-id-item"><span>TSN</span><strong>${esc(v?.tsn||'–')}</strong></div>
+    </div>
     <div class="section">
       <div class="grid2">
         <div class="field"><label>Auftrag</label><textarea id="editDescription" class="textarea" rows="3">${esc(o.description||'')}</textarea></div>
@@ -913,7 +2428,7 @@ function openOrder(id){
     </div>
 
     <div class="actions">
-      ${o.archived_at?`<button id="archiveBtn" class="btn">Wiederherstellen</button>`:`<button id="archiveBtn" class="btn">Löschen</button>`}
+      ${o.archived_at?`<button id="restoreOrderBtn" class="text-action">Wiederherstellen</button><button id="hardDeleteOrderBtn" class="text-action delete-text">Löschen</button>`:`<button id="archiveBtn" class="text-action delete-text">Löschen</button>`}
       <button id="saveOrderBtn" class="btn primary">Auftrag Speichern</button>
     </div>
   `);
@@ -924,6 +2439,8 @@ function openOrder(id){
   if($('#payOpen'))$('#payOpen').onclick=()=>setPayment(o.id,'open');
   if($('#payPaid'))$('#payPaid').onclick=()=>setPayment(o.id,'paid');
   if($('#archiveBtn'))$('#archiveBtn').onclick=()=>toggleArchive(o.id);
+  if($('#restoreOrderBtn'))$('#restoreOrderBtn').onclick=()=>restoreOrder(o.id);
+  if($('#hardDeleteOrderBtn'))$('#hardDeleteOrderBtn').onclick=()=>hardDeleteOrder(o.id);
   if($('#saveOrderBtn'))$('#saveOrderBtn').onclick=()=>saveOrderWindow(o.id);
 }
 function taskRow(o,t){
@@ -991,6 +2508,7 @@ $('#authSwitchBtn').onclick=()=>{authMode=authMode==='login'?'signup':'login';co
 $('#authMainBtn').onclick=async()=>{const u=$('#loginUser').value.trim(),p=$('#loginPass').value;try{if(u.length<3||p.length<8)throw new Error('Benutzername mindestens 3 Zeichen, Passwort mindestens 8 Zeichen.');if(authMode==='signup'){if(p!==$('#loginConfirm').value)throw new Error('Passwörter stimmen nicht überein.');await register(u,p)}else await signIn(u,p);await enterApp()}catch(e){$('#authMessage').textContent=e.message;$('#authMessage').classList.remove('hidden')}};
 $('#loginPass').onkeydown=e=>{if(e.key==='Enter')$('#authMainBtn').click()};
 if($('#logoutBtn'))$('#logoutBtn').onclick=logout;
+if($('#mobileLogoutBtn'))$('#mobileLogoutBtn').onclick=logout;
 if($('#topNew'))$('#topNew').onclick=openNewOrder;
 if($('#search'))$('#search').oninput=e=>{search=e.target.value;render()};
 document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>{
@@ -998,6 +2516,7 @@ document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>{
   page=b.dataset.page;
   render();
 });
+if(FORCE_LOGIN_ON_LOAD){localStorage.removeItem(SESSION_KEY);session=null;}
 enterApp();
 </script>
 </body>
