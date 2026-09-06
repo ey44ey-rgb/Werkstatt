@@ -4448,6 +4448,127 @@ body.login-mode .login-card{
   }
 }
 
+
+/* ==========================================================
+   MOBILE ADD BUTTONS – single authoritative rule
+   ========================================================== */
+@media(max-width:680px){
+
+  /* Desktop label hidden, mobile plus visible */
+  .desktop-add-label{
+    display:none!important;
+  }
+  .mobile-add-label{
+    display:flex!important;
+  }
+
+  /* Every mobile add button has exactly the same geometry */
+  .responsive-add,
+  .calendar-add-btn,
+  [data-action="new"].btn.primary{
+    position:static!important;
+    width:42px!important;
+    min-width:42px!important;
+    max-width:42px!important;
+    height:42px!important;
+    min-height:42px!important;
+    max-height:42px!important;
+    aspect-ratio:1 / 1!important;
+    flex:0 0 42px!important;
+    padding:0!important;
+    margin:0!important;
+    border:0!important;
+    border-radius:50%!important;
+    clip-path:circle(50% at 50% 50%)!important;
+    -webkit-clip-path:circle(50% at 50% 50%)!important;
+    overflow:hidden!important;
+    display:grid!important;
+    place-items:center!important;
+    box-sizing:border-box!important;
+    line-height:1!important;
+    background:var(--blue)!important;
+    color:#fff!important;
+  }
+
+  .responsive-add .mobile-add-label,
+  .calendar-add-btn .mobile-add-label,
+  [data-action="new"].btn.primary .mobile-add-label{
+    position:static!important;
+    inset:auto!important;
+    width:42px!important;
+    height:42px!important;
+    padding:0!important;
+    margin:0!important;
+    display:grid!important;
+    place-items:center!important;
+    font-size:26px!important;
+    font-weight:400!important;
+    line-height:1!important;
+    transform:translateY(-1px)!important;
+    color:#fff!important;
+  }
+
+  /* Overview: compact plus on the right of "Willkommen zurück." */
+  .board-page{
+    position:relative!important;
+  }
+
+  .mobile-overview-hero{
+    min-height:48px!important;
+    margin:4px 0 14px!important;
+    padding-right:54px!important;
+    display:flex!important;
+    align-items:center!important;
+  }
+
+  .board-page > .pagehead{
+    position:absolute!important;
+    top:6px!important;
+    right:0!important;
+    width:42px!important;
+    min-width:42px!important;
+    max-width:42px!important;
+    height:42px!important;
+    min-height:42px!important;
+    max-height:42px!important;
+    padding:0!important;
+    margin:0!important;
+    display:block!important;
+  }
+
+  .board-page > .pagehead > div{
+    display:none!important;
+  }
+
+  .board-page > .pagehead .responsive-add{
+    position:static!important;
+    width:42px!important;
+    height:42px!important;
+  }
+
+  /* Other pages: plus stays inside page header, aligned right */
+  .pagehead{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:space-between!important;
+    gap:12px!important;
+  }
+
+  .pagehead > .responsive-add{
+    margin-left:auto!important;
+  }
+
+  /* Calendar: same circle, stays inside calendar header */
+  .calendar-top{
+    position:relative!important;
+  }
+
+  .calendar-add-btn{
+    justify-self:end!important;
+    align-self:center!important;
+  }
+}
+
 </style>
 </head>
 <body>
