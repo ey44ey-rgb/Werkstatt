@@ -4385,6 +4385,69 @@ body.login-mode .login-card{
   }
 }
 
+
+/* ==========================================================
+   FINAL: true circular mobile + and admin creator visibility
+   ========================================================== */
+.creator-admin-compact{
+  color:#8a95a4!important;
+  font-size:10.5px!important;
+  line-height:1.15!important;
+  font-weight:560!important;
+  white-space:nowrap!important;
+}
+.creator-admin-only{
+  margin-left:auto!important;
+}
+
+@media(max-width:680px){
+  .responsive-add,
+  .board-page>.pagehead .responsive-add,
+  .calendar-add-btn{
+    width:46px!important;
+    min-width:46px!important;
+    max-width:46px!important;
+    height:46px!important;
+    min-height:46px!important;
+    max-height:46px!important;
+    aspect-ratio:1/1!important;
+    padding:0!important;
+    margin:0!important;
+    border:0!important;
+    border-radius:50%!important;
+    clip-path:circle(50% at 50% 50%)!important;
+    -webkit-clip-path:circle(50% at 50% 50%)!important;
+    overflow:hidden!important;
+    display:grid!important;
+    place-items:center!important;
+    flex:0 0 46px!important;
+    box-sizing:border-box!important;
+  }
+
+  .responsive-add .mobile-add-label,
+  .calendar-add-btn .mobile-add-label{
+    position:absolute!important;
+    inset:0!important;
+    width:46px!important;
+    height:46px!important;
+    display:grid!important;
+    place-items:center!important;
+    margin:0!important;
+    padding:0!important;
+    font-size:28px!important;
+    line-height:1!important;
+    font-weight:400!important;
+    transform:none!important;
+    top:0!important;
+    left:0!important;
+  }
+
+  .board-page>.pagehead{
+    width:46px!important;
+    height:46px!important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -5105,6 +5168,7 @@ function renderBoard(){
 }
 function card(o){
   const v=vehicle(o.vehicle_id),c=customer(o.customer_id),tasks=Array.isArray(o.tasks)?o.tasks:[],st=statusOf(o);
+  const creator=profiles.find(p=>p.id===o.created_by_user_id);
   const missing=tasks.filter(t=>taskState(t)==='missing').length;
   const available=tasks.filter(t=>['available','installed'].includes(taskState(t))).length;
   const undecided=Math.max(0,tasks.length-missing-available);
@@ -5116,7 +5180,7 @@ function card(o){
     if(missing)bits.push(`<span class="parts-bit missing">${missing} fehlt${missing===1?'':'en'}</span>`);
     if(available)bits.push(`<span class="parts-bit available">${available} da</span>`);
     if(undecided)bits.push(`<span class="parts-bit neutral">${undecided} offen</span>`);
-    partsSummary=`<div class="parts-summary">${bits.join('<span class="parts-sep">·</span>')}</div>`;
+    partsSummary=`<div class="parts-summary">${bits.join('')}</div>`;
   }
 
   return `<article class="ordercard" draggable="true" data-order="${o.id}">
@@ -5128,12 +5192,11 @@ function card(o){
       <div class="cardright">
         ${c?.name?`<div class="customername customer-right">${esc(c.name)}</div>`:''}
         ${appointment?`<div class="appointment-right">${appointment.toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit'})} · ${appointment.toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'})}</div>`:''}
+        ${isAdmin()?`<div class="creator-admin-compact">von ${esc(creator?.username||'Unbekannt')}</div>`:''}
       </div>
     </div>
-
     <div class="desc">${esc(o.description)}</div>
     ${partsSummary}
-
     <div class="cardmeta compact-cardmeta">
       <span class="badge ${o.payment_status==='paid'?'green':'red'}">${o.payment_status==='paid'?'Bezahlt':'Offen'}</span>
     </div>
@@ -5165,6 +5228,7 @@ function renderOrders(){
   <div class="orders-simple-list">
     ${a.length?a.map(o=>{
       const v=vehicle(o.vehicle_id),s=statusOf(o);
+      const creator=profiles.find(p=>p.id===o.created_by_user_id);
       const selected=selections.orders.has(o.id);
       return `<div class="order-simple-row ${editing?'is-editing ':''}${selected?'row-selected':''}" data-order-row="${o.id}">
         ${editing?`<div class="order-select-col"><button class="select-action" data-select-order="${o.id}" aria-label="Auftrag auswählen">${selectMark(selected)}</button></div>`:''}
@@ -5173,7 +5237,10 @@ function renderOrders(){
           <span>${esc((v?.manufacturer||'')+' '+(v?.model||''))}</span>
         </div>
         <div class="order-simple-task">${esc(o.description||'')}</div>
-        <div class="order-simple-meta"><span>${statLabel[s]}</span></div>
+        <div class="order-simple-meta">
+          <span>${statLabel[s]}</span>
+          ${isAdmin()?`<span class="creator-admin-compact">von ${esc(creator?.username||'Unbekannt')}</span>`:''}
+        </div>
         <span class="order-simple-arrow">›</span>
       </div>`;
     }).join(''):'<div class="empty-simple">Keine Aufträge vorhanden.</div>'}
@@ -5191,7 +5258,7 @@ function renderPurchase(){
           <div class="small muted">${esc((v?.manufacturer||'')+' '+(v?.model||''))}</div>
           ${c?.name?`<div class="customername">${esc(c.name)}</div>`:''}
         </div>
-        <span class="badge red">${miss.length} Fehlt</span>
+        <span class="badge red">${miss.length} ${miss.length===1?'fehlt':'fehlen'}</span>
       </div>
       <div class="purchase-items">
         ${miss.map(t=>`<div class="purchase-item"><span>${esc(capFirst(t.title))}</span><span class="badge red">Fehlt</span></div>`).join('')}
