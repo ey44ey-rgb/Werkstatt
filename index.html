@@ -4569,11 +4569,1752 @@ body.login-mode .login-card{
   }
 }
 
+
+/* ==========================================================
+   PUBLIC CUSTOMER PORTAL
+   ========================================================== */
+#publicPortal{
+  min-height:100dvh;
+  background:#f5f8fc;
+  color:var(--text);
+}
+.public-shell{
+  width:min(100%,1080px);
+  margin:0 auto;
+  padding:0 28px 56px;
+}
+.public-header{
+  min-height:88px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+.public-wordmark{
+  font-size:31px;
+  color:var(--blue);
+}
+.public-login-link{
+  border:0;
+  background:transparent;
+  color:var(--blue);
+  font-size:13px;
+  font-weight:680;
+  cursor:pointer;
+  padding:8px 0;
+}
+.public-main{
+  width:min(100%,760px);
+  margin:42px auto 0;
+}
+.public-hero{
+  margin-bottom:28px;
+}
+.public-hero h1{
+  margin:0;
+  font-size:clamp(34px,5vw,56px);
+  line-height:1.04;
+  letter-spacing:-.055em;
+  font-weight:820;
+}
+.public-hero p{
+  margin:13px 0 0;
+  color:var(--muted);
+  font-size:15px;
+}
+.public-request-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:24px;
+  box-shadow:0 12px 36px rgba(24,48,78,.06);
+}
+.public-section-title{
+  margin-bottom:18px;
+  font-size:17px;
+  font-weight:760;
+}
+.public-grid2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  margin-bottom:14px;
+}
+.public-request-card>.field{
+  margin-bottom:14px;
+}
+.public-submit{
+  width:100%;
+  margin-top:5px;
+  min-height:48px!important;
+}
+.public-request-message{
+  margin:2px 0 12px;
+  padding:11px 13px;
+  border-radius:10px;
+  font-size:13px;
+}
+.public-request-message.success{
+  display:block!important;
+  background:var(--greenSoft);
+  color:var(--green);
+}
+.public-request-message.error{
+  display:block!important;
+  background:var(--redSoft);
+  color:var(--red);
+}
+
+/* Admin request inbox */
+.requests-list{overflow:hidden}
+.request-row{
+  display:grid;
+  grid-template-columns:minmax(150px,.8fr) minmax(220px,1.5fr) minmax(150px,.9fr) auto 18px;
+  align-items:center;
+  gap:16px;
+  min-height:68px;
+  padding:12px 14px;
+  border-bottom:1px solid var(--line);
+  cursor:pointer;
+}
+.request-row:last-child{border-bottom:0}
+.request-main,.request-customer{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  min-width:0;
+}
+.request-main strong{font-size:14px;font-weight:760}
+.request-main span,.request-customer span{font-size:12px;color:var(--muted)}
+.request-issue{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.request-customer{font-size:13px}
+.detail-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+}
+.detail-grid>div{
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+}
+.detail-grid span{font-size:11px;color:var(--muted)}
+.detail-grid strong{font-size:13px}
+.request-issue-full{line-height:1.5}
+
+/* ==========================================================
+   OVERVIEW + : hard final mobile circle
+   ========================================================== */
+@media(max-width:680px){
+  .public-shell{padding:0 16px 36px}
+  .public-header{min-height:72px}
+  .public-wordmark{font-size:27px}
+  .public-login-link{font-size:12px}
+  .public-main{margin-top:26px}
+  .public-hero{margin-bottom:20px}
+  .public-hero h1{font-size:34px}
+  .public-hero p{font-size:13px}
+  .public-request-card{padding:17px;border-radius:16px}
+  .public-grid2{grid-template-columns:1fr;gap:12px;margin-bottom:12px}
+  .public-request-card>.field{margin-bottom:12px}
+
+  .request-row{
+    grid-template-columns:1fr auto 18px;
+    grid-template-areas:
+      "main badge arrow"
+      "issue issue arrow"
+      "customer customer arrow";
+    gap:5px 10px;
+    padding:12px 13px;
+  }
+  .request-main{grid-area:main}
+  .request-issue{grid-area:issue;white-space:normal}
+  .request-customer{grid-area:customer}
+  .request-row>.badge{grid-area:badge}
+  .request-row>.unified-arrow{grid-area:arrow}
+  .detail-grid{grid-template-columns:1fr}
+
+  /* Exactly the requested compact round add button on mobile overview */
+  .board-page > .pagehead{
+    position:absolute!important;
+    top:7px!important;
+    right:2px!important;
+    width:38px!important;
+    min-width:38px!important;
+    max-width:38px!important;
+    height:38px!important;
+    min-height:38px!important;
+    max-height:38px!important;
+    margin:0!important;
+    padding:0!important;
+    display:block!important;
+  }
+  .board-page > .pagehead .responsive-add{
+    position:relative!important;
+    width:38px!important;
+    min-width:38px!important;
+    max-width:38px!important;
+    height:38px!important;
+    min-height:38px!important;
+    max-height:38px!important;
+    padding:0!important;
+    margin:0!important;
+    border-radius:50%!important;
+    clip-path:circle(50% at 50% 50%)!important;
+    -webkit-clip-path:circle(50% at 50% 50%)!important;
+    display:grid!important;
+    place-items:center!important;
+    overflow:hidden!important;
+    flex:none!important;
+  }
+  .board-page > .pagehead .responsive-add .mobile-add-label{
+    position:absolute!important;
+    inset:0!important;
+    width:38px!important;
+    height:38px!important;
+    display:grid!important;
+    place-items:center!important;
+    padding:0!important;
+    margin:0!important;
+    font-size:24px!important;
+    line-height:1!important;
+    transform:none!important;
+    top:0!important;
+    left:0!important;
+  }
+  .mobile-overview-hero{padding-right:50px!important}
+}
+
+
+/* ==========================================================
+   PUBLIC START PAGE HEADER – blue bar on top only
+   ========================================================== */
+body.public-mode #app,
+body.public-mode #login{
+  display:none!important;
+}
+
+body.public-mode #publicPortal{
+  display:block!important;
+}
+
+#publicPortal .public-shell{
+  width:min(100%,1080px)!important;
+  margin:0 auto!important;
+  padding:0 28px 56px!important;
+}
+
+#publicPortal .public-header{
+  width:100vw!important;
+  max-width:none!important;
+  min-height:82px!important;
+  margin-left:calc(50% - 50vw)!important;
+  margin-right:calc(50% - 50vw)!important;
+  padding:0 max(28px, calc((100vw - 1080px)/2 + 28px))!important;
+  display:grid!important;
+  grid-template-columns:1fr auto 1fr!important;
+  align-items:center!important;
+  gap:16px!important;
+  background:var(--blue)!important;
+  border:0!important;
+  box-shadow:0 4px 14px rgba(26,80,145,.10)!important;
+}
+
+#publicPortal .public-header-spacer{
+  grid-column:1!important;
+}
+
+#publicPortal .public-wordmark{
+  grid-column:2!important;
+  justify-self:center!important;
+  color:#fff!important;
+  font-size:30px!important;
+  font-weight:850!important;
+}
+
+#publicPortal .public-login-link{
+  grid-column:3!important;
+  justify-self:end!important;
+  border:0!important;
+  background:transparent!important;
+  color:#fff!important;
+  font-size:14px!important;
+  font-weight:700!important;
+  padding:9px 0!important;
+  cursor:pointer!important;
+}
+
+#publicPortal .public-login-link:hover{
+  opacity:.84!important;
+}
+
+#publicPortal .public-main{
+  margin-top:34px!important;
+}
+
+@media(max-width:680px){
+  #publicPortal .public-shell{
+    padding:0 16px 36px!important;
+  }
+
+  #publicPortal .public-header{
+    min-height:78px!important;
+    padding:0 18px!important;
+    grid-template-columns:1fr auto 1fr!important;
+  }
+
+  #publicPortal .public-wordmark{
+    font-size:34px!important;
+  }
+
+  #publicPortal .public-login-link{
+    font-size:14px!important;
+  }
+
+  #publicPortal .public-main{
+    margin-top:26px!important;
+  }
+}
+
+
+/* ==========================================================
+   FINAL PUBLIC / LOGIN SEPARATION
+   ========================================================== */
+
+/* Hidden app must beat every older mobile #app rule. */
+#app.hidden,
+body.public-mode #app,
+body.login-mode #app{
+  display:none!important;
+}
+
+/* Public page is the only visible screen before staff login. */
+body.public-mode #publicPortal{
+  display:block!important;
+}
+body.public-mode #login{
+  display:none!important;
+}
+
+/* Login screen replaces the public page completely. */
+body.login-mode #publicPortal{
+  display:none!important;
+}
+body.login-mode #login{
+  display:grid!important;
+}
+
+/* Public page ends after its form. No internal Erle mobile bar below it. */
+#publicPortal{
+  min-height:100dvh!important;
+  overflow:visible!important;
+}
+#publicPortal + #login + #app{
+  /* app remains controlled exclusively by showApp */
+}
+
+/* Fallback when Login is tapped before JS has initialized. */
+#login:target{
+  display:grid!important;
+  position:fixed!important;
+  inset:0!important;
+  z-index:10000!important;
+  width:100vw!important;
+  height:100dvh!important;
+  background:#f5f8fc!important;
+  place-items:center!important;
+  overflow:auto!important;
+}
+body:has(#login:target) #publicPortal,
+body:has(#login:target) #app{
+  display:none!important;
+}
+
+#publicPortal .public-login-link{
+  text-decoration:none!important;
+}
+
+/* Header remains ONLY at the top of the public customer page. */
+#publicPortal .public-header{
+  position:relative!important;
+  top:auto!important;
+  bottom:auto!important;
+}
+
+
+/* ==========================================================
+   PUBLIC REQUEST – blue-focused, practical and clean
+   ========================================================== */
+#publicPortal{
+  background:#eef5fe!important;
+}
+#publicPortal .public-header{
+  background:var(--blue)!important;
+}
+#publicPortal .public-main{
+  width:min(100%,800px)!important;
+}
+#publicPortal .public-hero{
+  background:var(--blue)!important;
+  color:#fff!important;
+  margin:28px 0 18px!important;
+  padding:28px 30px!important;
+  border-radius:20px!important;
+}
+#publicPortal .public-hero h1{
+  color:#fff!important;
+  font-size:clamp(34px,5vw,52px)!important;
+}
+#publicPortal .public-hero p{
+  color:rgba(255,255,255,.78)!important;
+}
+#publicPortal .public-request-card{
+  box-shadow:none!important;
+  border-color:#d8e6f7!important;
+}
+.public-time-note{
+  margin:-4px 0 14px!important;
+  color:#6f7f92!important;
+  font-size:12px!important;
+  line-height:1.4!important;
+}
+.login-switch-row{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:22px!important;
+  flex-wrap:wrap!important;
+}
+.login-switch-row button{
+  border:0!important;
+  background:transparent!important;
+  color:var(--blue)!important;
+  font-weight:670!important;
+  padding:6px 0!important;
+}
+@media(max-width:680px){
+  #publicPortal .public-hero{
+    margin:18px 0 14px!important;
+    padding:22px 20px!important;
+    border-radius:16px!important;
+  }
+  #publicPortal .public-hero h1{
+    font-size:32px!important;
+    line-height:1.05!important;
+  }
+  .public-time-note{
+    margin-top:-2px!important;
+    font-size:11.5px!important;
+  }
+}
+
+
+/* ===== Public start page: completely blue, white form fields ===== */
+html:has(body.public-mode),
+body.public-mode,
+body.public-mode #publicPortal,
+body.public-mode #publicPortal .public-shell,
+body.public-mode #publicPortal .public-main{
+  background:#1674e8 !important;
+}
+body.public-mode #publicPortal{
+  min-height:100dvh !important;
+}
+body.public-mode #publicPortal .public-header{
+  background:#1674e8 !important;
+  box-shadow:none !important;
+  border:0 !important;
+}
+body.public-mode #publicPortal .public-hero{
+  background:transparent !important;
+  padding-left:0 !important;
+  padding-right:0 !important;
+  margin-bottom:10px !important;
+}
+body.public-mode #publicPortal .public-request-card{
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+  padding-left:0 !important;
+  padding-right:0 !important;
+}
+body.public-mode #publicPortal .public-section-title,
+body.public-mode #publicPortal label{
+  color:#fff !important;
+}
+body.public-mode #publicPortal .input,
+body.public-mode #publicPortal .textarea,
+body.public-mode #publicPortal select{
+  background:#fff !important;
+  color:#102038 !important;
+  border-color:rgba(255,255,255,.95) !important;
+}
+body.public-mode #publicPortal .input::placeholder,
+body.public-mode #publicPortal .textarea::placeholder{
+  color:#9aa5b3 !important;
+}
+body.public-mode #publicPortal .public-time-note{
+  color:rgba(255,255,255,.82) !important;
+}
+body.public-mode #publicPortal .public-submit{
+  background:#fff !important;
+  color:#1674e8 !important;
+  border-color:#fff !important;
+}
+body.public-mode #publicPortal .public-login-link,
+body.public-mode #publicPortal .brand-wordmark{
+  color:#fff !important;
+}
+
+
+/* ===== FORCE public landing page blue from top to bottom ===== */
+body.public-mode{
+  background:#1674e8 !important;
+  min-height:100vh !important;
+  min-height:100dvh !important;
+}
+body.public-mode::before,
+body.public-mode::after{
+  background:#1674e8 !important;
+}
+body.public-mode #publicPortal{
+  position:relative !important;
+  min-height:100vh !important;
+  min-height:100dvh !important;
+  background:#1674e8 !important;
+}
+body.public-mode #publicPortal,
+body.public-mode #publicPortal > *,
+body.public-mode #publicPortal .public-shell,
+body.public-mode #publicPortal .public-main,
+body.public-mode #publicPortal .public-header,
+body.public-mode #publicPortal .public-hero,
+body.public-mode #publicPortal .public-request-card{
+  background-color:#1674e8 !important;
+  background-image:none !important;
+}
+/* Only controls/cards that must visually stay white */
+body.public-mode #publicPortal input,
+body.public-mode #publicPortal textarea,
+body.public-mode #publicPortal select,
+body.public-mode #publicPortal .input,
+body.public-mode #publicPortal .textarea{
+  background:#fff !important;
+  color:#102038 !important;
+}
+body.public-mode #publicPortal .public-submit{
+  background:#fff !important;
+  color:#1674e8 !important;
+}
+
+
+/* ==========================================================
+   PUBLIC CUSTOMER PAGE – FINAL BLUE GLASS LANGUAGE
+   ========================================================== */
+body.public-mode,
+body.public-mode #publicPortal,
+body.public-mode #publicPortal .public-shell,
+body.public-mode #publicPortal .public-main{
+  background:#1473E6!important;
+  background-image:none!important;
+}
+
+body.public-mode #publicPortal{
+  min-height:100dvh!important;
+  color:#fff!important;
+}
+
+body.public-mode #publicPortal .public-shell{
+  width:min(100%,760px)!important;
+  padding:0 24px 28px!important;
+}
+
+body.public-mode #publicPortal .public-header{
+  min-height:96px!important;
+  width:100%!important;
+  margin:0!important;
+  padding:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  display:grid!important;
+  grid-template-columns:1fr auto 1fr!important;
+  align-items:center!important;
+}
+
+body.public-mode #publicPortal .public-header-spacer{
+  grid-column:1!important;
+}
+
+body.public-mode #publicPortal .public-wordmark{
+  grid-column:2!important;
+  justify-self:center!important;
+  color:#fff!important;
+  font-size:36px!important;
+  font-weight:900!important;
+  letter-spacing:-.06em!important;
+}
+
+body.public-mode #publicPortal .public-login-link{
+  grid-column:3!important;
+  justify-self:end!important;
+  color:#fff!important;
+  font-size:15px!important;
+  font-weight:750!important;
+  text-decoration:none!important;
+  opacity:.96!important;
+}
+
+body.public-mode #publicPortal .public-main{
+  margin:8px auto 0!important;
+  width:100%!important;
+}
+
+body.public-mode #publicPortal .public-hero{
+  background:transparent!important;
+  color:#fff!important;
+  padding:0!important;
+  margin:0 0 26px!important;
+  border-radius:0!important;
+}
+
+body.public-mode #publicPortal .public-hero h1{
+  margin:0!important;
+  color:#fff!important;
+  font-size:clamp(38px,7vw,58px)!important;
+  line-height:1.02!important;
+  letter-spacing:-.055em!important;
+  font-weight:880!important;
+}
+
+body.public-mode #publicPortal .public-hero p{
+  margin:14px 0 0!important;
+  color:rgba(255,255,255,.74)!important;
+  font-size:16px!important;
+  line-height:1.4!important;
+}
+
+body.public-mode #publicPortal .public-request-card{
+  position:relative!important;
+  background:rgba(255,255,255,.025)!important;
+  border:1px solid rgba(255,255,255,.20)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04)!important;
+  border-radius:20px!important;
+  padding:22px!important;
+}
+
+body.public-mode #publicPortal .public-request-card::before{
+  content:"Schnell. Einfach. Persönlich."!important;
+  position:absolute!important;
+  top:28px!important;
+  right:22px!important;
+  color:rgba(255,255,255,.88)!important;
+  font-size:12px!important;
+  font-weight:650!important;
+}
+
+body.public-mode #publicPortal .public-section-title{
+  margin:0 0 24px!important;
+  color:#fff!important;
+  font-size:27px!important;
+  line-height:1.1!important;
+  font-weight:850!important;
+  letter-spacing:-.03em!important;
+}
+
+body.public-mode #publicPortal label{
+  display:block!important;
+  margin-bottom:8px!important;
+  color:#fff!important;
+  font-size:14px!important;
+  font-weight:760!important;
+}
+
+body.public-mode #publicPortal .field{
+  min-width:0!important;
+}
+
+body.public-mode #publicPortal .public-grid2{
+  gap:16px!important;
+  margin-bottom:16px!important;
+}
+
+body.public-mode #publicPortal .public-request-card>.field{
+  margin-bottom:16px!important;
+}
+
+body.public-mode #publicPortal input,
+body.public-mode #publicPortal textarea,
+body.public-mode #publicPortal select,
+body.public-mode #publicPortal .input,
+body.public-mode #publicPortal .textarea{
+  width:100%!important;
+  box-sizing:border-box!important;
+  background:rgba(255,255,255,.025)!important;
+  color:#fff!important;
+  border:1px solid rgba(255,255,255,.28)!important;
+  border-radius:12px!important;
+  box-shadow:none!important;
+  outline:none!important;
+  font-size:16px!important;
+  font-weight:500!important;
+}
+
+body.public-mode #publicPortal input,
+body.public-mode #publicPortal select,
+body.public-mode #publicPortal .input{
+  min-height:52px!important;
+  padding:0 15px!important;
+}
+
+body.public-mode #publicPortal textarea,
+body.public-mode #publicPortal .textarea{
+  min-height:112px!important;
+  padding:14px 15px!important;
+  resize:vertical!important;
+}
+
+body.public-mode #publicPortal input:focus,
+body.public-mode #publicPortal textarea:focus,
+body.public-mode #publicPortal select:focus{
+  border-color:rgba(255,255,255,.72)!important;
+  box-shadow:0 0 0 3px rgba(255,255,255,.08)!important;
+}
+
+body.public-mode #publicPortal input::placeholder,
+body.public-mode #publicPortal textarea::placeholder{
+  color:rgba(255,255,255,.48)!important;
+}
+
+body.public-mode #publicPortal input[type="date"],
+body.public-mode #publicPortal input[type="time"]{
+  color-scheme:dark!important;
+}
+
+body.public-mode #publicPortal .public-time-note{
+  color:rgba(255,255,255,.70)!important;
+  font-size:12px!important;
+  margin:-4px 0 16px!important;
+}
+
+body.public-mode #publicPortal .public-submit{
+  min-height:54px!important;
+  width:100%!important;
+  margin-top:4px!important;
+  background:#fff!important;
+  color:#1473E6!important;
+  border:0!important;
+  border-radius:12px!important;
+  font-size:16px!important;
+  font-weight:820!important;
+  box-shadow:none!important;
+  position:relative!important;
+}
+
+body.public-mode #publicPortal .public-submit::after{
+  content:"→"!important;
+  display:inline-block!important;
+  margin-left:14px!important;
+  font-size:24px!important;
+  line-height:0!important;
+  vertical-align:-2px!important;
+}
+
+body.public-mode #publicPortal .public-request-message.success{
+  background:rgba(255,255,255,.14)!important;
+  color:#fff!important;
+  border:1px solid rgba(255,255,255,.22)!important;
+}
+
+body.public-mode #publicPortal .public-request-message.error{
+  background:rgba(140,0,0,.16)!important;
+  color:#fff!important;
+  border:1px solid rgba(255,255,255,.20)!important;
+}
+
+/* Footer benefits – visual only, no function changes */
+body.public-mode #publicPortal .public-benefits{
+  display:grid!important;
+  grid-template-columns:repeat(3,1fr)!important;
+  gap:0!important;
+  margin:20px 0 2px!important;
+  color:#fff!important;
+  text-align:center!important;
+}
+
+body.public-mode #publicPortal .public-benefit{
+  padding:0 16px!important;
+  border-right:1px solid rgba(255,255,255,.24)!important;
+}
+
+body.public-mode #publicPortal .public-benefit:last-child{
+  border-right:0!important;
+}
+
+body.public-mode #publicPortal .public-benefit strong{
+  display:block!important;
+  margin-bottom:3px!important;
+  color:#fff!important;
+  font-size:13px!important;
+  font-weight:800!important;
+}
+
+body.public-mode #publicPortal .public-benefit span{
+  display:block!important;
+  color:rgba(255,255,255,.76)!important;
+  font-size:11px!important;
+  line-height:1.35!important;
+}
+
+@media(max-width:680px){
+  body.public-mode #publicPortal .public-shell{
+    padding:0 18px 24px!important;
+  }
+
+  body.public-mode #publicPortal .public-header{
+    min-height:90px!important;
+  }
+
+  body.public-mode #publicPortal .public-wordmark{
+    font-size:34px!important;
+  }
+
+  body.public-mode #publicPortal .public-login-link{
+    font-size:14px!important;
+  }
+
+  body.public-mode #publicPortal .public-main{
+    margin-top:2px!important;
+  }
+
+  body.public-mode #publicPortal .public-hero{
+    margin-bottom:22px!important;
+  }
+
+  body.public-mode #publicPortal .public-hero h1{
+    font-size:36px!important;
+  }
+
+  body.public-mode #publicPortal .public-hero p{
+    font-size:14px!important;
+  }
+
+  body.public-mode #publicPortal .public-request-card{
+    padding:18px!important;
+    border-radius:17px!important;
+  }
+
+  body.public-mode #publicPortal .public-request-card::before{
+    top:22px!important;
+    right:18px!important;
+    font-size:11px!important;
+  }
+
+  body.public-mode #publicPortal .public-section-title{
+    font-size:24px!important;
+    margin-bottom:22px!important;
+  }
+
+  body.public-mode #publicPortal .public-grid2{
+    grid-template-columns:1fr!important;
+    gap:14px!important;
+    margin-bottom:14px!important;
+  }
+
+  body.public-mode #publicPortal .public-request-card>.field{
+    margin-bottom:14px!important;
+  }
+
+  body.public-mode #publicPortal input,
+  body.public-mode #publicPortal select,
+  body.public-mode #publicPortal .input{
+    min-height:50px!important;
+  }
+
+  body.public-mode #publicPortal textarea,
+  body.public-mode #publicPortal .textarea{
+    min-height:108px!important;
+  }
+
+  body.public-mode #publicPortal .public-benefit{
+    padding:0 8px!important;
+  }
+
+  body.public-mode #publicPortal .public-benefit strong{
+    font-size:12px!important;
+  }
+
+  body.public-mode #publicPortal .public-benefit span{
+    font-size:10px!important;
+  }
+}
+
 </style>
+
+<style id="erle-public-final-override">
+/* ==========================================================
+   ERLE PUBLIC – FINAL OVERRIDE
+   Must remain the LAST stylesheet in <head>.
+   ========================================================== */
+
+html,
+body{
+  margin:0;
+  padding:0;
+}
+
+body.public-mode{
+  min-height:100vh !important;
+  min-height:100dvh !important;
+  background:#1473E6 !important;
+  background-image:none !important;
+}
+
+/* Absolutely every public-page surface is blue */
+body.public-mode #publicPortal,
+body.public-mode #publicPortal .public-shell,
+body.public-mode #publicPortal .public-main,
+body.public-mode #publicPortal .public-header,
+body.public-mode #publicPortal .public-hero,
+body.public-mode #publicPortal .public-request-card{
+  background:#1473E6 !important;
+  background-color:#1473E6 !important;
+  background-image:none !important;
+}
+
+body.public-mode #publicPortal{
+  display:block !important;
+  width:100% !important;
+  min-height:100vh !important;
+  min-height:100dvh !important;
+  color:#fff !important;
+  overflow:visible !important;
+}
+
+body.public-mode #publicPortal .public-shell{
+  width:min(100%,760px) !important;
+  max-width:760px !important;
+  margin:0 auto !important;
+  padding:0 22px 30px !important;
+  box-sizing:border-box !important;
+}
+
+body.public-mode #publicPortal .public-header{
+  min-height:104px !important;
+  width:100% !important;
+  margin:0 !important;
+  padding:0 !important;
+  display:grid !important;
+  grid-template-columns:1fr auto 1fr !important;
+  align-items:center !important;
+  box-shadow:none !important;
+  border:0 !important;
+}
+
+body.public-mode #publicPortal .public-header-spacer{
+  grid-column:1 !important;
+}
+
+body.public-mode #publicPortal .public-wordmark{
+  grid-column:2 !important;
+  justify-self:center !important;
+  color:#fff !important;
+  font-size:37px !important;
+  line-height:1 !important;
+  font-weight:900 !important;
+  letter-spacing:-.065em !important;
+}
+
+body.public-mode #publicPortal .public-login-link{
+  grid-column:3 !important;
+  justify-self:end !important;
+  color:#fff !important;
+  background:transparent !important;
+  border:0 !important;
+  text-decoration:none !important;
+  font-size:15px !important;
+  font-weight:760 !important;
+  padding:8px 0 !important;
+}
+
+body.public-mode #publicPortal .public-main{
+  width:100% !important;
+  margin:4px auto 0 !important;
+}
+
+body.public-mode #publicPortal .public-hero{
+  margin:0 0 28px !important;
+  padding:0 !important;
+  border:0 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+}
+
+body.public-mode #publicPortal .public-hero h1{
+  margin:0 !important;
+  color:#fff !important;
+  font-size:clamp(38px,7vw,56px) !important;
+  line-height:1.01 !important;
+  letter-spacing:-.055em !important;
+  font-weight:880 !important;
+}
+
+body.public-mode #publicPortal .public-hero p{
+  margin:14px 0 0 !important;
+  color:rgba(255,255,255,.72) !important;
+  font-size:16px !important;
+  line-height:1.4 !important;
+}
+
+/* Glass panel – NEVER white */
+body.public-mode #publicPortal .public-request-card{
+  position:relative !important;
+  padding:22px !important;
+  border:1px solid rgba(255,255,255,.20) !important;
+  border-radius:20px !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.035) !important;
+}
+
+body.public-mode #publicPortal .public-request-card::before{
+  content:"Schnell. Einfach. Persönlich." !important;
+  position:absolute !important;
+  top:28px !important;
+  right:22px !important;
+  color:rgba(255,255,255,.88) !important;
+  font-size:12px !important;
+  font-weight:650 !important;
+}
+
+body.public-mode #publicPortal .public-section-title{
+  margin:0 0 24px !important;
+  color:#fff !important;
+  font-size:27px !important;
+  line-height:1.1 !important;
+  font-weight:850 !important;
+  letter-spacing:-.03em !important;
+}
+
+body.public-mode #publicPortal label{
+  display:block !important;
+  margin:0 0 8px !important;
+  color:#fff !important;
+  font-size:14px !important;
+  font-weight:760 !important;
+}
+
+/* Inputs are blue/translucent, NOT white */
+body.public-mode #publicPortal input,
+body.public-mode #publicPortal textarea,
+body.public-mode #publicPortal select,
+body.public-mode #publicPortal .input,
+body.public-mode #publicPortal .textarea,
+body.public-mode #publicPortal .select{
+  width:100% !important;
+  max-width:100% !important;
+  box-sizing:border-box !important;
+  background:rgba(255,255,255,.025) !important;
+  background-color:rgba(255,255,255,.025) !important;
+  background-image:none !important;
+  color:#fff !important;
+  border:1px solid rgba(255,255,255,.28) !important;
+  border-radius:12px !important;
+  box-shadow:none !important;
+  outline:none !important;
+  -webkit-appearance:none;
+}
+
+body.public-mode #publicPortal input,
+body.public-mode #publicPortal select,
+body.public-mode #publicPortal .input,
+body.public-mode #publicPortal .select{
+  min-height:52px !important;
+  padding:0 15px !important;
+  font-size:16px !important;
+}
+
+body.public-mode #publicPortal textarea,
+body.public-mode #publicPortal .textarea{
+  min-height:112px !important;
+  padding:14px 15px !important;
+  font-size:16px !important;
+  resize:vertical !important;
+}
+
+body.public-mode #publicPortal input::placeholder,
+body.public-mode #publicPortal textarea::placeholder{
+  color:rgba(255,255,255,.48) !important;
+  opacity:1 !important;
+}
+
+body.public-mode #publicPortal input:focus,
+body.public-mode #publicPortal textarea:focus,
+body.public-mode #publicPortal select:focus{
+  border-color:rgba(255,255,255,.72) !important;
+  box-shadow:0 0 0 3px rgba(255,255,255,.08) !important;
+}
+
+body.public-mode #publicPortal .public-grid2{
+  gap:16px !important;
+  margin-bottom:16px !important;
+}
+
+body.public-mode #publicPortal .public-request-card>.field{
+  margin-bottom:16px !important;
+}
+
+body.public-mode #publicPortal .public-time-note{
+  margin:-4px 0 16px !important;
+  color:rgba(255,255,255,.72) !important;
+  font-size:12px !important;
+}
+
+/* Only the CTA is white */
+body.public-mode #publicPortal .public-submit{
+  width:100% !important;
+  min-height:54px !important;
+  margin-top:4px !important;
+  background:#fff !important;
+  background-color:#fff !important;
+  color:#1473E6 !important;
+  border:0 !important;
+  border-radius:12px !important;
+  box-shadow:none !important;
+  font-size:16px !important;
+  font-weight:820 !important;
+}
+
+body.public-mode #publicPortal .public-submit::after{
+  content:"→" !important;
+  display:inline-block !important;
+  margin-left:14px !important;
+  font-size:24px !important;
+  line-height:0 !important;
+  vertical-align:-2px !important;
+}
+
+/* Bottom values */
+body.public-mode #publicPortal .public-benefits{
+  display:grid !important;
+  grid-template-columns:repeat(3,1fr) !important;
+  gap:0 !important;
+  margin:20px 0 0 !important;
+  color:#fff !important;
+  text-align:center !important;
+}
+
+body.public-mode #publicPortal .public-benefit{
+  padding:0 12px !important;
+  border-right:1px solid rgba(255,255,255,.23) !important;
+}
+
+body.public-mode #publicPortal .public-benefit:last-child{
+  border-right:0 !important;
+}
+
+body.public-mode #publicPortal .public-benefit strong{
+  display:block !important;
+  margin-bottom:3px !important;
+  color:#fff !important;
+  font-size:13px !important;
+  font-weight:800 !important;
+}
+
+body.public-mode #publicPortal .public-benefit span{
+  display:block !important;
+  color:rgba(255,255,255,.76) !important;
+  font-size:11px !important;
+  line-height:1.35 !important;
+}
+
+body.public-mode #publicPortal .public-request-message.success{
+  background:rgba(255,255,255,.13) !important;
+  color:#fff !important;
+  border:1px solid rgba(255,255,255,.22) !important;
+}
+
+body.public-mode #publicPortal .public-request-message.error{
+  background:rgba(100,0,0,.18) !important;
+  color:#fff !important;
+  border:1px solid rgba(255,255,255,.18) !important;
+}
+
+@media(max-width:680px){
+  body.public-mode #publicPortal .public-shell{
+    padding:0 18px 24px !important;
+  }
+
+  body.public-mode #publicPortal .public-header{
+    min-height:96px !important;
+  }
+
+  body.public-mode #publicPortal .public-wordmark{
+    font-size:36px !important;
+  }
+
+  body.public-mode #publicPortal .public-login-link{
+    font-size:14px !important;
+  }
+
+  body.public-mode #publicPortal .public-main{
+    margin-top:0 !important;
+  }
+
+  body.public-mode #publicPortal .public-hero{
+    margin-bottom:22px !important;
+  }
+
+  body.public-mode #publicPortal .public-hero h1{
+    font-size:36px !important;
+  }
+
+  body.public-mode #publicPortal .public-hero p{
+    font-size:14px !important;
+  }
+
+  body.public-mode #publicPortal .public-request-card{
+    padding:18px !important;
+    border-radius:17px !important;
+  }
+
+  body.public-mode #publicPortal .public-request-card::before{
+    top:22px !important;
+    right:18px !important;
+    font-size:11px !important;
+  }
+
+  body.public-mode #publicPortal .public-section-title{
+    font-size:24px !important;
+    margin-bottom:22px !important;
+  }
+
+  body.public-mode #publicPortal .public-grid2{
+    grid-template-columns:1fr !important;
+    gap:14px !important;
+    margin-bottom:14px !important;
+  }
+
+  body.public-mode #publicPortal .public-request-card>.field{
+    margin-bottom:14px !important;
+  }
+
+  body.public-mode #publicPortal input,
+  body.public-mode #publicPortal select,
+  body.public-mode #publicPortal .input,
+  body.public-mode #publicPortal .select{
+    min-height:50px !important;
+  }
+
+  body.public-mode #publicPortal textarea,
+  body.public-mode #publicPortal .textarea{
+    min-height:108px !important;
+  }
+
+  body.public-mode #publicPortal .public-benefit{
+    padding:0 7px !important;
+  }
+
+  body.public-mode #publicPortal .public-benefit strong{
+    font-size:12px !important;
+  }
+
+  body.public-mode #publicPortal .public-benefit span{
+    font-size:10px !important;
+  }
+}
+</style>
+
+
+<style id="erle-public-white-request-final">
+body.public-mode,
+body.public-mode #publicPortal,
+body.public-mode #publicPortal .public-shell,
+body.public-mode #publicPortal .public-main,
+body.public-mode #publicPortal .public-header,
+body.public-mode #publicPortal .public-hero{
+  background:#1473E6 !important;
+  background-color:#1473E6 !important;
+  background-image:none !important;
+}
+
+/* The request box is intentionally white. */
+body.public-mode #publicPortal .public-request-card{
+  background:#ffffff !important;
+  background-color:#ffffff !important;
+  background-image:none !important;
+  border:0 !important;
+  box-shadow:0 10px 28px rgba(12,54,112,.10) !important;
+  border-radius:18px !important;
+}
+
+/* Remove the extra slogan inside the request box. */
+body.public-mode #publicPortal .public-request-card::before{
+  content:none !important;
+  display:none !important;
+}
+
+/* Text inside the white request card */
+body.public-mode #publicPortal .public-request-card .public-section-title,
+body.public-mode #publicPortal .public-request-card label{
+  color:#102038 !important;
+}
+
+/* Inputs inside the white request card */
+body.public-mode #publicPortal .public-request-card input,
+body.public-mode #publicPortal .public-request-card textarea,
+body.public-mode #publicPortal .public-request-card select,
+body.public-mode #publicPortal .public-request-card .input,
+body.public-mode #publicPortal .public-request-card .textarea,
+body.public-mode #publicPortal .public-request-card .select{
+  background:#ffffff !important;
+  background-color:#ffffff !important;
+  color:#102038 !important;
+  border:1px solid #d8e2ef !important;
+  box-shadow:none !important;
+}
+
+body.public-mode #publicPortal .public-request-card input::placeholder,
+body.public-mode #publicPortal .public-request-card textarea::placeholder{
+  color:#a8b0ba !important;
+  opacity:1 !important;
+}
+
+body.public-mode #publicPortal .public-request-card input:focus,
+body.public-mode #publicPortal .public-request-card textarea:focus,
+body.public-mode #publicPortal .public-request-card select:focus{
+  border-color:#1473E6 !important;
+  box-shadow:0 0 0 3px rgba(20,115,230,.10) !important;
+}
+
+/* CTA remains blue inside the white card */
+body.public-mode #publicPortal .public-request-card .public-submit{
+  background:#1473E6 !important;
+  background-color:#1473E6 !important;
+  color:#ffffff !important;
+  border:0 !important;
+}
+
+/* Hide any leftover informational strips */
+body.public-mode #publicPortal .public-benefits,
+body.public-mode #publicPortal .public-time-note{
+  display:none !important;
+}
+</style>
+
+
+<style id="erle-final-request-login-notify">
+/* Public login: slightly separated, still quiet */
+body.public-mode #publicPortal .public-login-link{
+  min-height:38px!important;
+  padding:0 12px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:7px!important;
+  color:#fff!important;
+  border:1px solid rgba(255,255,255,.40)!important;
+  border-radius:999px!important;
+  background:rgba(255,255,255,.08)!important;
+  text-decoration:none!important;
+  box-sizing:border-box!important;
+}
+body.public-mode #publicPortal .public-login-link:active{
+  background:rgba(255,255,255,.15)!important;
+}
+.public-login-icon{
+  width:17px!important;
+  height:17px!important;
+  fill:none!important;
+  stroke:currentColor!important;
+  stroke-width:1.9!important;
+  stroke-linecap:round!important;
+  stroke-linejoin:round!important;
+  flex:none!important;
+}
+
+/* New customer request badge – desktop and mobile navigation */
+#requestsNav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+.request-nav-badge{
+  display:inline-grid;
+  place-items:center;
+  min-width:20px;
+  height:20px;
+  padding:0 6px;
+  border-radius:999px;
+  background:#fff;
+  color:var(--blue);
+  font-size:10px;
+  font-weight:850;
+  line-height:1;
+  box-sizing:border-box;
+}
+#requestsNav.has-new-requests:not(.active){
+  background:rgba(255,255,255,.10);
+}
+#requestsNav.active .request-nav-badge{
+  background:var(--blue);
+  color:#fff;
+}
+@media(max-width:680px){
+  body.public-mode #publicPortal .public-login-link{
+    min-height:36px!important;
+    padding:0 11px!important;
+    font-size:13px!important;
+  }
+  .public-login-icon{
+    width:16px!important;
+    height:16px!important;
+  }
+}
+</style>
+
+
+<style id="erle-structure-autofill-final">
+/* Login button in the requested person-icon style */
+body.public-mode #publicPortal .public-login-link{
+  min-height:42px!important;
+  padding:0 14px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:9px!important;
+  border:1px solid rgba(255,255,255,.28)!important;
+  border-radius:15px!important;
+  background:rgba(255,255,255,.08)!important;
+  color:#fff!important;
+  text-decoration:none!important;
+}
+.public-login-person{
+  width:21px!important;height:21px!important;
+  fill:none!important;stroke:currentColor!important;
+  stroke-width:1.8!important;stroke-linecap:round!important;stroke-linejoin:round!important;
+}
+
+/* Public autocomplete */
+.public-autocomplete-field{position:relative!important}
+.public-suggest{
+  position:absolute!important;
+  z-index:150!important;
+  top:calc(100% - 2px)!important;
+  left:0!important;right:0!important;
+  max-height:245px!important;
+  overflow:auto!important;
+  background:#fff!important;
+  border:1px solid #dbe4ef!important;
+  border-radius:12px!important;
+  box-shadow:0 14px 30px rgba(15,47,85,.16)!important;
+  padding:5px!important;
+}
+.public-suggest button{
+  width:100%!important;
+  min-height:40px!important;
+  padding:8px 10px!important;
+  border:0!important;
+  border-radius:8px!important;
+  background:#fff!important;
+  color:#102038!important;
+  text-align:left!important;
+  font-size:14px!important;
+}
+.public-suggest button:hover,.public-suggest button:focus{
+  background:#eef5fe!important;
+  color:#1473E6!important;
+}
+.optional-label{
+  font-weight:500!important;
+  opacity:.55!important;
+  font-size:.85em!important;
+}
+
+/* Plate: fixed parts never shift, supports any German 1–3 char region prefix */
+.plate-entry{
+  display:grid!important;
+  grid-template-columns:minmax(58px,.8fr) auto minmax(54px,.65fr) auto minmax(78px,1fr) 54px!important;
+  gap:7px!important;
+  align-items:center!important;
+  width:100%!important;
+}
+.plate-entry .plate-part,.plate-entry .plate-suffix{
+  min-width:0!important;
+  text-align:center!important;
+  padding-left:8px!important;
+  padding-right:8px!important;
+  text-transform:uppercase!important;
+}
+.plate-separator{
+  color:#8b98a8!important;
+  font-weight:800!important;
+  text-align:center!important;
+}
+
+/* Time grid */
+.time-picker-field{position:relative!important}
+.time-picker-button{
+  width:100%!important;
+  text-align:left!important;
+  cursor:pointer!important;
+  color:inherit!important;
+  background:inherit!important;
+}
+.time-grid{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:7px!important;
+  margin-top:7px!important;
+  padding:9px!important;
+  background:#fff!important;
+  border:1px solid #dbe4ef!important;
+  border-radius:12px!important;
+  box-shadow:0 12px 26px rgba(20,56,96,.12)!important;
+  position:absolute!important;
+  left:0!important;right:0!important;
+  z-index:160!important;
+}
+.time-slot{
+  min-height:38px!important;
+  border:1px solid #dce5ef!important;
+  background:#fff!important;
+  color:#102038!important;
+  border-radius:9px!important;
+  font-size:13px!important;
+  font-weight:700!important;
+}
+.time-slot.selected,.time-slot:active{
+  background:#1473E6!important;color:#fff!important;border-color:#1473E6!important;
+}
+
+/* Logged-in order list: strict columns so text never wanders */
+@media(min-width:681px){
+  .orders-simple-list .order-simple-row{
+    display:grid!important;
+    grid-template-columns:minmax(190px,1fr) minmax(260px,1.65fr) minmax(150px,.8fr) 22px!important;
+    align-items:center!important;
+    column-gap:18px!important;
+  }
+  .orders-simple-list .order-simple-main{grid-column:1!important;min-width:0!important}
+  .orders-simple-list .order-simple-task{grid-column:2!important;min-width:0!important}
+  .orders-simple-list .order-simple-meta{grid-column:3!important;min-width:0!important;text-align:right!important;justify-self:stretch!important}
+  .orders-simple-list .order-simple-arrow{grid-column:4!important;justify-self:end!important}
+  .orders-simple-list .order-simple-main strong,
+  .orders-simple-list .order-simple-main span,
+  .orders-simple-list .order-simple-task,
+  .orders-simple-list .order-simple-meta span{
+    overflow:hidden!important;text-overflow:ellipsis!important;
+  }
+}
+
+/* Admin request editor */
+.request-edit-grid{
+  display:grid!important;
+  grid-template-columns:1fr 1fr!important;
+  gap:14px!important;
+}
+.request-edit-grid .request-wide{grid-column:1/-1!important}
+.request-actions{justify-content:flex-end!important}
+
+/* Request list alignment */
+.request-row{
+  grid-template-columns:minmax(170px,1fr) minmax(250px,1.6fr) minmax(160px,.9fr) auto 18px!important;
+}
+.request-is-new{
+  box-shadow:inset 3px 0 0 #1473E6!important;
+}
+
+/* New request navigation is unmistakable */
+.request-nav-badge{
+  min-width:21px!important;height:21px!important;
+  border-radius:999px!important;
+  background:#fff!important;color:#1473E6!important;
+  font-size:10px!important;font-weight:900!important;
+}
+
+@media(max-width:680px){
+  .plate-entry{
+    grid-template-columns:66px auto 58px auto minmax(84px,1fr) 48px!important;
+    gap:5px!important;
+  }
+  .time-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  .request-edit-grid{grid-template-columns:1fr!important}
+  .request-edit-grid .request-wide{grid-column:1!important}
+  .orders-simple-list .order-simple-row{
+    align-items:start!important;
+  }
+}
+</style>
+
+
+<style id="erle-timegrid-final-fix">
+/* Time choice is collapsed by default and only visible after clicking "Uhrzeit wählen". */
+.time-grid.hidden{
+  display:none!important;
+}
+
+.time-picker-field{
+  position:relative!important;
+}
+
+.time-grid:not(.hidden){
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:6px!important;
+  position:absolute!important;
+  top:calc(100% + 6px)!important;
+  left:0!important;
+  right:0!important;
+  z-index:1000!important;
+  max-height:230px!important;
+  overflow-y:auto!important;
+  padding:8px!important;
+  margin:0!important;
+  background:#fff!important;
+  border:1px solid #dbe4ef!important;
+  border-radius:12px!important;
+  box-shadow:0 14px 28px rgba(20,56,96,.16)!important;
+}
+
+.time-picker-button{
+  position:relative!important;
+  cursor:pointer!important;
+  padding-right:38px!important;
+}
+
+.time-picker-button::after{
+  content:"⌄"!important;
+  position:absolute!important;
+  right:14px!important;
+  top:50%!important;
+  transform:translateY(-53%)!important;
+  font-size:18px!important;
+  line-height:1!important;
+  opacity:.65!important;
+}
+
+.time-picker-button[aria-expanded="true"]::after{
+  transform:translateY(-47%) rotate(180deg)!important;
+}
+
+.time-slot{
+  min-height:36px!important;
+  padding:0 6px!important;
+  border-radius:8px!important;
+}
+
+@media(min-width:681px){
+  .time-grid:not(.hidden){
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    max-width:360px!important;
+  }
+}
+
+@media(max-width:680px){
+  .time-grid:not(.hidden){
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    max-height:205px!important;
+  }
+}
+</style>
+
 </head>
 <body>
 
-<section id="login">
+
+<section id="publicPortal">
+  <div class="public-shell">
+    <header class="public-header">
+      <div class="public-header-spacer" aria-hidden="true"></div>
+      <div class="public-wordmark brand-wordmark">erle.</div>
+      <a id="staffLoginBtn" class="public-login-link" href="#login" role="button" aria-label="Login">
+      <svg class="public-login-icon public-login-person" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="7.2" r="3.2"></circle>
+        <path d="M5.5 20c.35-4.15 2.55-6.4 6.5-6.4s6.15 2.25 6.5 6.4H5.5Z"></path>
+      </svg>
+      <span>Login</span>
+    </a>
+    </header>
+
+    <main class="public-main">
+      <section class="public-hero">
+        <h1>Fahrzeug angeben.<br>Anliegen beschreiben.<br>Anfrage senden.</h1>
+        <p>Wir melden uns anschließend bei Ihnen.</p>
+      </section>
+
+      <form id="customerRequestForm" class="public-request-card" autocomplete="off" lang="de">
+        <div class="public-section-title">Ihre Anfrage</div>
+
+        <div class="public-grid2">
+          <div class="field public-autocomplete-field">
+            <label>Hersteller *</label>
+            <input id="crManufacturer" class="input" placeholder="z. B. Mercedes-Benz" autocomplete="off" required>
+            <div id="crManufacturerSuggest" class="public-suggest hidden"></div>
+          </div>
+          <div class="field public-autocomplete-field">
+            <label>Modell / Baureihe *</label>
+            <input id="crModel" class="input" placeholder="z. B. C-Klasse, Golf 7" autocomplete="off" required>
+            <div id="crModelSuggest" class="public-suggest hidden"></div>
+          </div>
+        </div>
+
+        <div class="field public-autocomplete-field">
+          <label>Motorisierung / Variante</label>
+          <input id="crVariant" class="input" placeholder="z. B. C 200d, C 220d, 1.4 TSI" autocomplete="off">
+          <div id="crVariantSuggest" class="public-suggest hidden"></div>
+        </div>
+
+        <div class="field">
+          <label>Kennzeichen <span class="optional-label">optional</span></label>
+          <div class="plate-entry" aria-label="Deutsches Kennzeichen">
+            <input id="crPlateRegion" class="input plate-part plate-region" maxlength="3" placeholder="HB" autocapitalize="characters" autocomplete="off" aria-label="Ortskürzel">
+            <span class="plate-separator">–</span>
+            <input id="crPlateLetters" class="input plate-part plate-letters" maxlength="2" placeholder="AB" autocapitalize="characters" autocomplete="off" aria-label="Buchstaben">
+            <span class="plate-separator">–</span>
+            <input id="crPlateNumber" class="input plate-part plate-number" maxlength="4" inputmode="numeric" placeholder="123" autocomplete="off" aria-label="Ziffern">
+            <select id="crPlateSuffix" class="select plate-suffix" aria-label="Zusatz">
+              <option value=""></option><option value="E">E</option><option value="H">H</option>
+            </select>
+          </div>
+          <input id="crPlate" type="hidden">
+        </div>
+
+        <div class="field">
+          <label>Anliegen *</label>
+          <textarea id="crIssue" class="textarea" rows="4" placeholder="Beschreiben Sie kurz, was gemacht werden soll." required spellcheck="true" lang="de" autocapitalize="sentences"></textarea>
+        </div>
+
+        <div class="public-grid2 public-appointment-grid">
+          <div class="field">
+            <label>Wunschtermin</label>
+            <input id="crDate" class="input" type="date">
+          </div>
+          <div class="field time-picker-field">
+            <label>Uhrzeit</label>
+            <button id="crTimeButton" class="input time-picker-button" type="button" aria-expanded="false">Uhrzeit wählen</button>
+            <input id="crTime" type="hidden">
+            <div id="crTimeGrid" class="time-grid hidden"></div>
+          </div>
+        </div>
+
+        <div class="public-grid2">
+          <div class="field">
+            <label>Name *</label>
+            <input id="crName" class="input" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label>Telefon <span class="optional-label">optional</span></label>
+            <input id="crPhone" class="input" inputmode="tel" autocomplete="tel">
+          </div>
+        </div>
+
+        <div id="customerRequestMessage" class="public-request-message hidden"></div>
+        <button id="customerRequestSubmit" class="btn primary public-submit" type="submit">Anfrage senden</button>
+      </form>
+    </main>
+  </div>
+</section>
+
+
+<section id="login" class="hidden">
   <div class="login-card">
     <div class="brand brand-login"><div class="brandtitle brand-wordmark">erle.</div><div class="brandsub">deine Planung.</div></div>
     <div class="field"><label>Benutzername</label><input id="loginUser" class="input" autocomplete="off" autocapitalize="none" spellcheck="false"></div>
@@ -4581,7 +6322,10 @@ body.login-mode .login-card{
     <div id="confirmWrap" class="field hidden"><label>Passwort wiederholen</label><input id="loginConfirm" class="input" type="password" autocomplete="off"></div>
     <div id="authMessage" class="error hidden" style="margin-bottom:12px"></div>
     <button id="authMainBtn" class="btn primary">Anmelden</button>
-    <div class="authswitch"><span id="authSwitchText">Noch kein Konto?</span> <button id="authSwitchBtn">Account erstellen</button></div>
+    <div class="authswitch login-switch-row">
+      <button id="authSwitchBtn" type="button">Account erstellen</button>
+      <button id="backToPublicBtn" type="button" onclick="showPublic(); return false;">Zurück</button>
+    </div>
   </div>
 </section>
 
@@ -4595,6 +6339,7 @@ body.login-mode .login-card{
       <button data-page="appointments">Termine</button>
       <button data-page="vehicles">Fahrzeuge</button>
       <button data-page="archive">Archiv</button>
+      <button id="requestsNav" data-page="requests">Anfragen</button>
       <button id="usersNav" data-page="users">Benutzer</button>
       <button id="settingsNav" data-page="settings">Einstellungen</button>
     </nav>
@@ -5012,13 +6757,14 @@ const manufacturers=[...new Set(commonModels.map(x=>{
 }))].sort((a,b)=>a.localeCompare(b,'de',{sensitivity:'base'}));
 
 let session=JSON.parse(localStorage.getItem(SESSION_KEY)||'null');
-let me=null, profiles=[], orders=[], vehicles=[], customers=[];
+let me=null, profiles=[], orders=[], vehicles=[], customers=[], customerRequests=[];
 let page='board', filter='all', search='', authMode='login', pollTimer=null;
 let calendarCursor=new Date();
 let editModes={orders:false,vehicles:false,archiveOrders:false,archiveVehicles:false,archiveAll:false,users:false};
 let collapsedStages={planned:true,buy:true,working:true,done:true};
 let selections={orders:new Set(),vehicles:new Set(),archiveOrders:new Set(),archiveVehicles:new Set(),archiveAll:new Set(),users:new Set()};
 let selectedCalendarDate=null;
+let lastNewRequestCount=null;
 
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
@@ -5171,19 +6917,46 @@ async function loadData(silent=false){
       rest('erle_customers','?select=*')
     ]);
     orders=o||[];vehicles=v||[];customers=c||[];
-    if(isAdmin()){profiles=await rest('erle_profiles','?select=id,username,role,active,created_at&order=created_at.asc')||[]}
+    if(isAdmin()){
+      profiles=await rest('erle_profiles','?select=id,username,role,active,created_at&order=created_at.asc')||[];
+      try{customerRequests=await rest('erle_customer_requests','?select=*&order=created_at.desc')||[]}catch{customerRequests=[]}
+      updateRequestIndicator(silent);
+    }
     await purgeExpiredArchive();
-    if(!silent)render(); else if(page==='board')render();
+    if(!silent)render(); else if(page==='board'||page==='requests')render();
   }catch(e){if(!silent)toast(e.message)}
 }
 async function enterApp(){
-  if(!session?.access_token){showLogin();return}
+  if(!session?.access_token){showPublic();return}
   try{await loadMe();if(!me||me.active===false)throw new Error('Konto nicht verfügbar.');await loadData();showApp();startPolling()}
   catch(e){if(await refreshSession())return enterApp();logout()}
 }
-function showLogin(){document.body.classList.add('login-mode');$('#app').classList.add('hidden');$('#login').classList.remove('hidden');window.scrollTo(0,0)}
-function showApp(){
+function showPublic(){
   document.body.classList.remove('login-mode');
+  document.body.classList.add('public-mode');
+  $('#publicPortal').classList.remove('hidden');
+  $('#login').classList.add('hidden');
+  $('#app').classList.add('hidden');
+  window.scrollTo(0,0);
+}
+function showLogin(){
+  authMode='login';
+  if($('#confirmWrap'))$('#confirmWrap').classList.add('hidden');
+  if($('#authMainBtn'))$('#authMainBtn').textContent='Anmelden';
+  if($('#authSwitchBtn'))$('#authSwitchBtn').textContent='Account erstellen';
+  if($('#authMessage')){$('#authMessage').textContent='';$('#authMessage').classList.add('hidden')}
+  document.body.classList.remove('public-mode');
+  document.body.classList.add('login-mode');
+  $('#publicPortal').classList.add('hidden');
+  $('#app').classList.add('hidden');
+  $('#login').classList.remove('hidden');
+  if($('#loginUser'))$('#loginUser').focus();
+  window.scrollTo(0,0);
+}
+function showApp(){
+  document.body.classList.remove('public-mode');
+  document.body.classList.remove('login-mode');
+  $('#publicPortal').classList.add('hidden');
   $('#login').classList.add('hidden');
   $('#app').classList.remove('hidden');
   $('#app').classList.remove('hidden');
@@ -5191,6 +6964,8 @@ function showApp(){
   $('#sideRole').textContent=isAdmin()?'Administrator':'Mitarbeiter';
   if($('#mobileUser'))$('#mobileUser').textContent=me.username;
   if($('#mobileRole'))$('#mobileRole').textContent=isAdmin()?'Administrator':'Mitarbeiter';
+  $('#requestsNav').classList.toggle('hidden',!isAdmin());
+  updateRequestIndicator(false);
   $('#usersNav').classList.toggle('hidden',!isAdmin());
   $('#settingsNav').classList.remove('hidden');
   render();
@@ -5205,13 +6980,9 @@ function logout(){
   if($('#loginConfirm'))$('#loginConfirm').value='';
   if($('#authMessage')){$('#authMessage').textContent='';$('#authMessage').classList.add('hidden')}
   authMode='login';
-  if($('#confirmWrap'))$('#confirmWrap').classList.add('hidden');
-  if($('#authMainBtn'))$('#authMainBtn').textContent='Anmelden';
-  if($('#authSwitchText'))$('#authSwitchText').textContent='Noch kein Konto?';
-  if($('#authSwitchBtn'))$('#authSwitchBtn').textContent='Account erstellen';
-  showLogin();
+  showPublic();
 }
-function startPolling(){clearInterval(pollTimer);pollTimer=setInterval(()=>loadData(true),15000)}
+function startPolling(){clearInterval(pollTimer);pollTimer=setInterval(()=>loadData(true),5000)}
 
 function vehicle(id){return vehicles.find(v=>v.id===id)} function customer(id){return customers.find(c=>c.id===id)}
 function creatorName(o){
@@ -5237,6 +7008,423 @@ function visibleOrders(){
   if(filter!=='all')a=a.filter(o=>statusOf(o)===filter);
   return a;
 }
+
+
+
+const WORKSHOP_CORRECTIONS = [
+  [/\boel\b/gi,'Öl'],
+  [/\boelservice\b/gi,'Ölservice'],
+  [/\böl service\b/gi,'Ölservice'],
+  [/\boelwechsel\b/gi,'Ölwechsel'],
+  [/\böl wechsel\b/gi,'Ölwechsel'],
+  [/\breifen wechsel\b/gi,'Reifenwechsel'],
+  [/\bscheiben wischer\b/gi,'Scheibenwischer'],
+  [/\bzünd kerzen\b/gi,'Zündkerzen'],
+  [/\bluft filter\b/gi,'Luftfilter'],
+  [/\böl filter\b/gi,'Ölfilter'],
+  [/\bbrems beläge\b/gi,'Bremsbeläge'],
+  [/\bbrems scheiben\b/gi,'Bremsscheiben'],
+  [/\bkeil riemen\b/gi,'Keilriemen'],
+  [/\bzahn riemen\b/gi,'Zahnriemen']
+];
+
+function normalizeGermanWorkshopText(value){
+  let s=String(value||'').replace(/\s+/g,' ').trim();
+  WORKSHOP_CORRECTIONS.forEach(([rx,repl])=>s=s.replace(rx,repl));
+  s=s.replace(/(^|[.!?]\s+)([a-zäöü])/g,(m,p,c)=>p+c.toLocaleUpperCase('de-DE'));
+  return s;
+}
+
+function normalizePlateFlexible(value){
+  let raw=String(value||'').trim().toLocaleUpperCase('de-DE');
+  if(!raw)return '';
+  raw=raw.replace(/[–—]/g,'-').replace(/\s+/g,'-').replace(/-+/g,'-');
+  const parts=raw.split('-').filter(Boolean);
+  if(parts.length>=3){
+    const region=parts[0].replace(/[^A-ZÄÖÜ]/g,'').slice(0,3);
+    const letters=parts[1].replace(/[^A-Z]/g,'').slice(0,2);
+    const num=parts.slice(2).join('').replace(/[^0-9EH]/g,'').slice(0,5);
+    return [region,letters,num].filter(Boolean).join('-');
+  }
+  return normalizePlate(raw);
+}
+
+function syncPublicPlate(){
+  const region=($('#crPlateRegion')?.value||'').toLocaleUpperCase('de-DE').replace(/[^A-ZÄÖÜ]/g,'').slice(0,3);
+  const letters=($('#crPlateLetters')?.value||'').toUpperCase().replace(/[^A-Z]/g,'').slice(0,2);
+  const number=($('#crPlateNumber')?.value||'').replace(/\D/g,'').slice(0,4);
+  const suffix=($('#crPlateSuffix')?.value||'').toUpperCase();
+
+  if($('#crPlateRegion'))$('#crPlateRegion').value=region;
+  if($('#crPlateLetters'))$('#crPlateLetters').value=letters;
+  if($('#crPlateNumber'))$('#crPlateNumber').value=number;
+
+  const complete=region && letters && number ? `${region}-${letters}-${number}${suffix}` : '';
+  if($('#crPlate'))$('#crPlate').value=complete;
+  return complete;
+}
+
+function timeSlots(){
+  const result=[];
+  for(let h=9;h<=18;h++){
+    for(const m of [0,30]){
+      if(h===18 && m>0)continue;
+      result.push(String(h).padStart(2,'0')+':'+String(m).padStart(2,'0'));
+    }
+  }
+  return result;
+}
+
+function attachTimeGrid(inputId,buttonId,gridId){
+  const input=$('#'+inputId),button=$('#'+buttonId),grid=$('#'+gridId);
+  if(!input||!button||!grid)return;
+
+  grid.innerHTML=timeSlots().map(t=>`<button type="button" class="time-slot ${input.value===t?'selected':''}" data-time="${t}">${t}</button>`).join('');
+
+  /* Always start closed. */
+  grid.classList.add('hidden');
+  button.setAttribute('aria-expanded','false');
+
+  button.onclick=e=>{
+    e.preventDefault();
+    e.stopPropagation();
+
+    const shouldOpen=grid.classList.contains('hidden');
+
+    document.querySelectorAll('.time-grid').forEach(g=>{
+      g.classList.add('hidden');
+      const owner=g.parentElement?.querySelector('.time-picker-button');
+      if(owner)owner.setAttribute('aria-expanded','false');
+    });
+
+    if(shouldOpen){
+      grid.classList.remove('hidden');
+      button.setAttribute('aria-expanded','true');
+    }
+  };
+
+  grid.querySelectorAll('[data-time]').forEach(b=>b.onclick=e=>{
+    e.preventDefault();
+    e.stopPropagation();
+    input.value=b.dataset.time;
+    button.textContent=b.dataset.time;
+    grid.querySelectorAll('.time-slot').forEach(x=>x.classList.toggle('selected',x===b));
+    grid.classList.add('hidden');
+    button.setAttribute('aria-expanded','false');
+  });
+
+  grid.onclick=e=>e.stopPropagation();
+}
+
+function workshopTimeValid(time){
+  if(!time)return true;
+  return time>='09:00' && time<='18:00';
+}
+function appointmentTimeFromDateTime(value){
+  if(!value)return '';
+  const m=String(value).match(/T(\d{2}:\d{2})/);
+  return m?m[1]:'';
+}
+
+async function submitCustomerRequest(e){
+  e?.preventDefault();
+
+  syncPublicPlate();
+
+  const manufacturer=$('#crManufacturer')?.value.trim()||'';
+  const model=$('#crModel')?.value.trim()||'';
+  const variant=$('#crVariant')?.value.trim()||'';
+  const plate=$('#crPlate')?.value.trim()||'';
+  const issue=normalizeGermanWorkshopText($('#crIssue')?.value||'');
+  const name=$('#crName')?.value.trim()||'';
+  const phone=$('#crPhone')?.value.trim()||'';
+  const date=$('#crDate')?.value||'';
+  const time=$('#crTime')?.value||'';
+  const msg=$('#customerRequestMessage');
+
+  if(!manufacturer||!model||!issue||!name){
+    msg.textContent='Bitte Hersteller, Modell, Anliegen und Name angeben.';
+    msg.className='public-request-message error';
+    return;
+  }
+  if(time && !date){
+    msg.textContent='Bitte zur Uhrzeit auch ein Datum auswählen.';
+    msg.className='public-request-message error';
+    return;
+  }
+  if(time && !workshopTimeValid(time)){
+    msg.textContent='Bitte eine gültige Uhrzeit auswählen.';
+    msg.className='public-request-message error';
+    return;
+  }
+
+  const vehicleText=[manufacturer,model,variant].filter(Boolean).join(' ');
+  const desired=date?(date+'T'+(time||'09:00')+':00'):null;
+  const payload={
+    license_plate:plate||null,
+    vehicle_text:vehicleText,
+    issue,
+    customer_name:name,
+    phone:phone||null,
+    email:null,
+    desired_appointment:desired,
+    status:'new'
+  };
+
+  const btn=$('#customerRequestSubmit');
+  btn.disabled=true;
+  try{
+    await rest('erle_customer_requests','',{
+      method:'POST',
+      headers:{Prefer:'return=minimal'},
+      body:JSON.stringify(payload)
+    });
+    $('#customerRequestForm').reset();
+    $('#crTime').value='';
+    $('#crTimeButton').textContent='Uhrzeit wählen';
+    msg.textContent='Anfrage gesendet. Wir melden uns bei Ihnen.';
+    msg.className='public-request-message success';
+  }catch(err){
+    msg.textContent='Anfrage konnte nicht gesendet werden. Bitte versuchen Sie es erneut.';
+    msg.className='public-request-message error';
+  }finally{
+    btn.disabled=false;
+  }
+}
+
+function renderRequests(){
+  if(!isAdmin())return '<div class="panel">Kein Zugriff.</div>';
+  const list=[...(customerRequests||[])].sort((a,b)=>{
+    const an=a.status==='new'?0:1,bn=b.status==='new'?0:1;
+    return an-bn || new Date(b.created_at||0)-new Date(a.created_at||0);
+  });
+  return `<div class="pagehead">
+    <div><h1>Anfragen</h1></div>
+    <button class="icon-text-action" id="reloadRequests" aria-label="Neu laden" title="Neu laden">↻</button>
+  </div>
+  <div class="requests-list unified-list">
+    ${list.length?list.map(r=>`<div class="request-row unified-row ${r.status==='new'?'request-is-new':''}" data-request="${r.id}">
+      <div class="request-main">
+        <strong>${esc(r.customer_name||'–')}</strong>
+        <span>${esc(r.vehicle_text||'')}</span>
+      </div>
+      <div class="request-issue">${esc(r.issue||'')}</div>
+      <div class="request-customer">
+        <strong>${esc(r.license_plate||'Ohne Kennzeichen')}</strong>
+        <span>${esc(r.phone||'')}</span>
+      </div>
+      <span class="badge ${r.status==='converted'?'green':'blue'}">${r.status==='converted'?'Übernommen':'Neu'}</span>
+      <span class="unified-arrow">›</span>
+    </div>`).join(''):'<div class="empty-simple">Keine Anfragen vorhanden.</div>'}
+  </div>`;
+}
+
+function openCustomerRequest(id){
+  const r=customerRequests.find(x=>x.id===id);if(!r)return;
+
+  const assigneeOptions=profiles.filter(p=>p.active).map(p=>
+    `<option value="${p.id}" ${p.id===r.assigned_user_id?'selected':''}>${esc(p.username)}</option>`
+  ).join('');
+
+  const dt=r.desired_appointment?new Date(r.desired_appointment):null;
+  const dateValue=dt?dateKey(dt):'';
+  const timeValue=dt?dt.toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit',hour12:false}):'';
+
+  openModal('Anfrage bearbeiten',`
+    <div class="section request-edit-grid">
+      <div class="field">
+        <label>Name *</label>
+        <input id="requestName" class="input" value="${esc(r.customer_name||'')}" required>
+      </div>
+      <div class="field">
+        <label>Telefon</label>
+        <input id="requestPhone" class="input" value="${esc(r.phone||'')}">
+      </div>
+      <div class="field">
+        <label>Kennzeichen</label>
+        <input id="requestPlate" class="input" value="${esc(r.license_plate||'')}" placeholder="vor Übernahme ergänzen">
+      </div>
+      <div class="field">
+        <label>Fahrzeug</label>
+        <input id="requestVehicle" class="input" value="${esc(r.vehicle_text||'')}">
+      </div>
+      <div class="field">
+        <label>Datum</label>
+        <input id="requestDate" class="input" type="date" value="${dateValue}">
+      </div>
+      <div class="field time-picker-field">
+        <label>Uhrzeit</label>
+        <button id="requestTimeButton" class="input time-picker-button" type="button">${timeValue||'Uhrzeit wählen'}</button>
+        <input id="requestTime" type="hidden" value="${timeValue}">
+        <div id="requestTimeGrid" class="time-grid hidden"></div>
+      </div>
+      <div class="field request-wide">
+        <label>Anliegen *</label>
+        <textarea id="requestIssue" class="textarea" rows="4" spellcheck="true" lang="de" autocapitalize="sentences">${esc(r.issue||'')}</textarea>
+      </div>
+      <div class="field request-wide">
+        <label>Zuständig</label>
+        <select id="requestAssignee" class="select">
+          <option value="">Noch nicht zugeordnet</option>${assigneeOptions}
+        </select>
+      </div>
+    </div>
+
+    ${r.status!=='converted'?`<div class="actions request-actions">
+      <button id="saveRequestBtn" class="btn">Änderungen speichern</button>
+      <button id="convertRequestBtn" class="btn primary">Als Auftrag übernehmen</button>
+    </div>`:`<div class="section"><span class="badge green">Bereits als Auftrag übernommen</span></div>`}
+  `);
+
+  attachTimeGrid('requestTime','requestTimeButton','requestTimeGrid');
+
+  if($('#requestPlate')){
+    $('#requestPlate').onblur=()=>$('#requestPlate').value=normalizePlateFlexible($('#requestPlate').value);
+  }
+  if($('#requestIssue')){
+    $('#requestIssue').onblur=()=>$('#requestIssue').value=normalizeGermanWorkshopText($('#requestIssue').value);
+  }
+  if($('#saveRequestBtn'))$('#saveRequestBtn').onclick=()=>saveCustomerRequestEdits(id,false);
+  if($('#convertRequestBtn'))$('#convertRequestBtn').onclick=()=>saveCustomerRequestEdits(id,true);
+}
+
+
+async function saveCustomerRequestEdits(id,convertAfter=false){
+  const r=customerRequests.find(x=>x.id===id);if(!r)return;
+
+  const name=$('#requestName')?.value.trim()||'';
+  const phone=$('#requestPhone')?.value.trim()||'';
+  const plate=normalizePlateFlexible($('#requestPlate')?.value||'');
+  const vehicleText=$('#requestVehicle')?.value.trim()||'';
+  const issue=normalizeGermanWorkshopText($('#requestIssue')?.value||'');
+  const date=$('#requestDate')?.value||'';
+  const time=$('#requestTime')?.value||'';
+  const assignee=$('#requestAssignee')?.value||null;
+
+  if(!name||!vehicleText||!issue){
+    toast('Name, Fahrzeug und Anliegen müssen ausgefüllt sein.');
+    return;
+  }
+  if(time && !date){
+    toast('Bitte zur Uhrzeit auch ein Datum wählen.');
+    return;
+  }
+  if(time && !workshopTimeValid(time)){
+    toast('Bitte eine gültige Uhrzeit auswählen.');
+    return;
+  }
+  if(convertAfter && !plate){
+    toast('Vor der Übernahme als Auftrag bitte ein Kennzeichen ergänzen.');
+    return;
+  }
+
+  const desired=date?(date+'T'+(time||'09:00')+':00'):null;
+  const patch={
+    customer_name:name,
+    phone:phone||null,
+    license_plate:plate||null,
+    vehicle_text:vehicleText,
+    issue,
+    desired_appointment:desired,
+    assigned_user_id:assignee
+  };
+
+  try{
+    const rows=await rest('erle_customer_requests','?id=eq.'+encodeURIComponent(id),{
+      method:'PATCH',
+      headers:{Prefer:'return=representation'},
+      body:JSON.stringify(patch)
+    });
+    Object.assign(r,rows?.[0]||patch);
+    updateRequestIndicator(false);
+
+    if(convertAfter){
+      await convertRequestToOrder(id);
+    }else{
+      closeModal();
+      render();
+      toast('Anfrage gespeichert.');
+    }
+  }catch(e){
+    toast('Anfrage konnte nicht gespeichert werden: '+e.message);
+  }
+}
+
+async function convertRequestToOrder(id){
+  const r=customerRequests.find(x=>x.id===id);if(!r||r.status==='converted')return;
+  if(!r.license_plate){toast('Vor der Übernahme bitte ein Kennzeichen ergänzen.');return}
+  try{
+    let v=vehicles.find(x=>(x.license_plate||'').replace(/-/g,'')===(r.license_plate||'').replace(/-/g,''));
+    let c=null;
+    if(r.customer_name){
+      c={id:uid('c'),name:r.customer_name,phone:r.phone||null,email:r.email||null};
+      await rest('erle_customers','',{method:'POST',headers:{Prefer:'return=minimal'},body:JSON.stringify(c)});
+      customers.push(c);
+    }
+    if(!v){
+      const parts=String(r.vehicle_text||'').trim().split(/\s+/);
+      const maker=parts.shift()||'';
+      const model=parts.join(' ');
+      v={id:uid('v'),customer_id:c?.id||null,license_plate:normalizePlate(r.license_plate),manufacturer:maker,model};
+      await rest('erle_vehicles','',{method:'POST',headers:{Prefer:'return=minimal'},body:JSON.stringify(v)});
+      vehicles.push(v);
+    }else if(c && !v.customer_id){
+      v.customer_id=c.id;
+      await rest('erle_vehicles','?id=eq.'+encodeURIComponent(v.id),{method:'PATCH',headers:{Prefer:'return=minimal'},body:JSON.stringify({customer_id:c.id})});
+    }
+
+    const work=String(r.issue||'').split(/\n|;|,/).map(x=>x.trim()).filter(Boolean);
+    const tasks=work.map((title,i)=>({id:uid('t'),title:capFirst(title),completed:false,position:i+1,part_status:'none'}));
+    const o={
+      id:uid('o'),
+      vehicle_id:v.id,
+      customer_id:c?.id||v.customer_id||null,
+      order_number:'A-'+Date.now().toString().slice(-6),
+      description:r.issue,
+      extra_info:'Kundenanfrage',
+      priority:'normal',
+      appointment_date:r.desired_appointment||null,
+      assigned_user_id:r.assigned_user_id||me.id,
+      created_by_user_id:me.id,
+      payment_status:'open',
+      archived_at:null,
+      tasks,
+      notes:[]
+    };
+    await rest('erle_orders','',{method:'POST',headers:{Prefer:'return=minimal'},body:JSON.stringify(o)});
+    orders.push(o);
+
+    await rest('erle_customer_requests','?id=eq.'+encodeURIComponent(r.id),{
+      method:'PATCH',
+      headers:{Prefer:'return=minimal'},
+      body:JSON.stringify({status:'converted',converted_order_id:o.id,converted_at:new Date().toISOString()})
+    });
+    r.status='converted';r.converted_order_id=o.id;
+    closeModal();
+    render();
+    toast('Anfrage als Auftrag übernommen.');
+  }catch(e){
+    toast('Anfrage konnte nicht übernommen werden: '+e.message);
+  }
+}
+
+
+function newRequestCount(){
+  return isAdmin() ? (customerRequests||[]).filter(r=>r.status==='new').length : 0;
+}
+function updateRequestIndicator(announce=false){
+  const nav=$('#requestsNav');
+  if(!nav)return;
+  const count=newRequestCount();
+  nav.innerHTML=`<span>Anfragen</span>${count?`<span class="request-nav-badge">${count>99?'99+':count}</span>`:''}`;
+  nav.classList.toggle('has-new-requests',count>0);
+
+  if(announce && lastNewRequestCount!==null && count>lastNewRequestCount){
+    toast(count-lastNewRequestCount===1?'Neue Anfrage eingegangen.':`${count-lastNewRequestCount} neue Anfragen eingegangen.`);
+  }
+  lastNewRequestCount=count;
+}
+
 function render(){
   document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===page));
   const c=$('#content');
@@ -5246,9 +7434,11 @@ function render(){
   if(page==='appointments')c.innerHTML=renderAppointments();
   if(page==='vehicles')c.innerHTML=renderVehicles();
   if(page==='archive')c.innerHTML=renderArchive();
+  if(page==='requests')c.innerHTML=renderRequests();
   if(page==='users')c.innerHTML=renderUsers();
   if(page==='settings')c.innerHTML=renderSettings();
   wire();
+  updateRequestIndicator(false);
 }
 function renderBoard(){
   const a=visibleOrders(), all=orders.filter(o=>!isArchived(o));
@@ -5389,36 +7579,7 @@ function renderPurchase(){
 }
 
 
-function openPurchaseParts(oid){
-  const o=orders.find(x=>x.id===oid);if(!o)return;
-  const v=vehicle(o.vehicle_id);
-  const tasks=(o.tasks||[]).filter(t=>taskState(t)==='missing');
-  openModal('Einkauf · '+esc(v?.license_plate||''),`
-    <div class="muted">${esc((v?.manufacturer||'')+' '+(v?.model||''))}</div>
-    <div class="vehicle-id-strip">
-      <div class="vehicle-id-item"><span>Baujahr</span><strong>${esc(v?.year||'–')}</strong></div>
-      <div class="vehicle-id-item"><span>HSN</span><strong>${esc(v?.hsn||'–')}</strong></div>
-      <div class="vehicle-id-item"><span>TSN</span><strong>${esc(v?.tsn||'–')}</strong></div>
-    </div>
-    <div class="section" style="margin-top:14px">
-      <div class="between"><div class="sectiontitle">Benötigte Teile</div><span class="small muted">Preisvergleich Deutschland</span></div>
-      ${tasks.length?tasks.map(t=>`<div class="parts-search-row">
-        <div class="parts-search-main">
-          <strong>${esc(capFirst(t.title))}</strong>
-          <span>${/öl|oel|oil/i.test(t.title)?'Ölservice: Motoröl, Ölfilter und passende Service-Teile berücksichtigen.':'Passend zum Fahrzeug suchen.'}</span>
-        </div>
-        <div class="parts-links">
-          <a class="parts-link" href="${partsSearchUrl(v,t.title,'shopping')}" target="_blank" rel="noopener">Preise Vergleichen</a>
-          <a class="parts-link" href="${partsSearchUrl(v,t.title,'daparto')}" target="_blank" rel="noopener">DAPARTO</a>
-          <a class="parts-link" href="${partsSearchUrl(v,t.title,'autodoc')}" target="_blank" rel="noopener">AUTODOC</a>
-          <a class="parts-link" href="${partsSearchUrl(v,t.title,'motointegrator')}" target="_blank" rel="noopener">Motointegrator</a>
-        </div>
-      </div>`).join(''):'<div class="small muted">Keine fehlenden Teile.</div>'}
-    </div>
-    <div class="actions"><button class="btn" id="purchaseToOrder">Auftrag Öffnen</button></div>
-  `);
-  $('#purchaseToOrder').onclick=()=>openOrder(oid);
-}
+
 
 function isoWeekNumber(date){
   const d=new Date(Date.UTC(date.getFullYear(),date.getMonth(),date.getDate()));
@@ -5865,6 +8026,9 @@ function wire(){
     if(opening)setTimeout(()=>$('#search')?.focus(),30);
   };
 
+  document.querySelectorAll('[data-request]').forEach(r=>r.onclick=()=>openCustomerRequest(r.dataset.request));
+  if($('#reloadRequests'))$('#reloadRequests').onclick=async()=>{try{customerRequests=await rest('erle_customer_requests','?select=*&order=created_at.desc')||[];render()}catch(e){toast(e.message)}};
+
 }
 
 
@@ -6057,12 +8221,15 @@ function openNewAppointment(dateStr){
   openModal('Neuer Termin',`
     <div class="grid2">
       <div class="field"><label>Datum</label><input id="apptDate" class="input" type="date" value="${chosen}"></div>
-      <div class="field"><label>Uhrzeit</label><input id="apptTime" class="input" type="time" value="09:00"></div>
+      <div class="field"><label>Uhrzeit</label><button id="apptTimeButton" class="input time-picker-button" type="button">09:00</button>
+      <input id="apptTime" type="hidden" value="09:00">
+      <div id="apptTimeGrid" class="time-grid hidden"></div></div>
     </div>
     <div class="field" style="margin-top:14px"><label>Fahrzeug</label><select id="apptVehicle" class="select"><option value="">Fahrzeug auswählen…</option>${vehicleOptions}</select></div>
     <div class="field" style="margin-top:14px"><label>Auftrag / Termin</label><input id="apptDescription" class="input" placeholder="z. B. Inspektion, Reifenwechsel, Diagnose"></div>
     <div class="actions"><button class="btn" id="apptCancel">Abbrechen</button><button class="btn primary" id="apptSave">Termin Speichern</button></div>
   `);
+  attachTimeGrid('apptTime','apptTimeButton','apptTimeGrid');
   $('#apptCancel').onclick=closeModal;
   $('#apptSave').onclick=async()=>{
     const vehicleId=$('#apptVehicle').value;
@@ -6070,6 +8237,7 @@ function openNewAppointment(dateStr){
     const date=$('#apptDate').value;
     const time=$('#apptTime').value||'09:00';
     if(!vehicleId||!description||!date){toast('Bitte Datum, Fahrzeug und Termin angeben.');return}
+    if(!workshopTimeValid(time)){toast('Termine sind nur zwischen 09:00 und 18:00 Uhr möglich.');return}
     const o={
       id:uid('o'),
       vehicle_id:vehicleId,
@@ -6111,10 +8279,13 @@ function openNewOrder(){
     <div class="field"><label>TSN</label><input id="ntsn" class="input" maxlength="3" placeholder="z. B. ABC"></div>
   </div>
   <div class="field" style="margin-top:15px"><label>Kunde</label><input id="nc" class="input" placeholder="optional"></div>
-  <div class="field" style="margin-top:15px"><label>Auftrag *</label><textarea id="nd" class="textarea" rows="3" placeholder="z. B. Ölservice, Bremsen vorne, Reifen wechseln"></textarea><div class="small muted">Mit Komma, Semikolon oder neuer Zeile trennen. Daraus entstehen automatisch die Arbeiten.</div></div>
-  <div class="field" style="margin-top:15px"><label>Zusatzinformation</label><textarea id="ne" class="textarea" rows="2"></textarea></div>
-  <div class="grid3" style="margin-top:15px"><div class="field"><label>Datum</label><input id="ndate" type="date" class="input"></div><div class="field"><label>Uhrzeit</label><input id="ntime" type="time" class="input"></div><div class="field"><label>Zuständig</label><select id="nass" class="select">${workerOptions}</select></div></div>
+  <div class="field" style="margin-top:15px"><label>Auftrag *</label><textarea id="nd" class="textarea" rows="3" spellcheck="true" lang="de" autocapitalize="sentences" placeholder="z. B. Ölservice, Bremsen vorne, Reifen wechseln"></textarea><div class="small muted">Mit Komma, Semikolon oder neuer Zeile trennen. Daraus entstehen automatisch die Arbeiten.</div></div>
+  <div class="field" style="margin-top:15px"><label>Zusatzinformation</label><textarea id="ne" class="textarea" rows="2" spellcheck="true" lang="de" autocapitalize="sentences"></textarea></div>
+  <div class="grid3" style="margin-top:15px"><div class="field"><label>Datum</label><input id="ndate" type="date" class="input"></div><div class="field"><label>Uhrzeit</label><button id="ntimeButton" type="button" class="input time-picker-button">Uhrzeit wählen</button>
+      <input id="ntime" type="hidden">
+      <div id="ntimeGrid" class="time-grid hidden"></div></div><div class="field"><label>Zuständig</label><select id="nass" class="select">${workerOptions}</select></div></div>
   <div class="actions"><button class="btn" id="cancelNew">Abbrechen</button><button class="btn primary" id="saveNew">Auftrag Erstellen</button></div>`);
+  attachTimeGrid('ntime','ntimeButton','ntimeGrid');
   $('#cancelNew').onclick=closeModal;
   $('#np').onblur=()=>$('#np').value=normalizePlate($('#np').value);
   $('#np').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();$('#np').value=normalizePlate($('#np').value);$('#nm').focus()}};
@@ -6124,14 +8295,14 @@ function openNewOrder(){
   $('#nhsn').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();$('#ntsn').focus()}};
   $('#ntsn').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();$('#nc').focus()}};
   $('#nc').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();$('#nd').focus()}};
-  $('#ndate').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();$('#ntime').focus()}};
+  $('#ndate').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();$('#ntimeButton').focus()}};
   $('#ntime').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();$('#nass').focus()}};
   $('#nass').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();createOrder()}};
   $('#saveNew').onclick=createOrder;
 }
 async function createOrder(){
   try{
-    const plate=normalizePlate($('#np').value),maker=$('#nm').value.trim(),model=$('#nmodel').value.trim(),desc=$('#nd').value.trim();
+    const plate=normalizePlate($('#np').value),maker=$('#nm').value.trim(),model=$('#nmodel').value.trim(),desc=normalizeGermanWorkshopText($('#nd').value);
     if(!plate||!maker||!desc)throw new Error('Kennzeichen, Hersteller und Auftrag sind Pflichtfelder.');
 
     const year=$('#nyear').value.trim(),hsn=$('#nhsn').value.trim().toUpperCase(),tsn=$('#ntsn').value.trim().toUpperCase();
@@ -6155,7 +8326,9 @@ async function createOrder(){
 
     const work=desc.split(/\n|;|,/).map(x=>x.trim()).filter(Boolean);
     const tasks=work.map((title,i)=>({id:uid('t'),title:capFirst(title),completed:false,position:i+1,part_status:'none'}));
-    const dt=$('#ndate').value?$('#ndate').value+'T'+($('#ntime').value||'08:00')+':00':null;
+    const orderTime=$('#ntime').value||'09:00';
+    if($('#ndate').value && !workshopTimeValid(orderTime))throw new Error('Termine sind nur zwischen 09:00 und 18:00 Uhr möglich.');
+    const dt=$('#ndate').value?$('#ndate').value+'T'+orderTime+':00':null;
 
     const o={
       id:uid('o'),vehicle_id:v.id,customer_id:null,order_number:'A-'+Date.now().toString().slice(-6),
@@ -6183,7 +8356,13 @@ async function saveOrderWindow(oid){
   const o=orders.find(x=>x.id===oid);if(!o)return;
   o.description=$('#editDescription')?.value.trim()||o.description;
   o.extra_info=$('#editExtra')?.value.trim()||'';
-  o.appointment_date=$('#editAppointment')?.value?$('#editAppointment').value+':00':null;
+  const editAppointmentValue=$('#editAppointment')?.value||'';
+  const editAppointmentTime=appointmentTimeFromDateTime(editAppointmentValue);
+  if(editAppointmentTime && !workshopTimeValid(editAppointmentTime)){
+    toast('Termine sind nur zwischen 09:00 und 18:00 Uhr möglich.');
+    return;
+  }
+  o.appointment_date=editAppointmentValue?editAppointmentValue+':00':null;
   if(isAdmin()&&$('#editAssignee'))o.assigned_user_id=$('#editAssignee').value;
   const note=$('#noteText')?.value.trim();
   if(note){
@@ -6218,7 +8397,7 @@ function openOrder(id){
         <div class="field"><label>Zusatzinformation</label><textarea id="editExtra" class="textarea" rows="3">${esc(o.extra_info||'')}</textarea></div>
       </div>
       <div class="grid2" style="margin-top:14px">
-        <div class="field"><label>Termin</label><input id="editAppointment" type="datetime-local" class="input" value="${o.appointment_date?String(o.appointment_date).slice(0,16):''}"></div>
+        <div class="field"><label>Termin</label><input id="editAppointment" type="datetime-local" step="900" class="input" value="${o.appointment_date?String(o.appointment_date).slice(0,16):''}"></div>
         <div class="field"><label>Zuständig</label>${isAdmin()?`<select id="editAssignee" class="select">${assigneeOptions}</select>`:`<div class="input" style="background:#f8fafc">${esc(profiles.find(p=>p.id===o.assigned_user_id)?.username||me.username)}</div>`}</div>
       </div>
     </div>
@@ -6340,9 +8519,44 @@ async function toggleArchive(oid){
   toast(o.archived_at?'Auftrag ins Archiv verschoben.':'Auftrag wiederhergestellt.');
 }
 
-$('#authSwitchBtn').onclick=()=>{authMode=authMode==='login'?'signup':'login';const s=authMode==='signup';$('#confirmWrap').classList.toggle('hidden',!s);$('#authMainBtn').textContent=s?'Account erstellen':'Anmelden';$('#authSwitchText').textContent=s?'Bereits ein Konto?':'Noch kein Konto?';$('#authSwitchBtn').textContent=s?'Anmelden':'Account erstellen';$('#authMessage').classList.add('hidden')};
-$('#authMainBtn').onclick=async()=>{const u=$('#loginUser').value.trim(),p=$('#loginPass').value;try{if(u.length<3||p.length<8)throw new Error('Benutzername mindestens 3 Zeichen, Passwort mindestens 8 Zeichen.');if(authMode==='signup'){if(p!==$('#loginConfirm').value)throw new Error('Passwörter stimmen nicht überein.');await register(u,p)}else await signIn(u,p);await enterApp()}catch(e){$('#authMessage').textContent=e.message;$('#authMessage').classList.remove('hidden')}};
-$('#loginPass').onkeydown=e=>{if(e.key==='Enter')$('#authMainBtn').click()};
+$('#authMainBtn').onclick=async()=>{
+  const u=$('#loginUser').value.trim(),p=$('#loginPass').value;
+  const c=$('#loginConfirm').value;
+  try{
+    if(u.length<3||p.length<8)throw new Error('Benutzername mindestens 3 Zeichen, Passwort mindestens 8 Zeichen.');
+    if(authMode==='register'){
+      if(p!==c)throw new Error('Die Passwörter stimmen nicht überein.');
+      await register(u,p);
+    }else{
+      await signIn(u,p);
+    }
+    await enterApp();
+  }catch(e){
+    $('#authMessage').textContent=e.message;
+    $('#authMessage').classList.remove('hidden');
+  }
+};
+$('#authSwitchBtn').onclick=()=>{
+  authMode=authMode==='login'?'register':'login';
+  const registering=authMode==='register';
+  $('#confirmWrap').classList.toggle('hidden',!registering);
+  $('#authMainBtn').textContent=registering?'Account erstellen':'Anmelden';
+  $('#authSwitchBtn').textContent=registering?'Zur Anmeldung':'Account erstellen';
+  $('#authMessage').textContent='';
+  $('#authMessage').classList.add('hidden');
+  if(registering)$('#loginConfirm').value='';
+};
+$('#loginPass').onkeydown=e=>{
+  if(e.key==='Enter'){
+    e.preventDefault();
+    if(authMode==='register')$('#loginConfirm').focus();
+    else $('#authMainBtn').click();
+  }
+};
+$('#loginConfirm').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();$('#authMainBtn').click()}};
+if($('#staffLoginBtn'))$('#staffLoginBtn').addEventListener('click',e=>{e.preventDefault();showLogin();});
+if($('#backToPublicBtn'))$('#backToPublicBtn').addEventListener('click',e=>{e.preventDefault();showPublic();});
+if($('#customerRequestForm'))$('#customerRequestForm').onsubmit=submitCustomerRequest;
 if($('#logoutBtn'))$('#logoutBtn').onclick=logout;
 if($('#mobileLogoutBtn'))$('#mobileLogoutBtn').onclick=logout;
 if($('#topNew'))$('#topNew').onclick=openNewOrder;
@@ -6352,7 +8566,219 @@ document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>{
   page=b.dataset.page;
   render();
 });
+if(!session?.access_token)showPublic();
 enterApp();
 </script>
+
+<datalist id="erleManufacturerOptions">
+  <option value="Audi"><option value="BMW"><option value="Mercedes-Benz">
+  <option value="Volkswagen"><option value="Škoda"><option value="SEAT">
+  <option value="Cupra"><option value="Opel"><option value="Ford">
+  <option value="Toyota"><option value="Hyundai"><option value="Kia">
+  <option value="Renault"><option value="Peugeot"><option value="Citroën">
+  <option value="Volvo"><option value="Porsche"><option value="Tesla">
+</datalist>
+<datalist id="erleModelOptions"></datalist>
+<datalist id="erleVariantOptions"></datalist>
+
+
+
+
+<script id="erle-public-vehicle-autocomplete">
+(function(){
+  const DB={
+    "Mercedes-Benz":{
+      popular:["C-Klasse","E-Klasse","A-Klasse","GLC","V-Klasse","CLA"],
+      models:["A-Klasse","B-Klasse","C-Klasse","E-Klasse","S-Klasse","CLA","CLS","GLA","GLB","GLC","GLE","GLS","V-Klasse","Citan","Sprinter"],
+      variants:{
+        "A-Klasse":["A 160","A 180","A 180d","A 200","A 200d","A 220","A 220d","A 250","A 250e","AMG A 35","AMG A 45 S"],
+        "B-Klasse":["B 160","B 180","B 180d","B 200","B 200d","B 220d","B 250e"],
+        "C-Klasse":["C 180","C 200","C 200d","C 220d","C 250","C 250d","C 300","C 300d","C 300e","C 300de","AMG C 43","AMG C 63"],
+        "E-Klasse":["E 180","E 200","E 200d","E 220d","E 250","E 300","E 300d","E 300e","E 300de","E 350d","E 400d","AMG E 53","AMG E 63"],
+        "S-Klasse":["S 350d","S 400d","S 450","S 450d","S 500","S 580","S 580e","AMG S 63"],
+        "CLA":["CLA 180","CLA 180d","CLA 200","CLA 200d","CLA 220d","CLA 250e","AMG CLA 35","AMG CLA 45 S"],
+        "CLS":["CLS 220d","CLS 250d","CLS 300d","CLS 350d","CLS 400d","CLS 450","AMG CLS 53"],
+        "GLA":["GLA 180","GLA 180d","GLA 200","GLA 200d","GLA 220d","GLA 250e","AMG GLA 35","AMG GLA 45 S"],
+        "GLB":["GLB 180","GLB 180d","GLB 200","GLB 200d","GLB 220d","GLB 250","AMG GLB 35"],
+        "GLC":["GLC 200","GLC 220d","GLC 250","GLC 250d","GLC 300","GLC 300d","GLC 300e","GLC 300de","AMG GLC 43","AMG GLC 63"],
+        "GLE":["GLE 250d","GLE 300d","GLE 350d","GLE 350de","GLE 400d","GLE 450","GLE 450d","GLE 450e","AMG GLE 53","AMG GLE 63"],
+        "GLS":["GLS 350d","GLS 400d","GLS 450","GLS 450d","GLS 580","AMG GLS 63"],
+        "V-Klasse":["V 200d","V 220d","V 250d","V 300d"],
+        "Citan":["108 CDI","109 CDI","110","110 CDI","111 CDI","112 CDI","113"],
+        "Sprinter":["211 CDI","214 CDI","215 CDI","311 CDI","314 CDI","315 CDI","316 CDI","317 CDI","319 CDI"]
+      }
+    },
+    "BMW":{
+      popular:["3er","5er","1er","X1","X3","X5"],
+      models:["1er","2er","3er","4er","5er","7er","8er","X1","X2","X3","X4","X5","X6","X7","i3","i4","i5","i7","iX"],
+      variants:{
+        "1er":["116i","118i","120i","128ti","M135i xDrive","116d","118d","120d"],
+        "2er":["218i","220i","230i","M240i xDrive","218d","220d","225e xDrive","230e xDrive"],
+        "3er":["318i","320i","330i","M340i xDrive","316d","318d","320d","330d","M340d xDrive","320e","330e"],
+        "4er":["420i","430i","M440i xDrive","420d","430d","M440d xDrive"],
+        "5er":["520i","530i","540i xDrive","520d","530d","540d xDrive","530e","550e xDrive","i5 eDrive40","i5 M60 xDrive"],
+        "X1":["sDrive18i","xDrive23i","sDrive18d","xDrive23d","xDrive25e","xDrive30e","iX1 eDrive20","iX1 xDrive30"],
+        "X3":["xDrive20i","xDrive30i","M40i","xDrive20d","xDrive30d","M40d","xDrive30e","X3 M"],
+        "X5":["xDrive40i","M60i xDrive","xDrive30d","xDrive40d","xDrive50e","X5 M"],
+        "i4":["eDrive35","eDrive40","xDrive40","M50"],
+        "i5":["eDrive40","xDrive40","M60 xDrive"]
+      }
+    },
+    "Volkswagen":{
+      popular:["Golf","Polo","Passat","Tiguan","T-Roc","Caddy"],
+      models:["up!","Polo","Golf","Golf Variant","Passat","Arteon","T-Cross","Taigo","T-Roc","Tiguan","Touran","Touareg","Caddy","Transporter","Multivan","ID.3","ID.4","ID.5","ID.7"],
+      variants:{
+        "Polo":["1.0 MPI","1.0 TSI","1.5 TSI","GTI 2.0 TSI"],
+        "Golf":["1.0 TSI","1.2 TSI","1.4 TSI","1.5 TSI","1.5 eTSI","2.0 TSI GTI","2.0 TSI R","1.6 TDI","2.0 TDI","1.4 eHybrid","GTE"],
+        "Passat":["1.4 TSI","1.5 TSI","2.0 TSI","1.6 TDI","2.0 TDI","1.4 GTE","1.5 eHybrid"],
+        "T-Roc":["1.0 TSI","1.5 TSI","2.0 TSI","2.0 TDI","R 2.0 TSI"],
+        "Tiguan":["1.4 TSI","1.5 TSI","2.0 TSI","2.0 TDI","1.4 eHybrid","1.5 eHybrid"],
+        "Touran":["1.0 TSI","1.2 TSI","1.4 TSI","1.5 TSI","1.6 TDI","2.0 TDI"],
+        "Caddy":["1.0 TSI","1.5 TSI","2.0 TDI"],
+        "Transporter":["2.0 TDI","2.0 TSI","e-Transporter"],
+        "ID.3":["Pure","Pro","Pro S","GTX"],"ID.4":["Pure","Pro","Pro 4MOTION","GTX"],"ID.5":["Pro","Pro 4MOTION","GTX"],"ID.7":["Pro","Pro S","Tourer Pro","GTX"]
+      }
+    },
+    "Audi":{
+      popular:["A3","A4","A6","Q3","Q5","A5"],
+      models:["A1","A3","A4","A5","A6","A7","A8","Q2","Q3","Q4 e-tron","Q5","Q7","Q8","TT"],
+      variants:{
+        "A1":["25 TFSI","30 TFSI","35 TFSI","40 TFSI"],
+        "A3":["30 TFSI","35 TFSI","40 TFSI e","30 TDI","35 TDI","S3","RS3"],
+        "A4":["35 TFSI","40 TFSI","45 TFSI quattro","30 TDI","35 TDI","40 TDI","45 TDI quattro","S4","RS4"],
+        "A5":["35 TFSI","40 TFSI","45 TFSI quattro","35 TDI","40 TDI","S5","RS5"],
+        "A6":["40 TFSI","45 TFSI","50 TFSI e","55 TFSI e","35 TDI","40 TDI","45 TDI","50 TDI","S6","RS6"],
+        "Q3":["35 TFSI","40 TFSI quattro","45 TFSI e","35 TDI","40 TDI quattro","RS Q3"],
+        "Q5":["40 TFSI","45 TFSI","50 TFSI e","55 TFSI e","35 TDI","40 TDI","50 TDI","SQ5"],
+        "Q7":["45 TDI","50 TDI","55 TFSI","55 TFSI e","60 TFSI e","SQ7"],
+        "Q8":["45 TDI","50 TDI","55 TFSI","55 TFSI e","60 TFSI e","SQ8","RS Q8"]
+      }
+    },
+    "Škoda":{popular:["Octavia","Fabia","Superb","Kodiaq","Karoq"],models:["Fabia","Scala","Octavia","Superb","Kamiq","Karoq","Kodiaq","Enyaq"],variants:{"Fabia":["1.0 MPI","1.0 TSI","1.5 TSI"],"Octavia":["1.0 TSI","1.5 TSI","2.0 TSI","1.6 TDI","2.0 TDI","1.4 iV","RS 2.0 TSI"],"Superb":["1.5 TSI","2.0 TSI","2.0 TDI","1.4 iV"],"Kodiaq":["1.5 TSI","2.0 TSI","2.0 TDI","1.5 iV"],"Enyaq":["50","60","80","85","85x","RS"]}},
+    "SEAT":{popular:["Leon","Ibiza","Ateca","Arona"],models:["Ibiza","Leon","Arona","Ateca","Tarraco"],variants:{"Ibiza":["1.0 MPI","1.0 TSI","1.5 TSI"],"Leon":["1.0 TSI","1.5 TSI","2.0 TSI","1.6 TDI","2.0 TDI","1.4 eHybrid"],"Ateca":["1.0 TSI","1.5 TSI","2.0 TSI","2.0 TDI"]}},
+    "Cupra":{popular:["Formentor","Leon","Born"],models:["Leon","Formentor","Ateca","Born","Tavascan"],variants:{"Formentor":["1.5 TSI","1.5 eTSI","2.0 TSI","2.0 TDI","e-HYBRID 204","VZ e-HYBRID 272","VZ5"],"Leon":["1.5 eTSI","2.0 TSI","e-HYBRID 204","e-HYBRID 272"],"Born":["45","58","77","e-Boost","VZ"]}},
+    "Opel":{popular:["Corsa","Astra","Mokka","Grandland"],models:["Corsa","Astra","Insignia","Mokka","Crossland","Grandland"],variants:{"Corsa":["1.2","1.2 Turbo","1.3 CDTI","1.5 Diesel","Electric"],"Astra":["1.2 Turbo","1.4 Turbo","1.6 Turbo","1.5 Diesel","1.6 Plug-in-Hybrid","Electric"],"Mokka":["1.2 Turbo","1.5 Diesel","Electric"]}},
+    "Ford":{popular:["Focus","Fiesta","Kuga","Puma"],models:["Fiesta","Focus","Mondeo","Puma","Kuga","Mustang","Transit","Transit Custom"],variants:{"Fiesta":["1.0 EcoBoost","1.1","1.5 TDCi","ST 1.5 EcoBoost"],"Focus":["1.0 EcoBoost","1.5 EcoBoost","2.3 EcoBoost ST","1.5 EcoBlue","2.0 EcoBlue"],"Kuga":["1.5 EcoBoost","1.5 EcoBlue","2.0 EcoBlue","2.5 Hybrid","2.5 Plug-in-Hybrid"],"Transit":["2.0 EcoBlue","2.2 TDCi","2.4 TDCi"]}},
+    "Toyota":{popular:["Yaris","Corolla","RAV4","C-HR"],models:["Yaris","Corolla","C-HR","RAV4","Camry","Aygo X","Land Cruiser","Prius"],variants:{"Yaris":["1.0 VVT-i","1.5 VVT-i","1.5 Hybrid","GR Yaris 1.6 Turbo"],"Corolla":["1.2 Turbo","1.8 Hybrid","2.0 Hybrid"],"RAV4":["2.0","2.5 Hybrid","2.5 Plug-in-Hybrid"]}},
+    "Hyundai":{popular:["i30","i20","Tucson","Kona"],models:["i10","i20","i30","Kona","Tucson","Santa Fe","IONIQ 5","IONIQ 6"],variants:{"i30":["1.0 T-GDI","1.5 T-GDI","1.6 CRDi","N 2.0 T-GDI"],"Kona":["1.0 T-GDI","1.6 T-GDI","1.6 Hybrid","Elektro"],"Tucson":["1.6 T-GDI","1.6 CRDi","1.6 Hybrid","1.6 Plug-in-Hybrid"]}},
+    "Kia":{popular:["Ceed","Sportage","Niro","Sorento"],models:["Picanto","Rio","Ceed","XCeed","Niro","Sportage","Sorento","EV3","EV6","EV9"],variants:{"Ceed":["1.0 T-GDI","1.5 T-GDI","1.6 CRDi"],"Sportage":["1.6 T-GDI","1.6 CRDi","1.6 Hybrid","1.6 Plug-in-Hybrid"],"Niro":["1.6 Hybrid","1.6 Plug-in-Hybrid","EV"]}},
+    "Renault":{popular:["Clio","Megane","Captur","Austral"],models:["Twingo","Clio","Megane","Captur","Austral","Scenic","Espace","Kangoo","Trafic"],variants:{"Clio":["TCe 90","TCe 100","E-Tech Full Hybrid"],"Megane":["TCe 140","E-Tech Plug-in Hybrid","E-Tech Electric"],"Captur":["TCe 90","TCe 140","E-Tech Full Hybrid"]}},
+    "Peugeot":{popular:["208","308","3008","2008"],models:["108","208","308","408","508","2008","3008","5008","Partner","Expert"],variants:{"208":["PureTech 75","PureTech 100","BlueHDi 100","e-208"],"308":["PureTech 130","BlueHDi 130","Hybrid 180","Hybrid 225","e-308"],"3008":["PureTech 130","BlueHDi 130","Hybrid","Plug-in-Hybrid","e-3008"]}},
+    "Citroën":{popular:["C3","C4","C5 Aircross"],models:["C1","C3","C4","C5 X","C3 Aircross","C5 Aircross","Berlingo","Jumpy"],variants:{"C3":["PureTech 83","PureTech 110","BlueHDi 100","ë-C3"],"C4":["PureTech 100","PureTech 130","BlueHDi 130","ë-C4"],"C5 Aircross":["PureTech 130","BlueHDi 130","Hybrid","Plug-in-Hybrid"]}},
+    "Volvo":{popular:["XC60","XC40","V60","XC90"],models:["V40","V60","V90","S60","S90","XC40","XC60","XC90","EX30","EX40"],variants:{"XC40":["B3","B4","B5","T4 Recharge","T5 Recharge","Recharge Pure Electric"],"XC60":["B4","B5","B6","T6 Recharge","T8 Recharge"],"V60":["B4","B5","T6 Recharge","T8 Recharge"]}},
+    "Porsche":{popular:["911","Cayenne","Macan","Panamera"],models:["718 Boxster","718 Cayman","911","Panamera","Macan","Cayenne","Taycan"],variants:{"911":["Carrera","Carrera S","Carrera GTS","Turbo","Turbo S","GT3","GT3 RS"],"Cayenne":["Cayenne","Cayenne S","E-Hybrid","S E-Hybrid","Turbo E-Hybrid"],"Macan":["Macan","Macan S","Macan GTS","Macan Electric","Macan 4 Electric"]}},
+    "Tesla":{popular:["Model 3","Model Y"],models:["Model 3","Model Y","Model S","Model X"],variants:{"Model 3":["RWD","Long Range AWD","Performance"],"Model Y":["RWD","Long Range RWD","Long Range AWD","Performance"],"Model S":["Dual Motor","Plaid"],"Model X":["Dual Motor","Plaid"]}},
+    "Dacia":{popular:["Sandero","Duster","Jogger"],models:["Sandero","Sandero Stepway","Duster","Jogger","Spring","Logan"],variants:{"Sandero":["SCe 65","TCe 90","ECO-G 100"],"Duster":["TCe 130","TCe 150","Hybrid 140","ECO-G 100"],"Jogger":["TCe 110","Hybrid 140","ECO-G 100"]}},
+    "Nissan":{popular:["Qashqai","Juke","X-Trail"],models:["Micra","Juke","Qashqai","X-Trail","Leaf","Ariya","Townstar"],variants:{"Juke":["DIG-T 114","Hybrid 143"],"Qashqai":["DIG-T 140","DIG-T 158","e-POWER 190"],"X-Trail":["e-POWER 204","e-4ORCE 213"]}},
+    "Mazda":{popular:["Mazda3","CX-5","CX-30"],models:["Mazda2","Mazda3","Mazda6","CX-3","CX-30","CX-5","CX-60","MX-5","MX-30"],variants:{"Mazda3":["e-Skyactiv G 122","e-Skyactiv G 150","e-Skyactiv X 186"],"CX-5":["Skyactiv-G 165","Skyactiv-G 194","Skyactiv-D 150","Skyactiv-D 184"],"MX-5":["Skyactiv-G 132","Skyactiv-G 184"]}},
+    "Honda":{popular:["Civic","Jazz","CR-V"],models:["Jazz","Civic","HR-V","CR-V","ZR-V","e:Ny1"],variants:{"Civic":["1.0 VTEC Turbo","1.5 VTEC Turbo","2.0 e:HEV","Type R"],"Jazz":["1.5 e:HEV"],"CR-V":["2.0 e:HEV","2.0 e:PHEV"]}},
+    "Fiat":{popular:["500","Panda","Tipo","Ducato"],models:["500","500e","Panda","Tipo","600","Doblo","Ducato"],variants:{"500":["1.0 Hybrid","1.2","0.9 TwinAir"],"500e":["24 kWh","42 kWh"],"Panda":["1.0 Hybrid","1.2","0.9 TwinAir"],"Ducato":["2.2 Multijet","2.3 Multijet","E-Ducato"]}},
+    "Alfa Romeo":{popular:["Giulia","Stelvio","Giulietta"],models:["MiTo","Giulietta","Giulia","Stelvio","Tonale"],variants:{"Giulia":["2.0 Turbo","2.2 Diesel","Quadrifoglio 2.9 V6"],"Stelvio":["2.0 Turbo","2.2 Diesel","Quadrifoglio 2.9 V6"],"Tonale":["1.5 Hybrid","1.3 Plug-in-Hybrid","1.6 Diesel"]}},
+    "MINI":{popular:["Cooper","Countryman"],models:["Cooper","Cooper 5-Türer","Clubman","Countryman","Aceman"],variants:{"Cooper":["Cooper C","Cooper S","Cooper E","Cooper SE","John Cooper Works"],"Countryman":["Countryman C","Countryman S ALL4","Countryman E","Countryman SE ALL4","John Cooper Works ALL4"]}},
+    "Land Rover":{popular:["Range Rover Evoque","Discovery Sport","Defender"],models:["Range Rover","Range Rover Sport","Range Rover Velar","Range Rover Evoque","Discovery","Discovery Sport","Defender"],variants:{"Range Rover Evoque":["D165","D200","P200","P250","P300e"],"Discovery Sport":["D165","D200","P200","P250e"],"Defender":["D200","D250","D300","P400e","P525"]}},
+    "Suzuki":{popular:["Swift","Vitara","S-Cross"],models:["Ignis","Swift","Vitara","S-Cross","Across","Swace"],variants:{"Swift":["1.2 Dualjet Hybrid"],"Vitara":["1.4 Boosterjet Hybrid","1.5 Dualjet Hybrid"],"S-Cross":["1.4 Boosterjet Hybrid","1.5 Dualjet Hybrid"]}}
+  };
+
+  const POPULAR_MAKES=["Volkswagen","Mercedes-Benz","BMW","Audi","Škoda","Opel","Ford","Toyota"];
+  const maker=$('#crManufacturer'),model=$('#crModel'),variant=$('#crVariant');
+  const makerBox=$('#crManufacturerSuggest'),modelBox=$('#crModelSuggest'),variantBox=$('#crVariantSuggest');
+  if(!maker||!model||!variant||!makerBox||!modelBox||!variantBox)return;
+
+  function exactMake(){
+    const q=maker.value.trim().toLowerCase();
+    return Object.keys(DB).find(x=>x.toLowerCase()===q)||'';
+  }
+  function exactModel(make){
+    if(!make)return '';
+    const q=model.value.trim().toLowerCase();
+    return DB[make].models.find(x=>x.toLowerCase()===q)||'';
+  }
+  function show(box,items,onPick){
+    if(!items.length){box.classList.add('hidden');box.innerHTML='';return}
+    box.innerHTML=items.slice(0,10).map(v=>`<button type="button" data-value="${esc(v)}">${esc(v)}</button>`).join('');
+    box.classList.remove('hidden');
+    box.querySelectorAll('button').forEach(b=>b.onclick=()=>{onPick(b.dataset.value);box.classList.add('hidden')});
+  }
+
+  maker.onfocus=()=>{
+    const q=maker.value.trim().toLowerCase();
+    const items=q?Object.keys(DB).filter(x=>x.toLowerCase().includes(q)):POPULAR_MAKES;
+    show(makerBox,items,v=>{maker.value=v;model.value='';variant.value='';maker.dispatchEvent(new Event('change'))});
+  };
+  maker.oninput=()=>{
+    const q=maker.value.trim().toLowerCase();
+    show(makerBox,Object.keys(DB).filter(x=>x.toLowerCase().includes(q)),v=>{maker.value=v;model.value='';variant.value='';maker.dispatchEvent(new Event('change'))});
+  };
+  maker.onchange=()=>{model.value='';variant.value='';modelBox.classList.add('hidden');variantBox.classList.add('hidden')};
+
+  model.onfocus=()=>{
+    const make=exactMake(); if(!make)return;
+    const q=model.value.trim().toLowerCase();
+    const items=q?DB[make].models.filter(x=>x.toLowerCase().includes(q)):DB[make].popular;
+    show(modelBox,items,v=>{model.value=v;variant.value='';model.dispatchEvent(new Event('change'))});
+  };
+  model.oninput=()=>{
+    const make=exactMake(); if(!make)return;
+    const q=model.value.trim().toLowerCase();
+    show(modelBox,DB[make].models.filter(x=>x.toLowerCase().includes(q)),v=>{model.value=v;variant.value='';model.dispatchEvent(new Event('change'))});
+  };
+  model.onchange=()=>{variant.value='';variantBox.classList.add('hidden')};
+
+  variant.onfocus=()=>{
+    const make=exactMake(),mdl=exactModel(make); if(!make||!mdl)return;
+    show(variantBox,DB[make].variants[mdl]||[],v=>{variant.value=v});
+  };
+  variant.oninput=()=>{
+    const make=exactMake(),mdl=exactModel(make); if(!make||!mdl)return;
+    const q=variant.value.trim().toLowerCase();
+    show(variantBox,(DB[make].variants[mdl]||[]).filter(x=>x.toLowerCase().includes(q)),v=>{variant.value=v});
+  };
+
+  const logical=[maker,model,variant,$('#crPlateRegion'),$('#crPlateLetters'),$('#crPlateNumber'),$('#crIssue'),$('#crDate'),$('#crTimeButton'),$('#crName'),$('#crPhone')].filter(Boolean);
+  logical.forEach((el,i)=>el.addEventListener('keydown',e=>{
+    if(e.key!=='Enter'||el.tagName==='TEXTAREA')return;
+    e.preventDefault();
+    if(logical[i+1])logical[i+1].focus();
+  }));
+
+  document.addEventListener('click',e=>{
+    if(!e.target.closest('.public-autocomplete-field')){
+      makerBox.classList.add('hidden');modelBox.classList.add('hidden');variantBox.classList.add('hidden');
+    }
+  });
+})();
+</script>
+
+
+
+
+<script id="erle-public-form-enhancers">
+(function(){
+  ['crPlateRegion','crPlateLetters','crPlateNumber','crPlateSuffix'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el)el.addEventListener('input',syncPublicPlate);
+    if(el)el.addEventListener('change',syncPublicPlate);
+  });
+
+  const region=$('#crPlateRegion'),letters=$('#crPlateLetters'),number=$('#crPlateNumber');
+  if(region)region.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();region.value=region.value.toUpperCase();letters?.focus()}};
+  if(letters)letters.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();letters.value=letters.value.toUpperCase();number?.focus()}};
+
+  attachTimeGrid('crTime','crTimeButton','crTimeGrid');
+
+  const issue=$('#crIssue');
+  if(issue)issue.addEventListener('blur',()=>issue.value=normalizeGermanWorkshopText(issue.value));
+})();
+</script>
+
+
+<script id="erle-timegrid-outside-close">
+document.addEventListener('click',function(e){
+  if(e.target.closest('.time-picker-field')) return;
+  document.querySelectorAll('.time-grid').forEach(g=>g.classList.add('hidden'));
+  document.querySelectorAll('.time-picker-button').forEach(b=>b.setAttribute('aria-expanded','false'));
+});
+</script>
+
 </body>
 </html>
