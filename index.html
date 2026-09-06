@@ -4200,6 +4200,191 @@ body.login-mode .login-card{
   }
 }
 
+
+/* ==========================================================
+   FINAL: mobile overview add button + persistent session
+   ========================================================== */
+@media (max-width:680px){
+  .board-page > .pagehead{
+    position:absolute!important;
+    top:5px!important;
+    right:0!important;
+    width:46px!important;
+    min-width:46px!important;
+    max-width:46px!important;
+    height:46px!important;
+    min-height:46px!important;
+    max-height:46px!important;
+    margin:0!important;
+    padding:0!important;
+    display:block!important;
+  }
+
+  .board-page > .pagehead .responsive-add{
+    -webkit-appearance:none!important;
+    appearance:none!important;
+    box-sizing:border-box!important;
+    position:relative!important;
+    inset:auto!important;
+    width:46px!important;
+    min-width:46px!important;
+    max-width:46px!important;
+    height:46px!important;
+    min-height:46px!important;
+    max-height:46px!important;
+    padding:0!important;
+    margin:0!important;
+    border-radius:9999px!important;
+    border:0!important;
+    display:grid!important;
+    place-items:center!important;
+    line-height:1!important;
+    overflow:hidden!important;
+    flex:none!important;
+  }
+
+  .board-page > .pagehead .responsive-add .mobile-add-label{
+    position:absolute!important;
+    inset:0!important;
+    width:46px!important;
+    height:46px!important;
+    margin:0!important;
+    padding:0!important;
+    display:grid!important;
+    place-items:center!important;
+    font-size:28px!important;
+    font-weight:400!important;
+    line-height:1!important;
+    transform:none!important;
+    top:0!important;
+    left:0!important;
+  }
+
+  .board-page > .pagehead .responsive-add .desktop-add-label{
+    display:none!important;
+  }
+
+  .mobile-overview-hero{
+    padding-right:60px!important;
+  }
+}
+
+
+/* ==========================================================
+   Overview information hierarchy + stable mobile refresh
+   ========================================================== */
+.ordercard .cardtop{
+  display:flex!important;
+  align-items:flex-start!important;
+  justify-content:space-between!important;
+  gap:14px!important;
+}
+.ordercard .cardleft{
+  min-width:0!important;
+  flex:1 1 auto!important;
+}
+.ordercard .cardright{
+  margin-left:auto!important;
+  min-width:0!important;
+  max-width:44%!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-end!important;
+  text-align:right!important;
+  gap:4px!important;
+}
+.appointment-right{
+  width:100%!important;
+  color:#7d8999!important;
+  font-size:11px!important;
+  line-height:1.25!important;
+  white-space:nowrap!important;
+  text-align:right!important;
+}
+
+.parts-summary{
+  display:flex!important;
+  align-items:center!important;
+  flex-wrap:wrap!important;
+  gap:5px!important;
+  margin-top:9px!important;
+  font-size:11px!important;
+  font-weight:680!important;
+  line-height:1.2!important;
+}
+.parts-bit{
+  display:inline-flex!important;
+  align-items:center!important;
+  min-height:24px!important;
+  padding:4px 8px!important;
+  border-radius:999px!important;
+}
+.parts-bit.missing{
+  background:var(--redSoft)!important;
+  color:var(--red)!important;
+}
+.parts-bit.available{
+  background:var(--greenSoft)!important;
+  color:var(--green)!important;
+}
+.parts-bit.neutral{
+  background:#f1f4f8!important;
+  color:#778394!important;
+}
+.parts-sep{
+  color:#b1bac6!important;
+  display:none!important;
+}
+.compact-cardmeta{
+  margin-top:9px!important;
+  display:flex!important;
+  justify-content:flex-start!important;
+}
+.compact-cardmeta .badge{
+  width:auto!important;
+  min-width:72px!important;
+}
+
+@media(max-width:680px){
+  .ordercard .cardright{
+    max-width:42%!important;
+  }
+  .appointment-right{
+    font-size:10.5px!important;
+  }
+  .parts-summary{
+    gap:4px!important;
+    margin-top:8px!important;
+  }
+  .parts-bit{
+    padding:4px 7px!important;
+    font-size:10.5px!important;
+  }
+}
+
+
+/* Admin-only creator information in order details */
+.creator-admin-only{
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  color:#7d8999;
+  font-size:12px;
+  line-height:1.2;
+  white-space:nowrap;
+}
+.creator-admin-only strong{
+  color:var(--text);
+  font-weight:700;
+}
+@media(max-width:680px){
+  .creator-admin-only{
+    font-size:11px;
+    gap:5px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -4207,9 +4392,9 @@ body.login-mode .login-card{
 <section id="login">
   <div class="login-card">
     <div class="brand brand-login"><div class="brandtitle brand-wordmark">erle.</div><div class="brandsub">deine Planung.</div></div>
-    <div class="field"><label>Benutzername</label><input id="loginUser" class="input" autocomplete="username"></div>
-    <div class="field"><label>Passwort</label><input id="loginPass" class="input" type="password" autocomplete="current-password"></div>
-    <div id="confirmWrap" class="field hidden"><label>Passwort wiederholen</label><input id="loginConfirm" class="input" type="password" autocomplete="new-password"></div>
+    <div class="field"><label>Benutzername</label><input id="loginUser" class="input" autocomplete="off" autocapitalize="none" spellcheck="false"></div>
+    <div class="field"><label>Passwort</label><input id="loginPass" class="input" type="password" autocomplete="off"></div>
+    <div id="confirmWrap" class="field hidden"><label>Passwort wiederholen</label><input id="loginConfirm" class="input" type="password" autocomplete="off"></div>
     <div id="authMessage" class="error hidden" style="margin-bottom:12px"></div>
     <button id="authMainBtn" class="btn primary">Anmelden</button>
     <div class="authswitch"><span id="authSwitchText">Noch kein Konto?</span> <button id="authSwitchBtn">Account erstellen</button></div>
@@ -4272,7 +4457,7 @@ body.login-mode .login-card{
 const SUPABASE_URL='https://yntrnwzzsmhzmqtwnyyb.supabase.co';
 const SUPABASE_KEY='sb_publishable_gYvZ4Awk6O_MvFvOIFXIaA_WzAD8Ns3';
 const SESSION_KEY='erle_supabase_session_v1';
-const FORCE_LOGIN_ON_LOAD=true;
+const FORCE_LOGIN_ON_LOAD=false;
 
 const commonModels = [
   'Alfa Romeo 147',
@@ -4826,7 +5011,22 @@ function showApp(){
   $('#settingsNav').classList.remove('hidden');
   render();
 }
-function logout(){session=null;me=null;localStorage.removeItem(SESSION_KEY);clearInterval(pollTimer);showLogin()}
+function logout(){
+  session=null;
+  me=null;
+  localStorage.removeItem(SESSION_KEY);
+  clearInterval(pollTimer);
+  if($('#loginUser'))$('#loginUser').value='';
+  if($('#loginPass'))$('#loginPass').value='';
+  if($('#loginConfirm'))$('#loginConfirm').value='';
+  if($('#authMessage')){$('#authMessage').textContent='';$('#authMessage').classList.add('hidden')}
+  authMode='login';
+  if($('#confirmWrap'))$('#confirmWrap').classList.add('hidden');
+  if($('#authMainBtn'))$('#authMainBtn').textContent='Anmelden';
+  if($('#authSwitchText'))$('#authSwitchText').textContent='Noch kein Konto?';
+  if($('#authSwitchBtn'))$('#authSwitchBtn').textContent='Account erstellen';
+  showLogin();
+}
 function startPolling(){clearInterval(pollTimer);pollTimer=setInterval(()=>loadData(true),15000)}
 
 function vehicle(id){return vehicles.find(v=>v.id===id)} function customer(id){return customers.find(c=>c.id===id)}
@@ -4904,14 +5104,37 @@ function renderBoard(){
   </div>`;
 }
 function card(o){
-  const v=vehicle(o.vehicle_id),c=customer(o.customer_id),tasks=Array.isArray(o.tasks)?o.tasks:[],done=tasks.filter(t=>t.completed).length,missing=tasks.filter(t=>taskState(t)==='missing').length,st=statusOf(o);
+  const v=vehicle(o.vehicle_id),c=customer(o.customer_id),tasks=Array.isArray(o.tasks)?o.tasks:[],st=statusOf(o);
+  const missing=tasks.filter(t=>taskState(t)==='missing').length;
+  const available=tasks.filter(t=>['available','installed'].includes(taskState(t))).length;
+  const undecided=Math.max(0,tasks.length-missing-available);
+  const appointment=o.appointment_date?new Date(o.appointment_date):null;
+
+  let partsSummary='';
+  if(tasks.length){
+    const bits=[];
+    if(missing)bits.push(`<span class="parts-bit missing">${missing} fehlt${missing===1?'':'en'}</span>`);
+    if(available)bits.push(`<span class="parts-bit available">${available} da</span>`);
+    if(undecided)bits.push(`<span class="parts-bit neutral">${undecided} offen</span>`);
+    partsSummary=`<div class="parts-summary">${bits.join('<span class="parts-sep">·</span>')}</div>`;
+  }
+
   return `<article class="ordercard" draggable="true" data-order="${o.id}">
-    <div class="cardtop"><div><div class="plate">${esc(v?.license_plate)}</div><div class="vehicle">${esc((v?.manufacturer||'')+' '+(v?.model||''))}</div></div><div class="cardright">${c?.name?`<div class="customername customer-right">${esc(c.name)}</div>`:''}</div></div>
+    <div class="cardtop">
+      <div class="cardleft">
+        <div class="plate">${esc(v?.license_plate)}</div>
+        <div class="vehicle">${esc((v?.manufacturer||'')+' '+(v?.model||''))}</div>
+      </div>
+      <div class="cardright">
+        ${c?.name?`<div class="customername customer-right">${esc(c.name)}</div>`:''}
+        ${appointment?`<div class="appointment-right">${appointment.toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit'})} · ${appointment.toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'})}</div>`:''}
+      </div>
+    </div>
+
     <div class="desc">${esc(o.description)}</div>
-    <div class="cardmeta">
-      ${o.appointment_date?`<span>${new Date(o.appointment_date).toLocaleString('de-DE',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})}</span>`:''}
-      ${missing?`<span style="color:var(--red)">${missing} Arbeit(en) mit fehlenden Teilen</span>`:''}
-      <span></span>
+    ${partsSummary}
+
+    <div class="cardmeta compact-cardmeta">
       <span class="badge ${o.payment_status==='paid'?'green':'red'}">${o.payment_status==='paid'?'Bezahlt':'Offen'}</span>
     </div>
     <div class="statusline ${st}"></div>
@@ -5789,9 +6012,13 @@ async function saveOrder(o){try{const rr=await rest('erle_orders','?id=eq.'+enco
 function openOrder(id){
   const o=orders.find(x=>x.id===id);if(!o)return;
   const v=vehicle(o.vehicle_id),tasks=Array.isArray(o.tasks)?o.tasks:[],st=statusOf(o);
+  const creator=profiles.find(p=>p.id===o.created_by_user_id);
   const assigneeOptions=(isAdmin()?profiles.filter(p=>p.active):profiles.filter(p=>p.id===me.id)).map(p=>`<option value="${p.id}" ${p.id===o.assigned_user_id?'selected':''}>${esc(p.username)}</option>`).join('');
   openModal(esc(v?.license_plate||''),`
-    <div class="between"><div class="muted">${esc((v?.manufacturer||'')+' '+(v?.model||''))}</div></div>
+    <div class="between">
+      <div class="muted">${esc((v?.manufacturer||'')+' '+(v?.model||''))}</div>
+      ${isAdmin()?`<div class="creator-admin-only"><span>Erstellt von</span><strong>${esc(creator?.username||'Unbekannt')}</strong></div>`:''}
+    </div>
     <div class="vehicle-id-strip">
       <div class="vehicle-id-item"><span>Baujahr</span><strong>${esc(v?.year||'–')}</strong></div>
       <div class="vehicle-id-item"><span>HSN</span><strong>${esc(v?.hsn||'–')}</strong></div>
@@ -5854,6 +6081,22 @@ async function toggleTask(oid,tid,val){
   render();
   openOrder(oid);
 }
+
+function refreshOrderViewPreservePosition(oid){
+  const pageY=window.scrollY||document.documentElement.scrollTop||0;
+  const modalBody=document.querySelector('.modalbody');
+  const modalY=modalBody?modalBody.scrollTop:0;
+
+  render();
+  openOrder(oid);
+
+  requestAnimationFrame(()=>{
+    window.scrollTo(0,pageY);
+    const nextBody=document.querySelector('.modalbody');
+    if(nextBody)nextBody.scrollTop=modalY;
+  });
+}
+
 async function setPart(oid,tid,state){
   const o=orders.find(x=>x.id===oid),t=(o.tasks||[]).find(x=>x.id===tid);
   if(!t)return;
@@ -5875,18 +6118,30 @@ async function setPart(oid,tid,state){
   }
 
   await saveOrder(o);
-  render();
-  openOrder(oid);
+  refreshOrderViewPreservePosition(oid);
 }
-async function addTask(oid){const o=orders.find(x=>x.id===oid),title=$('#newTask').value.trim();if(!title)return;o.tasks=o.tasks||[];o.tasks.push({id:uid('t'),title:capFirst(title),completed:false,position:o.tasks.length+1,part_status:'none'});await saveOrder(o);openOrder(oid);render()}
+async function addTask(oid){
+  const o=orders.find(x=>x.id===oid),title=$('#newTask').value.trim();
+  if(!title)return;
+  o.tasks=o.tasks||[];
+  o.tasks.push({id:uid('t'),title:capFirst(title),completed:false,position:o.tasks.length+1,part_status:'none'});
+  await saveOrder(o);
+  refreshOrderViewPreservePosition(oid);
+}
 async function addNote(oid){const o=orders.find(x=>x.id===oid),text=$('#noteText').value.trim();if(!text)return;o.notes=o.notes||[];o.notes.push({id:uid('n'),text,created_at:new Date().toISOString()});await saveOrder(o);openOrder(oid)}
-async function markFinished(oid,val){const o=orders.find(x=>x.id===oid);o.completed_at=val?new Date().toISOString():null;render();await saveOrder(o);openOrder(oid)}
+async function markFinished(oid,val){
+  const o=orders.find(x=>x.id===oid);
+  if(!o)return;
+  o.completed_at=val?new Date().toISOString():null;
+  await saveOrder(o);
+  refreshOrderViewPreservePosition(oid);
+}
 async function setPayment(oid,status){
-  const o=orders.find(x=>x.id===oid);if(!o)return;
+  const o=orders.find(x=>x.id===oid);
+  if(!o)return;
   o.payment_status=status;
   await saveOrder(o);
-  render();
-  openOrder(oid);
+  refreshOrderViewPreservePosition(oid);
 }
 async function toggleArchive(oid){
   const o=orders.find(x=>x.id===oid);if(!o)return;
@@ -5909,7 +6164,6 @@ document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>{
   page=b.dataset.page;
   render();
 });
-if(FORCE_LOGIN_ON_LOAD){localStorage.removeItem(SESSION_KEY);session=null;}
 enterApp();
 </script>
 </body>
