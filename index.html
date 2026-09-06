@@ -886,7 +886,7 @@ body,button,input,select,textarea{font-weight:450!important}
 
 /* ==========================================================
    Erle. – Probeversion
-   Ruhige Werkstatt-UI mit klarer Herkunft für Admins
+   Ruhige Planung-UI mit klarer Herkunft für Admins
    ========================================================== */
 .creator-badge{
   margin-top:4px;
@@ -2081,6 +2081,1510 @@ body{
   }
 }
 
+
+/* ==========================================================
+   Erle. – Mobile Stability + Final Blue
+   ========================================================== */
+:root{
+  --blue:#0F66D0;
+  --blueDark:#0D59B7;
+  --blueDeep:#0B4F9F;
+  --blueSoft:#EDF4FC;
+}
+
+html,body{
+  min-height:100%;
+}
+
+body.login-mode{
+  height:100dvh!important;
+  max-height:100dvh!important;
+  overflow:hidden!important;
+  overscroll-behavior:none!important;
+}
+
+body.login-mode #login{
+  width:100%!important;
+  height:100dvh!important;
+  min-height:0!important;
+  overflow:hidden!important;
+  padding:18px!important;
+  place-items:center!important;
+}
+
+body.login-mode .login-card{
+  max-height:calc(100dvh - 36px)!important;
+  overflow:hidden!important;
+}
+
+.sidebar{
+  background:#0F66D0!important;
+}
+
+.btn.primary,
+.filter.active{
+  background:#0F66D0!important;
+  border-color:#0F66D0!important;
+}
+
+.btn.primary:hover{
+  background:#0D5CBE!important;
+  border-color:#0D5CBE!important;
+}
+
+.brand-login .brand-wordmark,
+.badge.blue,
+.creator-pill,
+.colcount{
+  color:#0F66D0!important;
+}
+
+.event-dot{
+  background:#0F66D0!important;
+}
+
+.calendar-add-btn{
+  width:42px!important;
+  min-width:42px!important;
+  height:42px!important;
+  min-height:42px!important;
+  padding:0!important;
+  display:inline-grid!important;
+  place-items:center!important;
+  border-radius:12px!important;
+  font-size:26px!important;
+  line-height:1!important;
+  font-weight:500!important;
+}
+
+/* Konto unten: Name links, Abmelden rechts */
+.sidefoot{
+  display:flex!important;
+  align-items:flex-end!important;
+  justify-content:space-between!important;
+  gap:14px!important;
+}
+
+.sideidentity{
+  min-width:0!important;
+}
+
+.logout-link{
+  margin:0 0 1px auto!important;
+  padding:5px 0!important;
+  border:0!important;
+  background:transparent!important;
+  color:rgba(255,255,255,.92)!important;
+  font-size:13px!important;
+  font-weight:680!important;
+  text-align:right!important;
+  white-space:nowrap!important;
+}
+
+.logout-link:hover{
+  color:#fff!important;
+  opacity:.82;
+}
+
+@media(max-width:680px){
+  .top,
+  .sidebar{
+    background:#0F66D0!important;
+  }
+
+  .board-page>.pagehead .btn.primary{
+    background:#0F66D0!important;
+    border-color:#0F66D0!important;
+  }
+
+  /* Login must be exactly one phone viewport */
+  body.login-mode #login{
+    padding:14px!important;
+  }
+
+  body.login-mode .login-card{
+    width:min(100%,430px)!important;
+    max-height:calc(100dvh - 28px)!important;
+    padding:26px 22px!important;
+    border-radius:20px!important;
+  }
+
+  /* Drawer account row */
+  .sidebar .sidefoot{
+    display:flex!important;
+    flex-direction:row!important;
+    align-items:center!important;
+    justify-content:space-between!important;
+    width:100%!important;
+    padding:15px 4px 2px!important;
+  }
+
+  .sidebar .logout-link{
+    margin-left:auto!important;
+    padding:7px 0 7px 12px!important;
+    font-size:14px!important;
+  }
+
+  /* Stable full-screen form modal; no horizontal movement/zoom */
+  .backdrop{
+    position:fixed!important;
+    inset:0!important;
+    width:100vw!important;
+    height:100dvh!important;
+    padding:0!important;
+    overflow:hidden!important;
+    align-items:stretch!important;
+    justify-content:stretch!important;
+  }
+
+  .modal{
+    position:relative!important;
+    width:100vw!important;
+    max-width:none!important;
+    height:100dvh!important;
+    max-height:100dvh!important;
+    margin:0!important;
+    border-radius:0!important;
+    overflow:hidden!important;
+    transform:none!important;
+  }
+
+  .modalhead{
+    position:sticky!important;
+    top:0!important;
+    z-index:5!important;
+    min-height:64px!important;
+    padding:14px 16px!important;
+  }
+
+  .modalbody{
+    width:100%!important;
+    min-width:0!important;
+    height:calc(100dvh - 64px)!important;
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+    -webkit-overflow-scrolling:touch!important;
+    overscroll-behavior:contain!important;
+    padding:16px 16px calc(30px + env(safe-area-inset-bottom))!important;
+  }
+
+  .modalbody .grid2,
+  .modalbody .grid3{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:13px!important;
+  }
+
+  .modalbody .field,
+  .modalbody .combo,
+  .modalbody .input,
+  .modalbody .select,
+  .modalbody .textarea{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+  }
+
+  .modalbody .input,
+  .modalbody .select,
+  .modalbody .textarea{
+    font-size:16px!important;
+    min-height:48px!important;
+  }
+
+  .modalbody textarea{
+    resize:vertical!important;
+  }
+
+  .modalbody .actions{
+    display:flex!important;
+    gap:10px!important;
+    width:100%!important;
+    margin-top:18px!important;
+  }
+
+  .modalbody .actions .btn{
+    flex:1 1 0!important;
+    min-width:0!important;
+  }
+
+  .suggestions{
+    max-width:100%!important;
+  }
+
+  .calendar-add-btn{
+    width:44px!important;
+    min-width:44px!important;
+    height:44px!important;
+    min-height:44px!important;
+  }
+}
+
+
+/* ==========================================================
+   Erle. – Final Interaction Polish
+   Brand blue restored: #1473E6
+   ========================================================== */
+:root{
+  --blue:#1473E6;
+  --blueDark:#1267CE;
+  --blueDeep:#105CB8;
+  --blueSoft:#EEF5FE;
+}
+
+.sidebar,
+.btn.primary,
+.filter.active{
+  background:#1473E6!important;
+}
+.btn.primary,
+.filter.active{
+  border-color:#1473E6!important;
+}
+.btn.primary:hover{
+  background:#1267CE!important;
+  border-color:#1267CE!important;
+}
+
+.desktop-add-label{display:inline}
+.mobile-add-label{display:none}
+
+.calendar-toolbar{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.calendar-add-btn{
+  width:auto!important;
+  min-width:0!important;
+  height:auto!important;
+  min-height:38px!important;
+  padding:9px 13px!important;
+  border-radius:10px!important;
+  font-size:13px!important;
+  font-weight:680!important;
+}
+
+/* Desktop status count colors */
+.stage-planned .colcount{
+  background:#EEF5FE!important;
+  color:#1473E6!important;
+}
+.stage-buy .colcount{
+  background:#FFF0E8!important;
+  color:#C06418!important;
+}
+.stage-working .colcount{
+  background:#FFF6DA!important;
+  color:#A87500!important;
+}
+.stage-done .colcount{
+  background:#EAF8EF!important;
+  color:#24845A!important;
+}
+
+/* Simple orders list */
+.orders-simple-list{
+  background:transparent;
+  border-top:1px solid rgba(28,52,83,.08);
+}
+.order-simple-row{
+  display:grid;
+  grid-template-columns:minmax(170px,1.05fr) minmax(220px,1.5fr) minmax(180px,.9fr) 22px;
+  align-items:center;
+  gap:18px;
+  min-height:64px;
+  padding:11px 4px;
+  border-bottom:1px solid rgba(28,52,83,.075);
+  cursor:pointer;
+  transition:background .15s ease;
+}
+.order-simple-row:hover{
+  background:rgba(20,115,230,.035);
+}
+.order-simple-main{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  min-width:0;
+}
+.order-simple-main strong{
+  font-size:14px;
+  font-weight:750;
+}
+.order-simple-main span,
+.order-simple-task,
+.order-simple-meta{
+  font-size:12px;
+  color:#738095;
+}
+.order-simple-task{
+  color:#303c4d;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.order-simple-meta{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+}
+.order-simple-arrow{
+  font-size:20px;
+  color:#A6AFBC;
+}
+.empty-simple{
+  padding:18px 4px;
+  color:var(--muted);
+}
+
+/* Search icon */
+.mobile-search-btn{
+  display:none;
+}
+.mobile-search-btn svg{
+  width:22px;height:22px;fill:currentColor;
+}
+
+@media(max-width:680px){
+  .top,
+  .sidebar{
+    background:#1473E6!important;
+  }
+
+  .mobile-topbar{
+    grid-template-columns:48px 1fr 48px!important;
+  }
+
+  .mobile-search-btn{
+    display:grid!important;
+    grid-column:3!important;
+    width:44px!important;
+    height:44px!important;
+    place-items:center!important;
+    justify-self:end!important;
+    border:0!important;
+    border-radius:12px!important;
+    background:transparent!important;
+    color:#fff!important;
+    padding:0!important;
+  }
+
+  .mobile-search-wrap{
+    display:none!important;
+    padding:0 14px 14px!important;
+    background:#1473E6!important;
+  }
+  .mobile-search-wrap.mobile-search-open{
+    display:block!important;
+  }
+  .mobile-search-wrap .input{
+    min-height:46px!important;
+    background:#fff!important;
+    border:0!important;
+  }
+
+  .desktop-add-label{display:none!important}
+  .mobile-add-label{
+    display:inline!important;
+    font-size:28px!important;
+    font-weight:450!important;
+    line-height:1!important;
+  }
+
+  .responsive-add{
+    width:48px!important;
+    min-width:48px!important;
+    height:48px!important;
+    min-height:48px!important;
+    padding:0!important;
+    display:grid!important;
+    place-items:center!important;
+    border-radius:13px!important;
+  }
+
+  .board-page>.pagehead{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:flex-end!important;
+    margin:0 4px 18px!important;
+  }
+  .board-page>.pagehead>div{
+    display:none!important;
+  }
+  .board-page>.pagehead .responsive-add{
+    margin:0 auto!important;
+  }
+
+  .mobile-overview-hero{
+    margin:4px 4px 16px!important;
+  }
+  .mobile-overview-hero h1{
+    font-size:27px!important;
+  }
+
+  .calendar-toolbar{
+    gap:7px!important;
+  }
+  .calendar-add-btn{
+    width:44px!important;
+    min-width:44px!important;
+    height:44px!important;
+    min-height:44px!important;
+    padding:0!important;
+  }
+
+  .orders-simple-list{
+    border-top:0;
+  }
+  .order-simple-row{
+    grid-template-columns:1fr 20px!important;
+    gap:10px!important;
+    min-height:70px!important;
+    padding:12px 2px!important;
+  }
+  .order-simple-row .select-action{
+    grid-column:1;
+  }
+  .order-simple-main{
+    grid-column:1;
+  }
+  .order-simple-task{
+    grid-column:1;
+    white-space:normal;
+    overflow:visible;
+    text-overflow:clip;
+    margin-top:2px;
+  }
+  .order-simple-meta{
+    grid-column:1;
+    flex-direction:row;
+    gap:10px;
+    margin-top:1px;
+  }
+  .order-simple-arrow{
+    grid-column:2;
+    grid-row:1 / span 3;
+    align-self:center;
+  }
+}
+
+
+/* ==========================================================
+   Erle. – Unified Visual System
+   Gleiche Designsprache in allen Reitern, Funktionen unverändert
+   ========================================================== */
+:root{
+  --surface:#ffffff;
+  --surface-soft:#f7f9fc;
+  --surface-subtle:#f2f5f8;
+  --hairline:rgba(28,52,83,.075);
+  --text-strong:#142033;
+  --text-soft:#748199;
+  --radius-card:16px;
+  --radius-control:11px;
+  --shadow-card:0 6px 18px rgba(24,48,78,.045);
+}
+
+/* Global rhythm */
+.content{
+  padding-top:20px!important;
+}
+.pagehead{
+  margin:6px 0 16px!important;
+  align-items:center!important;
+}
+.pagehead h1{
+  font-size:29px!important;
+  font-weight:780!important;
+  letter-spacing:-.04em!important;
+}
+.pagehead p{
+  font-size:13px!important;
+  color:var(--text-soft)!important;
+}
+
+/* All section surfaces */
+.panel,
+.section,
+.calendar-shell,
+.settings-card,
+.user-list,
+.archive-list{
+  background:var(--surface)!important;
+  border:1px solid var(--hairline)!important;
+  border-radius:var(--radius-card)!important;
+  box-shadow:var(--shadow-card)!important;
+}
+
+/* Lists: same clean row language everywhere */
+.tablewrap,
+.orders-simple-list,
+.user-list,
+.archive-list,
+.purchase-list{
+  background:transparent!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+
+.tablewrap table{
+  width:100%;
+}
+
+.tablewrap th,
+.user-list-head{
+  background:transparent!important;
+  color:#8a93a1!important;
+  font-size:12px!important;
+  font-weight:700!important;
+  border-bottom:1px solid var(--hairline)!important;
+}
+
+.tablewrap td,
+.user-list-row,
+.archive-list-row,
+.order-simple-row{
+  background:transparent!important;
+  border-bottom:1px solid var(--hairline)!important;
+}
+
+.tablewrap tbody tr:hover,
+.user-list-row:not(.user-protected):hover,
+.archive-list-row:hover,
+.order-simple-row:hover{
+  background:rgba(20,115,230,.03)!important;
+}
+
+.order-simple-row{
+  padding-left:2px!important;
+  padding-right:2px!important;
+}
+
+/* Cards: overview + purchase */
+.ordercard,
+.purchase-card{
+  background:var(--surface)!important;
+  border:1px solid var(--hairline)!important;
+  border-radius:var(--radius-card)!important;
+  box-shadow:0 3px 12px rgba(24,48,78,.035)!important;
+}
+.ordercard:hover,
+.purchase-card:hover{
+  box-shadow:0 8px 18px rgba(24,48,78,.05)!important;
+}
+
+/* Buttons / controls */
+.btn,
+.input,
+.select,
+.textarea{
+  border-radius:var(--radius-control)!important;
+}
+.text-action{
+  font-weight:650!important;
+}
+
+/* Customer name alignment on cards */
+.cardtop{
+  display:flex!important;
+  justify-content:space-between!important;
+  align-items:flex-start!important;
+  gap:14px!important;
+}
+.cardright{
+  margin-left:auto!important;
+  min-width:0!important;
+  max-width:42%!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-end!important;
+  text-align:right!important;
+}
+.customer-right{
+  margin:0!important;
+  width:auto!important;
+  max-width:100%!important;
+  text-align:right!important;
+  font-size:11px!important;
+  line-height:1.25!important;
+  font-weight:500!important;
+  color:#8f98a6!important;
+  white-space:normal!important;
+  overflow-wrap:anywhere!important;
+  word-break:normal!important;
+}
+
+/* If customer name is sensible length, allow max two lines */
+.customer-right{
+  display:-webkit-box!important;
+  -webkit-box-orient:vertical!important;
+  -webkit-line-clamp:2!important;
+  overflow:hidden!important;
+}
+
+/* Unified sections in details */
+.modalbody .section{
+  margin-top:14px!important;
+}
+.sectiontitle{
+  font-size:15px!important;
+  font-weight:760!important;
+  letter-spacing:-.02em!important;
+}
+.vehicle-id-item{
+  background:var(--surface-soft)!important;
+  border:1px solid var(--hairline)!important;
+  border-radius:12px!important;
+}
+.calendar-selected{
+  background:var(--surface-soft)!important;
+  border:1px solid var(--hairline)!important;
+}
+
+/* Purchase list rows match orders/list style */
+.purchase-list{
+  display:flex!important;
+  flex-direction:column!important;
+  gap:10px!important;
+}
+.purchase-card{
+  padding:15px 16px!important;
+}
+
+/* Settings cards same rhythm */
+.settings-grid{
+  gap:14px!important;
+}
+.settings-card{
+  padding:17px!important;
+}
+
+/* Desktop */
+@media(min-width:681px){
+  .ordercard{
+    min-height:0!important;
+  }
+  .customer-right{
+    max-width:180px!important;
+  }
+}
+
+/* Mobile keeps its intentional differences but same visual system */
+@media(max-width:680px){
+  .content{
+    padding:20px 16px 30px!important;
+  }
+  .pagehead{
+    margin:4px 0 14px!important;
+  }
+  .pagehead h1{
+    font-size:25px!important;
+  }
+  .panel,
+  .section,
+  .calendar-shell,
+  .settings-card{
+    border-radius:15px!important;
+    box-shadow:0 5px 14px rgba(24,48,78,.035)!important;
+  }
+  .ordercard,
+  .purchase-card{
+    border-radius:14px!important;
+    box-shadow:none!important;
+  }
+  .cardright{
+    max-width:44%!important;
+  }
+  .customer-right{
+    max-width:145px!important;
+    font-size:11px!important;
+  }
+  .orders-simple-list,
+  .user-list,
+  .archive-list{
+    border-radius:0!important;
+  }
+}
+
+
+/* ==========================================================
+   Erle. – Final Unified Product Design
+   Desktop + Mobile, functions unchanged
+   ========================================================== */
+
+:root{
+  --blue:#1473E6;
+  --blue-hover:#1267CE;
+  --blue-soft:#EEF5FE;
+
+  --bg:#F5F8FC;
+  --surface:#FFFFFF;
+  --surface-soft:#F8FAFD;
+  --surface-muted:#F1F5F9;
+
+  --text:#132033;
+  --text-2:#465568;
+  --muted:#7A8798;
+
+  --line:#E3EAF2;
+
+  --orange:#C86A1B;
+  --orange-soft:#FFF1E8;
+  --yellow:#A97700;
+  --yellow-soft:#FFF7DB;
+  --green:#25865B;
+  --green-soft:#EAF8EF;
+  --red:#A34F59;
+  --red-soft:#FBF3F5;
+
+  --radius:16px;
+  --radius-sm:11px;
+  --shadow:0 6px 18px rgba(24,48,78,.05);
+}
+
+/* ---------- Base ---------- */
+html{
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+body,
+button,
+input,
+select,
+textarea{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter","Segoe UI","Helvetica Neue",Arial,sans-serif!important;
+}
+
+body{
+  background:var(--bg)!important;
+  color:var(--text)!important;
+  font-size:15px!important;
+  font-weight:470!important;
+  letter-spacing:-.012em;
+}
+
+.main{
+  background:var(--bg)!important;
+}
+
+.content{
+  padding:22px 28px 42px!important;
+  max-width:none!important;
+  width:100%!important;
+}
+
+/* ---------- Brand / sidebar ---------- */
+.sidebar{
+  background:var(--blue)!important;
+  box-shadow:10px 0 28px rgba(26,80,145,.08)!important;
+}
+
+.brand-sidebar .brand-wordmark,
+.mobile-logo-center.brand-wordmark{
+  color:#fff!important;
+}
+
+.brand-sidebar .brand-wordmark{
+  font-size:28px!important;
+}
+
+.nav{
+  gap:4px!important;
+}
+.nav button{
+  min-height:40px!important;
+  border-radius:10px!important;
+  padding:10px 12px!important;
+  color:rgba(255,255,255,.88)!important;
+  font-size:14px!important;
+  font-weight:650!important;
+}
+.nav button.active{
+  background:rgba(255,255,255,.17)!important;
+  color:#fff!important;
+}
+
+.sidefoot{
+  border-top:1px solid rgba(255,255,255,.16)!important;
+  padding-top:14px!important;
+}
+.sideidentity strong{
+  font-size:13px!important;
+  font-weight:720!important;
+}
+.side-role{
+  font-size:10.5px!important;
+  opacity:.74;
+  font-style:italic;
+}
+.sidebar .logout-link{
+  color:#fff!important;
+  font-weight:680!important;
+  opacity:.92;
+}
+
+/* ---------- Topbar ---------- */
+.top{
+  min-height:72px!important;
+  background:rgba(245,248,252,.96)!important;
+  border-bottom:1px solid rgba(30,52,80,.06)!important;
+  backdrop-filter:blur(18px)!important;
+  -webkit-backdrop-filter:blur(18px)!important;
+}
+.topinner{
+  padding:14px 28px!important;
+}
+.top .input{
+  width:min(360px,100%)!important;
+  min-height:42px!important;
+  margin-left:auto!important;
+  border-radius:12px!important;
+  background:#fff!important;
+  border:1px solid var(--line)!important;
+}
+
+/* ---------- Page headers ---------- */
+.pagehead{
+  margin:8px 0 18px!important;
+  display:flex!important;
+  align-items:flex-end!important;
+  justify-content:space-between!important;
+  gap:18px!important;
+}
+.pagehead h1{
+  margin:0!important;
+  font-size:29px!important;
+  line-height:1.05!important;
+  font-weight:790!important;
+  letter-spacing:-.045em!important;
+}
+.pagehead p{
+  margin:6px 0 0!important;
+  font-size:13px!important;
+  line-height:1.45!important;
+  color:var(--muted)!important;
+}
+
+/* ---------- Buttons ---------- */
+.btn{
+  min-height:40px!important;
+  border-radius:11px!important;
+  padding:9px 14px!important;
+  font-size:13px!important;
+  font-weight:680!important;
+  box-shadow:none!important;
+}
+.btn.primary{
+  background:var(--blue)!important;
+  border-color:var(--blue)!important;
+  color:#fff!important;
+  box-shadow:0 6px 16px rgba(20,115,230,.15)!important;
+}
+.btn.primary:hover{
+  background:var(--blue-hover)!important;
+  border-color:var(--blue-hover)!important;
+}
+
+.text-action{
+  border:0!important;
+  background:transparent!important;
+  color:var(--blue)!important;
+  font-weight:680!important;
+  padding:4px 0!important;
+}
+.delete-text,
+.user-delete-text{
+  color:var(--red)!important;
+}
+
+/* ---------- Inputs ---------- */
+.input,
+.select,
+.textarea{
+  border:1px solid var(--line)!important;
+  border-radius:11px!important;
+  background:#fff!important;
+  color:var(--text)!important;
+}
+.input:focus,
+.select:focus,
+.textarea:focus{
+  border-color:#B9D3F3!important;
+  box-shadow:0 0 0 4px rgba(20,115,230,.08)!important;
+}
+
+/* ---------- Shared surfaces ---------- */
+.panel,
+.section,
+.calendar-shell,
+.settings-card{
+  background:var(--surface)!important;
+  border:1px solid var(--line)!important;
+  border-radius:var(--radius)!important;
+  box-shadow:var(--shadow)!important;
+}
+
+/* ---------- Overview ---------- */
+.stats{
+  gap:12px!important;
+  margin-bottom:15px!important;
+}
+.stat{
+  background:#fff!important;
+  border:1px solid var(--line)!important;
+  border-radius:15px!important;
+  box-shadow:none!important;
+  min-height:84px!important;
+  padding:15px 16px!important;
+}
+.stat strong{
+  font-size:25px!important;
+  font-weight:780!important;
+}
+.stat span{
+  font-size:12px!important;
+  color:var(--muted)!important;
+}
+
+.filters{
+  margin-bottom:14px!important;
+}
+.filter{
+  min-height:34px!important;
+  border-radius:999px!important;
+  border:1px solid var(--line)!important;
+  background:#fff!important;
+  color:var(--text-2)!important;
+  font-weight:650!important;
+}
+.filter.active{
+  background:var(--blue)!important;
+  border-color:var(--blue)!important;
+  color:#fff!important;
+}
+
+.board{
+  gap:14px!important;
+}
+.col{
+  background:var(--surface-muted)!important;
+  border:1px solid #E7EDF4!important;
+  border-radius:17px!important;
+  padding:10px!important;
+  box-shadow:none!important;
+}
+.colhead-button{
+  min-height:44px!important;
+  padding:4px 4px 10px!important;
+}
+.stage-title{
+  font-size:14px!important;
+  font-weight:730!important;
+}
+.colcount{
+  min-width:28px!important;
+  height:28px!important;
+  padding:0 8px!important;
+  border:0!important;
+  border-radius:999px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  font-size:12px!important;
+  font-weight:750!important;
+}
+.stage-planned .colcount{
+  background:var(--blue-soft)!important;
+  color:var(--blue)!important;
+}
+.stage-buy .colcount{
+  background:var(--orange-soft)!important;
+  color:var(--orange)!important;
+}
+.stage-working .colcount{
+  background:var(--yellow-soft)!important;
+  color:var(--yellow)!important;
+}
+.stage-done .colcount{
+  background:var(--green-soft)!important;
+  color:var(--green)!important;
+}
+
+.ordercard{
+  background:#fff!important;
+  border:1px solid var(--line)!important;
+  border-radius:14px!important;
+  padding:14px!important;
+  box-shadow:none!important;
+}
+.ordercard:hover{
+  transform:translateY(-1px);
+  box-shadow:0 7px 18px rgba(24,48,78,.055)!important;
+}
+.plate{
+  font-size:19px!important;
+  font-weight:790!important;
+}
+.vehicle{
+  font-size:12.5px!important;
+  font-weight:570!important;
+  color:#4C596B!important;
+}
+.desc{
+  font-size:13px!important;
+  line-height:1.45!important;
+}
+.customer-right{
+  max-width:180px!important;
+  text-align:right!important;
+  font-size:11px!important;
+  line-height:1.2!important;
+  color:#8A95A4!important;
+}
+
+/* ---------- Unified list pages ---------- */
+.orders-simple-list,
+.user-list,
+.archive-list{
+  background:#fff!important;
+  border:1px solid var(--line)!important;
+  border-radius:var(--radius)!important;
+  box-shadow:none!important;
+  overflow:hidden!important;
+}
+
+.order-simple-row,
+.user-list-row,
+.archive-list-row{
+  background:#fff!important;
+  border-bottom:1px solid var(--line)!important;
+}
+.order-simple-row:last-child,
+.user-list-row:last-child,
+.archive-list-row:last-child{
+  border-bottom:0!important;
+}
+.order-simple-row:hover,
+.user-list-row:not(.user-protected):hover,
+.archive-list-row:hover{
+  background:#FAFCFF!important;
+}
+
+.order-simple-row{
+  min-height:68px!important;
+  padding:12px 15px!important;
+}
+.order-simple-main strong{
+  font-size:14px!important;
+  font-weight:760!important;
+}
+.order-simple-main span,
+.order-simple-task,
+.order-simple-meta{
+  font-size:12px!important;
+}
+.order-simple-task{
+  color:#3B485A!important;
+}
+.order-simple-meta{
+  color:var(--muted)!important;
+}
+.order-simple-arrow,
+.archive-arrow{
+  color:#A6AFBC!important;
+}
+
+/* ---------- Vehicles: same list/table visual language ---------- */
+.tablewrap{
+  background:#fff!important;
+  border:1px solid var(--line)!important;
+  border-radius:var(--radius)!important;
+  box-shadow:none!important;
+  overflow:hidden!important;
+}
+.tablewrap table{
+  border-collapse:collapse!important;
+}
+.tablewrap th{
+  background:#FAFBFD!important;
+  color:#8994A4!important;
+  font-size:11.5px!important;
+  font-weight:720!important;
+  padding:12px 14px!important;
+  border-bottom:1px solid var(--line)!important;
+}
+.tablewrap td{
+  font-size:13px!important;
+  padding:13px 14px!important;
+  border-bottom:1px solid var(--line)!important;
+}
+.tablewrap tbody tr:last-child td{
+  border-bottom:0!important;
+}
+.tablewrap tbody tr:hover{
+  background:#FAFCFF!important;
+}
+
+/* ---------- Purchase ---------- */
+.purchase-list{
+  display:flex!important;
+  flex-direction:column!important;
+  gap:10px!important;
+}
+.purchase-card{
+  background:#fff!important;
+  border:1px solid var(--line)!important;
+  border-radius:var(--radius)!important;
+  box-shadow:none!important;
+  padding:15px 16px!important;
+}
+.purchase-card:hover{
+  background:#FAFCFF!important;
+}
+
+/* ---------- Archive ---------- */
+.archive-list{
+  padding:0 14px!important;
+}
+.archive-list-row{
+  min-height:62px!important;
+}
+
+/* ---------- Users ---------- */
+.user-list-head{
+  min-height:44px!important;
+  background:#FAFBFD!important;
+  border-bottom:1px solid var(--line)!important;
+  color:#8994A4!important;
+  font-size:11.5px!important;
+  font-weight:720!important;
+}
+.user-list-row{
+  min-height:62px!important;
+}
+.user-name-cell strong{
+  font-size:13.5px!important;
+  font-weight:740!important;
+}
+.role-text,
+.user-date{
+  font-size:12px!important;
+}
+
+/* ---------- Settings ---------- */
+.settings-grid{
+  gap:14px!important;
+}
+.settings-card{
+  padding:17px!important;
+}
+.settings-card h3,
+.settings-card .sectiontitle{
+  font-size:15px!important;
+  font-weight:760!important;
+}
+
+/* ---------- Calendar ---------- */
+.calendar-shell{
+  width:min(100%,1080px)!important;
+  margin:0 auto!important;
+  padding:18px!important;
+  box-shadow:none!important;
+}
+.calendar-top{
+  margin-bottom:14px!important;
+}
+.calendar-title{
+  font-size:22px!important;
+  font-weight:780!important;
+}
+.calendar-day{
+  background:#fff!important;
+  border:1px solid #E7EDF4!important;
+  border-radius:13px!important;
+  box-shadow:none!important;
+}
+.calendar-day.weekend{
+  background:#F2F4F7!important;
+}
+.calendar-day.selected{
+  background:var(--blue-soft)!important;
+  border-color:#BFD6F5!important;
+}
+.event-dot{
+  background:var(--blue)!important;
+}
+.calendar-selected{
+  background:#FAFBFD!important;
+  border:1px solid var(--line)!important;
+  border-radius:14px!important;
+}
+.calendar-event{
+  background:#fff!important;
+  border-bottom:1px solid var(--line)!important;
+}
+
+/* ---------- Modals / details ---------- */
+.modal{
+  background:#F8FAFD!important;
+  border-radius:20px!important;
+  box-shadow:0 28px 80px rgba(22,45,73,.18)!important;
+}
+.modalhead{
+  background:#F8FAFD!important;
+  border-bottom:1px solid var(--line)!important;
+}
+.modalhead h2{
+  font-size:23px!important;
+  font-weight:780!important;
+}
+.modalbody{
+  padding:18px 20px 22px!important;
+}
+.modalbody .section{
+  box-shadow:none!important;
+}
+.vehicle-id-item{
+  background:#FAFBFD!important;
+  border:1px solid var(--line)!important;
+  border-radius:11px!important;
+}
+
+/* ==========================================================
+   MOBILE
+   ========================================================== */
+@media(max-width:680px){
+  body{
+    font-size:16px!important;
+  }
+
+  .content{
+    padding:18px 14px 28px!important;
+  }
+
+  /* top header */
+  .top{
+    position:sticky!important;
+    top:0!important;
+    z-index:70!important;
+    min-height:78px!important;
+    background:var(--blue)!important;
+    border-bottom:0!important;
+    box-shadow:0 4px 14px rgba(26,80,145,.12)!important;
+  }
+  .mobile-topbar{
+    min-height:78px!important;
+    padding:10px 14px!important;
+  }
+  .mobile-logo-center.brand-wordmark{
+    font-size:34px!important;
+  }
+  .mobile-menu-btn,
+  .mobile-search-btn{
+    width:42px!important;
+    height:42px!important;
+    background:transparent!important;
+    box-shadow:none!important;
+  }
+
+  /* search only when opened */
+  .mobile-search-wrap{
+    display:none!important;
+    background:var(--blue)!important;
+    padding:0 14px 12px!important;
+  }
+  .mobile-search-wrap.mobile-search-open{
+    display:block!important;
+  }
+  .mobile-search-wrap .input{
+    width:100%!important;
+    min-height:46px!important;
+    border:0!important;
+    background:#fff!important;
+  }
+
+  /* headers */
+  .pagehead{
+    margin:4px 0 14px!important;
+    align-items:center!important;
+  }
+  .pagehead h1{
+    font-size:25px!important;
+  }
+  .pagehead p{
+    font-size:12.5px!important;
+  }
+
+  /* add actions: INLINE, NEVER FLOATING */
+  .responsive-add{
+    position:static!important;
+    width:44px!important;
+    min-width:44px!important;
+    height:44px!important;
+    min-height:44px!important;
+    padding:0!important;
+    border-radius:12px!important;
+    display:grid!important;
+    place-items:center!important;
+    flex:0 0 44px!important;
+    z-index:auto!important;
+  }
+  .desktop-add-label{
+    display:none!important;
+  }
+  .mobile-add-label{
+    display:inline!important;
+    font-size:27px!important;
+    line-height:1!important;
+    font-weight:480!important;
+  }
+
+  /* overview */
+  .mobile-overview-hero{
+    margin:2px 2px 15px!important;
+  }
+  .mobile-overview-hero h1{
+    font-size:26px!important;
+    font-weight:790!important;
+  }
+  .board-page>.pagehead{
+    justify-content:center!important;
+    margin-bottom:16px!important;
+  }
+  .board-page>.pagehead>div{
+    display:none!important;
+  }
+  .board-page>.pagehead .responsive-add{
+    margin:0 auto!important;
+  }
+  .board-page .stats,
+  .board-page .filters{
+    display:none!important;
+  }
+  .board{
+    display:block!important;
+    min-width:0!important;
+  }
+  .col{
+    width:100%!important;
+    min-height:0!important;
+    margin-bottom:10px!important;
+    padding:0!important;
+    background:#fff!important;
+    border-radius:15px!important;
+    overflow:hidden!important;
+    box-shadow:0 4px 12px rgba(24,48,78,.035)!important;
+  }
+  .colhead-button{
+    min-height:72px!important;
+    padding:13px 15px!important;
+  }
+  .stage-title{
+    font-size:17px!important;
+  }
+  .mobile-stage-sub{
+    display:block!important;
+    margin-top:3px!important;
+    font-size:12px!important;
+    color:var(--muted)!important;
+  }
+  .colbody{
+    padding:0 10px 10px!important;
+  }
+  .colbody.mobile-collapsed{
+    display:none!important;
+  }
+
+  /* all lists */
+  .orders-simple-list,
+  .user-list,
+  .archive-list,
+  .tablewrap{
+    border-radius:14px!important;
+  }
+  .order-simple-row{
+    grid-template-columns:1fr 20px!important;
+    min-height:72px!important;
+    padding:12px 14px!important;
+  }
+  .order-simple-task,
+  .order-simple-meta{
+    grid-column:1!important;
+  }
+  .order-simple-arrow{
+    grid-column:2!important;
+    grid-row:1 / span 3!important;
+    align-self:center!important;
+  }
+
+  /* vehicle table remains usable by horizontal overflow */
+  .tablewrap{
+    overflow-x:auto!important;
+  }
+  .tablewrap table{
+    min-width:680px!important;
+  }
+
+  /* calendar */
+  .calendar-shell{
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+    padding:11px!important;
+  }
+  .calendar-grid{
+    gap:3px!important;
+  }
+  .calendar-day{
+    border-radius:9px!important;
+  }
+  .calendar-add-btn{
+    width:44px!important;
+    min-width:44px!important;
+    height:44px!important;
+  }
+
+  /* modal stable and full-screen */
+  .backdrop{
+    padding:0!important;
+    align-items:stretch!important;
+  }
+  .modal{
+    width:100vw!important;
+    max-width:none!important;
+    height:100dvh!important;
+    max-height:100dvh!important;
+    margin:0!important;
+    border-radius:0!important;
+    overflow:hidden!important;
+  }
+  .modalhead{
+    min-height:62px!important;
+    padding:13px 15px!important;
+  }
+  .modalbody{
+    height:calc(100dvh - 62px)!important;
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+    padding:15px 15px calc(28px + env(safe-area-inset-bottom))!important;
+  }
+  .modalbody .grid2,
+  .modalbody .grid3{
+    grid-template-columns:1fr!important;
+    gap:12px!important;
+  }
+  .modalbody .input,
+  .modalbody .select,
+  .modalbody .textarea{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    font-size:16px!important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -2125,8 +3629,11 @@ body{
           <span></span><span></span><span></span>
         </button>
         <div class="mobile-logo-center brand-wordmark">erle.</div>
+        <button id="mobileSearchBtn" class="mobile-search-btn" type="button" aria-label="Suche öffnen" title="Suche">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.8 5.2a5.6 5.6 0 1 0 0 11.2 5.6 5.6 0 0 0 0-11.2Zm0-2a7.6 7.6 0 1 1 4.77 13.52l4.35 4.35-1.42 1.42-4.35-4.35A7.6 7.6 0 0 1 10.8 3.2Z"/></svg>
+        </button>
       </div>
-      <div class="topinner"><input id="search" class="input" placeholder="Kennzeichen oder Fahrzeug suchen…"></div>
+      <div id="mobileSearchWrap" class="topinner mobile-search-wrap"><input id="search" class="input" placeholder="Suchen…"></div>
     </div>
     <div id="mobileNavBackdrop" class="mobile-nav-backdrop"></div>
     <div id="content" class="content"></div>
@@ -2687,8 +4194,9 @@ async function enterApp(){
   try{await loadMe();if(!me||me.active===false)throw new Error('Konto nicht verfügbar.');await loadData();showApp();startPolling()}
   catch(e){if(await refreshSession())return enterApp();logout()}
 }
-function showLogin(){$('#app').classList.add('hidden');$('#login').classList.remove('hidden')}
+function showLogin(){document.body.classList.add('login-mode');$('#app').classList.add('hidden');$('#login').classList.remove('hidden')}
 function showApp(){
+  document.body.classList.remove('login-mode');
   $('#login').classList.add('hidden');
   $('#app').classList.remove('hidden');
   $('#sideUser').textContent=me.username;
@@ -2743,21 +4251,21 @@ function renderBoard(){
   const a=visibleOrders(), all=orders.filter(o=>!isArchived(o));
   const counts={planned:0,buy:0,working:0,done:0};all.forEach(o=>counts[statusOf(o)]++);
   const stageDesc={
-    planned:'Alle offenen und geplanten Aufträge',
-    buy:'Benötigte Teile und Materialien',
+    planned:'Offen und geplant',
+    buy:'Teile und Material fehlen',
     working:'Aktuell in Bearbeitung',
-    done:'Abgeschlossene Aufträge'
+    done:'Abgeschlossen'
   };
   return `<div class="board-page">
     <div class="mobile-overview-hero">
-      <div class="mobile-eyebrow">WERKSTATT</div>
-      <h1>Willkommen bei Erle.</h1>
-      <p>Einfach. Übersichtlich. Erledigt.</p>
+      <h1>Willkommen zurück.</h1>
     </div>
 
     <div class="pagehead">
       <div><h1>Übersicht</h1><p>Was steht an, was fehlt, was ist fertig?</p></div>
-      <button class="btn primary" data-action="new">+ Neuer Auftrag</button>
+      <button class="btn primary responsive-add" data-action="new" aria-label="Neuer Auftrag">
+        <span class="desktop-add-label">+ Neuer Auftrag</span><span class="mobile-add-label">+</span>
+      </button>
     </div>
 
     <div class="stats">
@@ -2794,7 +4302,7 @@ function renderBoard(){
 function card(o){
   const v=vehicle(o.vehicle_id),c=customer(o.customer_id),tasks=Array.isArray(o.tasks)?o.tasks:[],done=tasks.filter(t=>t.completed).length,missing=tasks.filter(t=>taskState(t)==='missing').length,st=statusOf(o);
   return `<article class="ordercard" draggable="true" data-order="${o.id}">
-    <div class="cardtop"><div><div class="plate">${esc(v?.license_plate)}</div><div class="vehicle">${esc((v?.manufacturer||'')+' '+(v?.model||''))}</div></div><div class="cardright">${c?.name?`<div class="customername customer-right">${esc(c.name)}</div>`:''}${isAdmin()?`<div class="creator-badge">Erstellt: ${esc(creatorName(o))}</div>`:''}</div></div>
+    <div class="cardtop"><div><div class="plate">${esc(v?.license_plate)}</div><div class="vehicle">${esc((v?.manufacturer||'')+' '+(v?.model||''))}</div></div><div class="cardright">${c?.name?`<div class="customername customer-right">${esc(c.name)}</div>`:''}</div></div>
     <div class="desc">${esc(o.description)}</div>
     <div class="cardmeta">
       ${o.appointment_date?`<span>${new Date(o.appointment_date).toLocaleString('de-DE',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})}</span>`:''}
@@ -2811,7 +4319,12 @@ function renderOrders(){
   const editing=editModes.orders;
   const allSelected=ids.length>0&&ids.every(id=>selections.orders.has(id));
 
-  return `<div class="pagehead"><div><h1>Aufträge</h1><p>Alle sichtbaren Werkstattaufträge.</p></div><button class="btn primary" data-action="new">+ Neuer Auftrag</button></div>
+  return `<div class="pagehead">
+    <div><h1>Aufträge</h1><p>Alle offenen und geplanten Aufträge.</p></div>
+    <button class="btn primary responsive-add" data-action="new" aria-label="Neuer Auftrag">
+      <span class="desktop-add-label">+ Neuer Auftrag</span><span class="mobile-add-label">+</span>
+    </button>
+  </div>
   <div class="edit-toolbar simple-editbar">
     <div class="bulk-count">${editing?`${selections.orders.size} ausgewählt`:''}</div>
     <div class="edit-actions simple-edit-actions">
@@ -2820,22 +4333,22 @@ function renderOrders(){
       <button class="text-action" data-edit-orders>Fertig</button>`:`<button class="text-action" data-edit-orders>Bearbeiten</button>`}
     </div>
   </div>
-  <div class="panel tablewrap"><table>
-    <thead><tr>${editing?'<th class="select-cell"></th>':''}<th>Kennzeichen</th><th>Fahrzeug</th><th>Auftrag</th><th>Status</th><th>Zuständig</th>${isAdmin()?'<th>Erstellt von</th>':''}</tr></thead>
-    <tbody>${a.map(o=>{
+  <div class="orders-simple-list">
+    ${a.length?a.map(o=>{
       const v=vehicle(o.vehicle_id),s=statusOf(o),p=profiles.find(x=>x.id===o.assigned_user_id);
       const selected=selections.orders.has(o.id);
-      return `<tr class="order-row ${selected?'row-selected':''}" data-order-row="${o.id}">
-        ${editing?`<td class="select-cell"><button class="select-action" data-select-order="${o.id}">${selectMark(selected)}</button></td>`:''}
-        <td><strong>${esc(v?.license_plate)}</strong></td>
-        <td>${esc((v?.manufacturer||'')+' '+(v?.model||''))}</td>
-        <td>${esc(o.description)}</td>
-        <td>${statLabel[s]}</td>
-        <td>${esc(p?.username||((o.assigned_user_id===me?.id)?me?.username:'–'))}</td>
-        ${isAdmin()?`<td><span class="creator-pill">${esc(creatorName(o))}</span></td>`:''}
-      </tr>`;
-    }).join('')}</tbody>
-  </table></div>`;
+      return `<div class="order-simple-row ${selected?'row-selected':''}" data-order-row="${o.id}">
+        ${editing?`<button class="select-action" data-select-order="${o.id}">${selectMark(selected)}</button>`:''}
+        <div class="order-simple-main">
+          <strong>${esc(v?.license_plate||'–')}</strong>
+          <span>${esc((v?.manufacturer||'')+' '+(v?.model||''))}</span>
+        </div>
+        <div class="order-simple-task">${esc(o.description||'')}</div>
+        <div class="order-simple-meta"><span>${statLabel[s]}</span><span>${esc(p?.username||((o.assigned_user_id===me?.id)?me?.username:'–'))}</span></div>
+        <span class="order-simple-arrow">›</span>
+      </div>`;
+    }).join(''):'<div class="empty-simple">Keine Aufträge vorhanden.</div>'}
+  </div>`;
 }
 function renderPurchase(){
   const a=orders.filter(o=>statusOf(o)==='buy'&&!isArchived(o));
@@ -2989,14 +4502,19 @@ function renderAppointments(){
     .sort((a,b)=>new Date(a.appointment_date)-new Date(b.appointment_date));
   const selectedLabel=new Intl.DateTimeFormat('de-DE',{weekday:'long',day:'2-digit',month:'long',year:'numeric'}).format(sel);
 
-  return `<div class="pagehead"><div><h1>Termine</h1><p>Monatsansicht mit Kalenderwochen und markierten Terminen.</p></div><button class="btn primary" id="newAppointmentTop">+ Neuer Termin</button></div>
+  return `<div class="pagehead"><div><h1>Termine</h1><p>Monatsansicht mit Kalenderwochen und markierten Terminen.</p></div></div>
   <div class="calendar-shell">
     <div class="calendar-top">
       <div class="calendar-title">${monthName}</div>
-      <div class="calendar-nav">
-        <button class="btn" id="calPrev">‹</button>
-        <button class="btn" id="calToday">Heute</button>
-        <button class="btn" id="calNext">›</button>
+      <div class="calendar-toolbar">
+        <button class="btn primary responsive-add calendar-add-btn" id="newAppointmentTop" aria-label="Termin hinzufügen">
+          <span class="desktop-add-label">+ Termin hinzufügen</span><span class="mobile-add-label">+</span>
+        </button>
+        <div class="calendar-nav">
+          <button class="btn" id="calPrev">‹</button>
+          <button class="btn" id="calToday">Heute</button>
+          <button class="btn" id="calNext">›</button>
+        </div>
       </div>
     </div>
     <div class="calendar-grid">${header}${body}</div>
@@ -3005,7 +4523,6 @@ function renderAppointments(){
     <div class="calendar-selected">
       <div class="calendar-selected-head">
         <div class="calendar-selected-title">${selectedLabel}</div>
-        <button class="btn" id="newAppointmentSelected">+ Termin hinzufügen</button>
       </div>
       <div class="calendar-selected-list">
         ${selectedAppointments.length?selectedAppointments.map(o=>{
@@ -3106,7 +4623,7 @@ function renderArchive(){
   const editing=editModes.archiveAll;
   const allSelected=ids.length>0&&ids.every(id=>selections.archiveAll.has(id));
 
-  return `<div class="pagehead"><div><h1>Archiv</h1><p>Archivierte Fahrzeuge und Werkstattvorgänge.</p></div></div>
+  return `<div class="pagehead"><div><h1>Archiv</h1><p>Archivierte Fahrzeuge und Vorgänge.</p></div></div>
 
   <div class="edit-toolbar simple-editbar archive-editbar">
     <div class="bulk-count">${editing?`${selections.archiveAll.size} ausgewählt`:''}</div>
@@ -3201,7 +4718,7 @@ function renderSettings(){
     <section class="section settings-card">
       <div class="settings-kicker">Konto</div>
       <div class="sectiontitle">Deine Rolle</div>
-      <div class="account-role"><strong>${isAdmin()?'Administrator':'Mitarbeiter'}</strong><span>${isAdmin()?'Vollzugriff auf Benutzer und alle Aufträge':'Werkstattzugriff auf die zugewiesenen Bereiche'}</span></div>
+      <div class="account-role"><strong>${isAdmin()?'Administrator':'Mitarbeiter'}</strong><span>${isAdmin()?'Vollzugriff auf Benutzer und alle Aufträge':'Planungzugriff auf die zugewiesenen Bereiche'}</span></div>
     </section>
 
     ${isAdmin()?`<section class="section settings-card admin-settings">
@@ -3229,7 +4746,6 @@ function wire(){
   if($('#calToday'))$('#calToday').onclick=()=>{calendarCursor=new Date();selectedCalendarDate=dateKey(new Date());render()};
   document.querySelectorAll('[data-caldate]').forEach(b=>b.onclick=()=>{selectedCalendarDate=b.dataset.caldate;render()});
   if($('#newAppointmentTop'))$('#newAppointmentTop').onclick=()=>openNewAppointment(selectedCalendarDate);
-  if($('#newAppointmentSelected'))$('#newAppointmentSelected').onclick=()=>openNewAppointment(selectedCalendarDate);
 
   document.querySelectorAll('.vehicle-row').forEach(r=>r.onclick=e=>{if(editModes.vehicles||e.target.closest('button,input'))return;openVehicle(r.dataset.vehicle)});
   document.querySelectorAll('[data-delete-vehicle]').forEach(b=>b.onclick=e=>{e.stopPropagation();archiveVehicle(b.dataset.deleteVehicle)});
@@ -3322,6 +4838,14 @@ function wire(){
     render();
   });
   if($('[data-users-delete-selected]'))$('[data-users-delete-selected]').onclick=deleteSelectedUsers;
+
+  if($('#mobileSearchBtn'))$('#mobileSearchBtn').onclick=()=>{
+    const wrap=$('#mobileSearchWrap');
+    if(!wrap)return;
+    const opening=!wrap.classList.contains('mobile-search-open');
+    wrap.classList.toggle('mobile-search-open');
+    if(opening)setTimeout(()=>$('#search')?.focus(),30);
+  };
 
 }
 
@@ -3581,6 +5105,10 @@ function openNewOrder(){
   $('#nyear').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();$('#nhsn').focus()}};
   $('#nhsn').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();$('#ntsn').focus()}};
   $('#ntsn').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();$('#nc').focus()}};
+  $('#nc').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();$('#nd').focus()}};
+  $('#ndate').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();$('#ntime').focus()}};
+  $('#ntime').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();$('#nass').focus()}};
+  $('#nass').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();createOrder()}};
   $('#saveNew').onclick=createOrder;
 }
 async function createOrder(){
@@ -3629,7 +5157,7 @@ async function createOrder(){
       await rest('erle_vehicles','?id=eq.'+encodeURIComponent(v.id),{method:'PATCH',headers:{Prefer:'return=minimal'},body:JSON.stringify({customer_id:cust.id})});
     }
 
-    closeModal();render();openOrder(o.id);
+    closeModal();render();toast('Auftrag erstellt.');
   }catch(e){toast('Auftrag konnte nicht erstellt werden: '+e.message)}
 }
 
@@ -3656,7 +5184,7 @@ function openOrder(id){
   const v=vehicle(o.vehicle_id),tasks=Array.isArray(o.tasks)?o.tasks:[],st=statusOf(o);
   const assigneeOptions=(isAdmin()?profiles.filter(p=>p.active):profiles.filter(p=>p.id===me.id)).map(p=>`<option value="${p.id}" ${p.id===o.assigned_user_id?'selected':''}>${esc(p.username)}</option>`).join('');
   openModal(esc(v?.license_plate||''),`
-    <div class="between"><div class="muted">${esc((v?.manufacturer||'')+' '+(v?.model||''))}</div>${isAdmin()?`<div class="creator-pill">Erstellt von ${esc(creatorName(o))}</div>`:''}</div>
+    <div class="between"><div class="muted">${esc((v?.manufacturer||'')+' '+(v?.model||''))}</div></div>
     <div class="vehicle-id-strip">
       <div class="vehicle-id-item"><span>Baujahr</span><strong>${esc(v?.year||'–')}</strong></div>
       <div class="vehicle-id-item"><span>HSN</span><strong>${esc(v?.hsn||'–')}</strong></div>
