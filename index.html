@@ -3585,6 +3585,352 @@ body{
   }
 }
 
+
+/* ==========================================================
+   Erle. – Mobile Visual Correction
+   ========================================================== */
+
+.page-actions{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:12px;
+}
+.icon-page-actions{
+  gap:8px;
+}
+.icon-text-action{
+  width:38px;
+  height:38px;
+  border:0;
+  border-radius:10px;
+  background:transparent;
+  color:var(--blue);
+  display:grid;
+  place-items:center;
+  padding:0;
+}
+.icon-text-action:hover{
+  background:var(--blue-soft);
+}
+.icon-text-action svg{
+  width:19px;
+  height:19px;
+  fill:currentColor;
+}
+
+/* Search icon */
+.mobile-search-btn svg{
+  width:24px!important;
+  height:24px!important;
+  fill:none!important;
+  stroke:#fff!important;
+  stroke-width:2!important;
+  stroke-linecap:round!important;
+  stroke-linejoin:round!important;
+}
+
+/* unified mobile-capable list */
+.unified-list{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:15px;
+  overflow:hidden;
+}
+.unified-row{
+  border-bottom:1px solid var(--line);
+  background:#fff;
+}
+.unified-row:last-child{
+  border-bottom:0;
+}
+.vehicle-list-row{
+  display:grid;
+  grid-template-columns:minmax(180px,1.4fr) minmax(150px,.9fr) 70px 18px;
+  gap:14px;
+  align-items:center;
+  min-height:64px;
+  padding:11px 14px;
+}
+.vehicle-list-main,
+.user-list-main{
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+}
+.vehicle-list-main strong,
+.user-list-main strong{
+  font-size:14px;
+  font-weight:760;
+}
+.vehicle-list-main span,
+.user-list-main span{
+  font-size:12px;
+  color:var(--muted);
+}
+.vehicle-list-customer{
+  font-size:13px;
+  text-align:right;
+  color:#465568;
+}
+.vehicle-list-count{
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+}
+.user-list-row{
+  display:grid;
+  grid-template-columns:minmax(180px,1fr) auto 18px;
+  gap:12px;
+  align-items:center;
+  min-height:64px;
+  padding:11px 14px;
+}
+.self-pill{
+  font-size:11px;
+  font-weight:760;
+  color:var(--blue);
+}
+.unified-arrow{
+  color:#A6AFBC;
+  font-size:20px;
+}
+
+/* no creator/progress visual noise */
+.creator-badge,
+.creator-pill,
+.progressline{
+  display:none!important;
+}
+
+/* Round plus with perfect centering */
+@media(max-width:680px){
+  .pagehead p{
+    display:none!important;
+  }
+
+  .responsive-add,
+  .calendar-add-btn{
+    width:42px!important;
+    min-width:42px!important;
+    height:42px!important;
+    min-height:42px!important;
+    border-radius:50%!important;
+    padding:0!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    flex:0 0 42px!important;
+    box-shadow:0 5px 14px rgba(20,115,230,.18)!important;
+  }
+  .mobile-add-label{
+    display:flex!important;
+    width:100%!important;
+    height:100%!important;
+    align-items:center!important;
+    justify-content:center!important;
+    font-size:27px!important;
+    font-weight:400!important;
+    line-height:1!important;
+    padding:0!important;
+    margin:0!important;
+    transform:translateY(-1px);
+  }
+
+  /* Home: plus beside welcome, not a giant bar */
+  .board-page{
+    position:relative!important;
+  }
+  .mobile-overview-hero{
+    display:flex!important;
+    align-items:center!important;
+    min-height:54px!important;
+    margin:2px 54px 14px 2px!important;
+  }
+  .mobile-overview-hero h1{
+    margin:0!important;
+    font-size:25px!important;
+    line-height:1.08!important;
+  }
+  .board-page>.pagehead{
+    position:absolute!important;
+    top:4px!important;
+    right:0!important;
+    width:44px!important;
+    height:44px!important;
+    margin:0!important;
+    display:block!important;
+  }
+  .board-page>.pagehead>div{
+    display:none!important;
+  }
+
+  /* Calendar: plus in calendar header top-right, nav on own row */
+  .calendar-top{
+    display:grid!important;
+    grid-template-columns:1fr auto!important;
+    grid-template-areas:
+      "title add"
+      "nav nav"!important;
+    gap:10px!important;
+    align-items:center!important;
+  }
+  .calendar-title{
+    grid-area:title!important;
+  }
+  .calendar-toolbar{
+    display:contents!important;
+  }
+  .calendar-add-btn{
+    grid-area:add!important;
+    justify-self:end!important;
+  }
+  .calendar-nav{
+    grid-area:nav!important;
+    display:flex!important;
+    justify-content:flex-end!important;
+    gap:7px!important;
+  }
+
+  /* Vehicles: no clipped horizontal desktop table */
+  .vehicle-list-row{
+    grid-template-columns:1fr auto 18px!important;
+    grid-template-areas:
+      "main count arrow"
+      "customer customer arrow"!important;
+    gap:4px 10px!important;
+    min-height:72px!important;
+    padding:12px 13px!important;
+  }
+  .vehicle-list-main{
+    grid-area:main!important;
+  }
+  .vehicle-list-customer{
+    grid-area:customer!important;
+    text-align:left!important;
+    font-size:12px!important;
+    color:var(--muted)!important;
+    white-space:normal!important;
+    overflow-wrap:anywhere!important;
+  }
+  .vehicle-list-count{
+    grid-area:count!important;
+    align-self:start!important;
+  }
+  .vehicle-list-row .unified-arrow{
+    grid-area:arrow!important;
+    align-self:center!important;
+  }
+  .vehicle-list-row>.select-action{
+    grid-column:1/-1!important;
+    justify-self:start!important;
+  }
+
+  /* Users: all visible, no clipped columns */
+  .user-list-row{
+    grid-template-columns:1fr auto 18px!important;
+    min-height:72px!important;
+    padding:12px 13px!important;
+    gap:8px!important;
+  }
+  .user-list-row .user-select-col{
+    grid-column:1/-1!important;
+  }
+  .user-list-main strong{
+    font-size:15px!important;
+  }
+
+  .pagehead .icon-page-actions{
+    margin-left:auto!important;
+    flex:0 0 auto!important;
+  }
+  .icon-text-action{
+    width:36px!important;
+    height:36px!important;
+  }
+
+  /* no old table min width on vehicle page */
+  .vehicle-list{
+    overflow:visible!important;
+  }
+}
+
+
+/* ==========================================================
+   LOGIN ONLY – mobile app chrome must never appear underneath
+   ========================================================== */
+.hidden{
+  display:none!important;
+}
+
+body.login-mode{
+  height:100dvh!important;
+  min-height:100dvh!important;
+  max-height:100dvh!important;
+  overflow:hidden!important;
+  overscroll-behavior:none!important;
+  background:#f7f9fc!important;
+}
+
+body.login-mode #app{
+  display:none!important;
+}
+
+body.login-mode #login{
+  display:grid!important;
+  position:fixed!important;
+  inset:0!important;
+  width:100vw!important;
+  height:100dvh!important;
+  min-height:100dvh!important;
+  max-height:100dvh!important;
+  overflow:hidden!important;
+  padding:16px!important;
+  place-items:center!important;
+  background:#f7f9fc!important;
+  z-index:9999!important;
+}
+
+body.login-mode .login-card{
+  width:min(100%,430px)!important;
+  max-height:calc(100dvh - 32px)!important;
+  overflow:auto!important;
+  margin:0!important;
+}
+
+@media(max-width:680px){
+  body.login-mode #app,
+  body.login-mode .top,
+  body.login-mode .sidebar,
+  body.login-mode .mobile-nav-backdrop{
+    display:none!important;
+  }
+
+  body.login-mode #login{
+    padding:14px!important;
+  }
+
+  body.login-mode .login-card{
+    width:min(100%,430px)!important;
+    max-height:calc(100dvh - 28px)!important;
+    overflow:auto!important;
+    -webkit-overflow-scrolling:touch!important;
+  }
+}
+
+
+/* Creator metadata is internal only and is never shown in the UI */
+.created-by,
+.creator,
+.ersteller,
+[data-field="createdBy"],
+[data-field="creator"],
+[data-label="Ersteller"],
+[data-label="Erstellt von"]{
+  display:none!important;
+}
+
 </style>
 </head>
 <body>
@@ -3630,8 +3976,11 @@ body{
         </button>
         <div class="mobile-logo-center brand-wordmark">erle.</div>
         <button id="mobileSearchBtn" class="mobile-search-btn" type="button" aria-label="Suche öffnen" title="Suche">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.8 5.2a5.6 5.6 0 1 0 0 11.2 5.6 5.6 0 0 0 0-11.2Zm0-2a7.6 7.6 0 1 1 4.77 13.52l4.35 4.35-1.42 1.42-4.35-4.35A7.6 7.6 0 0 1 10.8 3.2Z"/></svg>
-        </button>
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="10.5" cy="10.5" r="6.25"></circle>
+        <path d="M15.2 15.2 20 20"></path>
+      </svg>
+    </button>
       </div>
       <div id="mobileSearchWrap" class="topinner mobile-search-wrap"><input id="search" class="input" placeholder="Suchen…"></div>
     </div>
@@ -4194,10 +4543,11 @@ async function enterApp(){
   try{await loadMe();if(!me||me.active===false)throw new Error('Konto nicht verfügbar.');await loadData();showApp();startPolling()}
   catch(e){if(await refreshSession())return enterApp();logout()}
 }
-function showLogin(){document.body.classList.add('login-mode');$('#app').classList.add('hidden');$('#login').classList.remove('hidden')}
+function showLogin(){document.body.classList.add('login-mode');$('#app').classList.add('hidden');$('#login').classList.remove('hidden');window.scrollTo(0,0)}
 function showApp(){
   document.body.classList.remove('login-mode');
   $('#login').classList.add('hidden');
+  $('#app').classList.remove('hidden');
   $('#app').classList.remove('hidden');
   $('#sideUser').textContent=me.username;
   $('#sideRole').textContent=isAdmin()?'Administrator':'Mitarbeiter';
@@ -4250,19 +4600,12 @@ function render(){
 function renderBoard(){
   const a=visibleOrders(), all=orders.filter(o=>!isArchived(o));
   const counts={planned:0,buy:0,working:0,done:0};all.forEach(o=>counts[statusOf(o)]++);
-  const stageDesc={
-    planned:'Offen und geplant',
-    buy:'Teile und Material fehlen',
-    working:'Aktuell in Bearbeitung',
-    done:'Abgeschlossen'
-  };
+  const stageDesc={planned:'Offen und geplant',buy:'Teile und Material fehlen',working:'Aktuell in Bearbeitung',done:'Abgeschlossen'};
   return `<div class="board-page">
-    <div class="mobile-overview-hero">
-      <h1>Willkommen zurück.</h1>
-    </div>
+    <div class="mobile-overview-hero"><h1>Willkommen zurück.</h1></div>
 
     <div class="pagehead">
-      <div><h1>Übersicht</h1><p>Was steht an, was fehlt, was ist fertig?</p></div>
+      <div><h1>Übersicht</h1></div>
       <button class="btn primary responsive-add" data-action="new" aria-label="Neuer Auftrag">
         <span class="desktop-add-label">+ Neuer Auftrag</span><span class="mobile-add-label">+</span>
       </button>
@@ -4277,26 +4620,18 @@ function renderBoard(){
 
     <div class="filters">${[['all','Alle'],['buy','Einkauf'],['working','In Arbeit'],['done','Fertig']].map(([k,l])=>`<button class="filter ${filter===k?'active':''}" data-filter="${k}">${l}</button>`).join('')}</div>
 
-    <div class="boardwrap">
-      <div class="board">
-        ${['planned','buy','working','done'].map(st=>{
-          const list=a.filter(o=>statusOf(o)===st);
-          return `<section class="col stage-${st}" data-drop="${st}">
-            <button type="button" class="colhead colhead-button" data-collapse-stage="${st}">
-              <span class="stage-copy">
-                <span class="stage-title">${statLabel[st]}</span>
-                <span class="mobile-stage-sub">${stageDesc[st]}</span>
-              </span>
-              <span class="colhead-right">
-                <span class="colcount">${list.length}</span>
-                <span class="collapse-chevron">${collapsedStages[st]?'⌄':'⌃'}</span>
-              </span>
-            </button>
-            <div class="colbody ${collapsedStages[st]?'mobile-collapsed':''}">${list.map(card).join('')}</div>
-          </section>`;
-        }).join('')}
-      </div>
-    </div>
+    <div class="boardwrap"><div class="board">
+      ${['planned','buy','working','done'].map(st=>{
+        const list=a.filter(o=>statusOf(o)===st);
+        return `<section class="col stage-${st}" data-drop="${st}">
+          <button type="button" class="colhead colhead-button" data-collapse-stage="${st}">
+            <span class="stage-copy"><span class="stage-title">${statLabel[st]}</span><span class="mobile-stage-sub">${stageDesc[st]}</span></span>
+            <span class="colhead-right"><span class="colcount">${list.length}</span><span class="collapse-chevron">${collapsedStages[st]?'⌄':'⌃'}</span></span>
+          </button>
+          <div class="colbody ${collapsedStages[st]?'mobile-collapsed':''}">${list.map(card).join('')}</div>
+        </section>`;
+      }).join('')}
+    </div></div>
   </div>`;
 }
 function card(o){
@@ -4307,7 +4642,7 @@ function card(o){
     <div class="cardmeta">
       ${o.appointment_date?`<span>${new Date(o.appointment_date).toLocaleString('de-DE',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})}</span>`:''}
       ${missing?`<span style="color:var(--red)">${missing} Arbeit(en) mit fehlenden Teilen</span>`:''}
-      <span>${done}/${tasks.length} erledigt</span>
+      <span></span>
       <span class="badge ${o.payment_status==='paid'?'green':'red'}">${o.payment_status==='paid'?'Bezahlt':'Offen'}</span>
     </div>
     <div class="statusline ${st}"></div>
@@ -4320,7 +4655,7 @@ function renderOrders(){
   const allSelected=ids.length>0&&ids.every(id=>selections.orders.has(id));
 
   return `<div class="pagehead">
-    <div><h1>Aufträge</h1><p>Alle offenen und geplanten Aufträge.</p></div>
+    <div><h1>Aufträge</h1></div>
     <button class="btn primary responsive-add" data-action="new" aria-label="Neuer Auftrag">
       <span class="desktop-add-label">+ Neuer Auftrag</span><span class="mobile-add-label">+</span>
     </button>
@@ -4352,7 +4687,7 @@ function renderOrders(){
 }
 function renderPurchase(){
   const a=orders.filter(o=>statusOf(o)==='buy'&&!isArchived(o));
-  return `<div class="pagehead"><div><h1>Einkauf</h1><p>Aufträge mit fehlenden Teilen.</p></div></div>
+  return `<div class="pagehead"><div><h1>Einkauf</h1></div></div>
   <div class="purchase-list">${a.length?a.map(o=>{
     const v=vehicle(o.vehicle_id),c=customer(o.customer_id),miss=(o.tasks||[]).filter(t=>taskState(t)==='missing');
     return `<div class="panel purchase-card" data-purchase-order="${o.id}">
@@ -4502,7 +4837,7 @@ function renderAppointments(){
     .sort((a,b)=>new Date(a.appointment_date)-new Date(b.appointment_date));
   const selectedLabel=new Intl.DateTimeFormat('de-DE',{weekday:'long',day:'2-digit',month:'long',year:'numeric'}).format(sel);
 
-  return `<div class="pagehead"><div><h1>Termine</h1><p>Monatsansicht mit Kalenderwochen und markierten Terminen.</p></div></div>
+  return `<div class="pagehead"><div><h1>Termine</h1></div></div>
   <div class="calendar-shell">
     <div class="calendar-top">
       <div class="calendar-title">${monthName}</div>
@@ -4547,30 +4882,30 @@ function renderVehicles(){
   const editing=editModes.vehicles;
   const allSelected=ids.length>0&&ids.every(id=>selections.vehicles.has(id));
 
-  return `<div class="pagehead"><div><h1>Fahrzeuge</h1><p>Fahrzeuge, Kundenbezug und Historie.</p></div></div>
-  <div class="edit-toolbar simple-editbar">
-    <div class="bulk-count">${editing?`${selections.vehicles.size} ausgewählt`:''}</div>
-    <div class="edit-actions simple-edit-actions">
+  return `<div class="pagehead">
+    <div><h1>Fahrzeuge</h1></div>
+    <div class="page-actions">
       ${editing?`<button class="text-action" data-select-all-vehicles>${allSelected?'Auswahl aufheben':'Alle auswählen'}</button>
       <button class="text-action delete-text" data-bulk-archive-vehicles ${selections.vehicles.size?'':'disabled'}>Löschen</button>
       <button class="text-action" data-edit-vehicles>Fertig</button>`:`<button class="text-action" data-edit-vehicles>Bearbeiten</button>`}
     </div>
   </div>
-  <div class="panel tablewrap"><table class="click-table">
-    <thead><tr>${editing?'<th class="select-cell"></th>':''}<th>Kennzeichen</th><th>Hersteller</th><th>Modell</th><th>Kunde</th><th>Aufträge</th></tr></thead>
-    <tbody>${activeVehicles.map(v=>{
+  <div class="vehicle-list unified-list">
+    ${activeVehicles.length?activeVehicles.map(v=>{
       const c=customer(v.customer_id),related=orders.filter(o=>o.vehicle_id===v.id);
       const selected=selections.vehicles.has(v.id);
-      return `<tr class="vehicle-row ${selected?'row-selected':''}" data-vehicle="${v.id}">
-        ${editing?`<td class="select-cell"><button class="select-action" data-select-vehicle="${v.id}">${selectMark(selected)}</button></td>`:''}
-        <td><strong>${esc(v.license_plate)}</strong></td>
-        <td>${esc(v.manufacturer||'–')}</td>
-        <td>${esc(v.model||'–')}</td>
-        <td>${esc(c?.name||'–')}</td>
-        <td>${related.length}</td>
-      </tr>`;
-    }).join('')}</tbody>
-  </table></div>`;
+      return `<div class="vehicle-list-row unified-row ${selected?'row-selected':''}" data-vehicle="${v.id}">
+        ${editing?`<button class="select-action" data-select-vehicle="${v.id}">${selectMark(selected)}</button>`:''}
+        <div class="vehicle-list-main">
+          <strong>${esc(v.license_plate||'–')}</strong>
+          <span>${esc((v.manufacturer||'')+' '+(v.model||''))}</span>
+        </div>
+        <div class="vehicle-list-customer">${esc(c?.name||'–')}</div>
+        <div class="vehicle-list-count">${related.length}</div>
+        <span class="unified-arrow">›</span>
+      </div>`;
+    }).join(''):'<div class="empty-simple">Keine Fahrzeuge vorhanden.</div>'}
+  </div>`;
 }
 function openVehicle(id){
   const v=vehicles.find(x=>x.id===id);if(!v)return;
@@ -4623,7 +4958,7 @@ function renderArchive(){
   const editing=editModes.archiveAll;
   const allSelected=ids.length>0&&ids.every(id=>selections.archiveAll.has(id));
 
-  return `<div class="pagehead"><div><h1>Archiv</h1><p>Archivierte Fahrzeuge und Vorgänge.</p></div></div>
+  return `<div class="pagehead"><div><h1>Archiv</h1></div></div>
 
   <div class="edit-toolbar simple-editbar archive-editbar">
     <div class="bulk-count">${editing?`${selections.archiveAll.size} ausgewählt`:''}</div>
@@ -4650,42 +4985,43 @@ function renderArchive(){
 }
 function renderUsers(){
   if(!isAdmin())return '<div class="panel">Kein Zugriff.</div>';
-
   const editing=editModes.users;
   const workers=profiles.filter(p=>p.role!=='admin');
   const selectableIds=workers.map(p=>p.id);
   const allSelected=selectableIds.length>0&&selectableIds.every(id=>selections.users.has(id));
 
   return `<div class="pagehead">
-    <div><h1>Benutzer</h1><p>Registrierte Konten verwalten. Administratoren sind geschützt.</p></div>
-    <div class="user-page-actions">
-      <button class="text-action" id="reloadUsers">Neu Laden</button>
+    <div><h1>Benutzer</h1></div>
+    <div class="page-actions icon-page-actions">
+      <button class="icon-text-action" id="reloadUsers" aria-label="Neu laden" title="Neu laden">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.7 5.3A9 9 0 1 0 21 12h-2a7 7 0 1 1-1.7-4.6L14 10h7V3l-2.3 2.3Z"/></svg>
+      </button>
       ${editing
-        ? `<button class="text-action" data-users-select-all>${allSelected?'Auswahl Aufheben':'Alle Auswählen'}</button>
+        ? `<button class="text-action" data-users-select-all>${allSelected?'Auswahl aufheben':'Alle auswählen'}</button>
            <button class="text-action user-delete-text" data-users-delete-selected ${selections.users.size?'':'disabled'}>Löschen</button>
            <button class="text-action" data-users-edit>Fertig</button>`
-        : `<button class="text-action" data-users-edit>Bearbeiten</button>`}
+        : `<button class="icon-text-action" data-users-edit aria-label="Bearbeiten" title="Bearbeiten">
+             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 15.5 9.9-9.9 4.5 4.5-9.9 9.9H4v-4.5Zm11.3-11.3 1.4-1.4a1.5 1.5 0 0 1 2.1 0l2.4 2.4a1.5 1.5 0 0 1 0 2.1l-1.4 1.4-4.5-4.5Z"/></svg>
+           </button>`}
     </div>
   </div>
 
-  <div class="panel user-list">
-    <div class="user-list-head">
-      ${editing?'<span class="user-select-col"></span>':''}
-      <span>Benutzername</span><span>Rolle</span><span>Erstellt</span>
-    </div>
-
+  <div class="user-list unified-list">
     ${profiles.length?profiles.map(p=>{
       const protectedAdmin=p.role==='admin';
       const selected=selections.users.has(p.id);
-      return `<div class="user-list-row ${selected?'row-selected':''} ${protectedAdmin?'user-protected':''}" data-user-row="${p.id}">
-        ${editing?`<span class="user-select-col">${protectedAdmin
+      return `<div class="user-list-row unified-row ${selected?'row-selected':''} ${protectedAdmin?'user-protected':''}" data-user-row="${p.id}">
+        ${editing?`<div class="user-select-col">${protectedAdmin
           ? '<span class="user-lock">Geschützt</span>'
-          : `<button class="select-action" data-user-select="${p.id}">${selectMark(selected)}</button>`}</span>`:''}
-        <span class="user-name-cell"><strong>${esc(p.username)}</strong>${p.id===me.id?'<small>Du</small>':''}</span>
-        <span><span class="role-text ${protectedAdmin?'admin-role':''}">${protectedAdmin?'Administrator':'Mitarbeiter'}</span></span>
-        <span class="user-date">${p.created_at?new Date(p.created_at).toLocaleDateString('de-DE'):'–'}</span>
+          : `<button class="select-action" data-user-select="${p.id}">${selectMark(selected)}</button>`}</div>`:''}
+        <div class="user-list-main">
+          <strong>${esc(p.username)}</strong>
+          <span>${protectedAdmin?'Administrator':'Mitarbeiter'}${p.created_at?' · '+new Date(p.created_at).toLocaleDateString('de-DE'):''}</span>
+        </div>
+        ${p.id===me.id?'<span class="self-pill">Du</span>':''}
+        <span class="unified-arrow">${protectedAdmin?'':'›'}</span>
       </div>`;
-    }).join(''):'<div class="user-empty">Keine Benutzer Geladen.</div>'}
+    }).join(''):'<div class="empty-simple">Keine Benutzer vorhanden.</div>'}
   </div>`;
 }
 function renderSettings(){
